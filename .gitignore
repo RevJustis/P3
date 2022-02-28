@@ -6,9 +6,9 @@
 *.lck
 
 #Spark and this project
-P2.iml
-P2-build.iml
-project.P2-build.iml
+P3.iml
+P3-build.iml
+project.P3-build.iml
 .bsp/
 .idea/
 metastore_db/
