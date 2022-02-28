@@ -5,6 +5,7 @@ import org.apache.spark.streaming.{Seconds, StreamingContext}
 import org.apache.spark.streaming._
 import org.apache.spark.streaming.kafka
 import org.apache.spark.streaming.StreamingContext._
+import org.apache.spark.sql.SparkSession
 
 object Main {
   val spark = SparkSession.builder
