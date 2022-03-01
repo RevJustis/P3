@@ -1,10 +1,8 @@
-import scala.util.Random._
-import scala.util.Random
-import scala.math.BigDecimal._
-import java.text.SimpleDateFormat
 import java.util.Calendar
-import scala.io.Source
 import scala.collection.mutable
+import scala.math.BigDecimal._
+import scala.util.Random
+import scala.util.Random._
 
 object Alg {
   def yourFunctions(): Unit = {}
@@ -70,4 +68,25 @@ object Alg {
     val r = nextInt(10)
     if (r % 2 == 0) 'Y' else 'N'
   }
+
+  def payfailgen [A] (x: IndexedSeq[A], value: A): Unit = {
+
+    val x = IndexedSeq(
+      "Expired Card",
+      "Invalid CVC",
+      "Invalid Pin",
+      "Lost/Stolen Card",
+      "Withdrawal Exceeded Allowed Amount",
+      "Declined by Issuer",
+      "Invalid Postal Code",
+      "Card Not Supported",
+      "Currency Not Supported",
+      "Fraud Alert",
+      "Purchase Restriction"
+    )
+
+
+  }
+
 }
+
