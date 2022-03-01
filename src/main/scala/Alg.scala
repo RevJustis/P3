@@ -3,6 +3,7 @@ import scala.util.Random
 import scala.math.BigDecimal._
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import scala.io.Source
 
 object Alg {
   def yourFunctions(): Unit = {}
@@ -24,7 +25,7 @@ object Alg {
   }
 
   def readFile(filename: String): String = {
-    val bufferedSource = io.Source.fromFile(filename)
+    val bufferedSource = scala.io.Source.fromFile(filename)
     val countries = (for (line <- bufferedSource.getLines()) yield line).toList
     bufferedSource.close
     val random = new Random
