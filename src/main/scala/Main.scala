@@ -17,15 +17,15 @@ object Main {
     val conf = new SparkConf().setMaster("local[4]").setAppName("kafkar")
     val ssc = new StreamingContext(conf, Seconds(5))
 
-    //my kafka topic name is 'mytest'
-    // val kafkaStream = KafkaUtils.createStream(
-    //   ssc,
-    //   "localhost:2181",
-    //   "spark-streaming-consumer-group",
-    //   Map("test-topic" -> 5)
-    // )
-    // kafkaStream.print()
-    // ssc.start
-    // ssc.awaitTermination()
+    // my kafka topic name is 'mytest'
+    val kafkaStream = KafkaUtils.createStream(
+      ssc,
+      "localhost:2181",
+      "spark-streaming-consumer-group",
+      Map("test-topic" -> 5)
+    )
+    kafkaStream.print()
+    ssc.start
+    ssc.awaitTermination()
   }
 }

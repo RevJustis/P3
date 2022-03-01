@@ -14,6 +14,13 @@ libraryDependencies += "org.apache.spark" %% "spark-core" % "1.6.0"
 libraryDependencies += "org.apache.spark" %% "spark-streaming" % "1.6.0"
 libraryDependencies += "org.apache.spark" %% "spark-streaming-kafka" % "1.6.0"
 libraryDependencies += "org.apache.spark" % "spark-streaming-kafka-0-10_2.11" % "2.2.0"
+dependencyOverrides ++= {
+  Seq(
+    "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.6.7.1",
+    "com.fasterxml.jackson.core" % "jackson-databind" % "2.6.7",
+    "com.fasterxml.jackson.core" % "jackson-core" % "2.6.7"
+  )
+}
 
 fork in run := true
 connectInput in run := true
