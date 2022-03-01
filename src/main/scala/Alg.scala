@@ -40,7 +40,10 @@ object Alg {
     return randomCountry
 
   }
-
+  def payment_txn_id(): Int = {
+    nextInt(90000) + 10000
+  }
+  
   def payment_txn_successGen(): Char = {
     val r = nextInt(10)
     if (r % 2 == 0) 'Y' else 'N'

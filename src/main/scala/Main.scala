@@ -10,7 +10,7 @@ import Alg._
 object Main {
   def main(args: Array[String]) = {
     //some generator tests
-    println("This is a random name " + nameGenerator)
+    println("This is a random name " + nameGen)
 
     Logger.getLogger("org").setLevel(Level.OFF)
     Logger.getLogger("akka").setLevel(Level.OFF)
