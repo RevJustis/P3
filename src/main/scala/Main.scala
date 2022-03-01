@@ -9,9 +9,6 @@ import Alg._
 
 object Main {
   def main(args: Array[String]) = {
-    //some generator tests
-    println("This is a random name " + nameGen)
-
     Logger.getLogger("org").setLevel(Level.OFF)
     Logger.getLogger("akka").setLevel(Level.OFF)
 
@@ -21,14 +18,14 @@ object Main {
     val ssc = new StreamingContext(conf, Seconds(5))
 
     //my kafka topic name is 'mytest'
-    val kafkaStream = KafkaUtils.createStream(
-      ssc,
-      "localhost:2181",
-      "spark-streaming-consumer-group",
-      Map("test-topic" -> 5)
-    )
-    kafkaStream.print()
-    ssc.start
-    ssc.awaitTermination()
+    // val kafkaStream = KafkaUtils.createStream(
+    //   ssc,
+    //   "localhost:2181",
+    //   "spark-streaming-consumer-group",
+    //   Map("test-topic" -> 5)
+    // )
+    // kafkaStream.print()
+    // ssc.start
+    // ssc.awaitTermination()
   }
 }

@@ -4,6 +4,7 @@ import scala.math.BigDecimal._
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import scala.io.Source
+import scala.collection.mutable
 
 object Alg {
   def yourFunctions(): Unit = {}
@@ -43,7 +44,28 @@ object Alg {
   def payment_txn_id(): Int = {
     nextInt(90000) + 10000
   }
-  
+
+  def urlGen(): String = {
+    val g = fabricator.Internet()
+    g.urlBuilder
+      .scheme("https")
+      .host(hostGen())
+      .path("/getNewId")
+      .params(
+        mutable.Map[String, Any](
+          "id" -> nextInt(101),
+          "name" -> nameGen(),
+          "coordinates" -> 30.03
+        )
+      )
+      .toString()
+    // https://google.com/getNewId?id=100&name=John+Lennon&coordinates=30.03
+  }
+
+  def hostGen(): String = {
+    val r = nextInt(10)
+    if (r % 2 == 0) "amazon.com" else "alibaba.com"
+  }
   def payment_txn_successGen(): Char = {
     val r = nextInt(10)
     if (r % 2 == 0) 'Y' else 'N'
