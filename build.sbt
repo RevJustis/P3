@@ -10,10 +10,14 @@ lazy val root = (project in file("."))
 libraryDependencies += "org.scala-lang.modules" %% "scala-parser-combinators" % "1.1.2"
 libraryDependencies += "org.apache.spark" % "spark-streaming_2.11" % "2.2.0"
 libraryDependencies += "org.apache.spark" % "spark-streaming-kafka-0-8_2.11" % "2.1.0"
-// libraryDependencies += "org.apache.spark" %% "spark-core" % "1.6.0"
+libraryDependencies += "org.apache.spark" %% "spark-core" % "1.6.0"
 libraryDependencies += "org.apache.spark" %% "spark-streaming" % "1.6.0"
 libraryDependencies += "org.apache.spark" %% "spark-streaming-kafka" % "1.6.0"
 libraryDependencies += "org.apache.spark" % "spark-streaming-kafka-0-10_2.11" % "2.2.0"
 
 fork in run := true
 connectInput in run := true
+
+// For Name Generation/Fabrication
+resolvers += "Fabricator" at "https://dl.bintray.com/biercoff/Fabricator"
+libraryDependencies += "com.github.azakordonets" % "fabricator_2.11" % "2.1.5"

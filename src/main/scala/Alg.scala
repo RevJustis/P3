@@ -8,6 +8,11 @@ import scala.io.Source
 object Alg {
   def yourFunctions(): Unit = {}
 
+  def nameGenerator(): String = {
+    val namer = fabricator.Contact()
+    namer.fullName(false, false)
+  }
+
   def timestampGenerator: String = {
     val now = Calendar.getInstance().getTime()
     val newDate = now.toString

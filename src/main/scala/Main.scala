@@ -5,9 +5,13 @@ import org.apache.spark.streaming.{Seconds, StreamingContext}
 import org.apache.spark.streaming._
 import org.apache.spark.streaming.kafka
 import org.apache.spark.streaming.StreamingContext._
+import Alg._
 
 object Main {
   def main(args: Array[String]) = {
+    //some generator tests
+    println("This is a random name " + nameGenerator)
+
     Logger.getLogger("org").setLevel(Level.OFF)
     Logger.getLogger("akka").setLevel(Level.OFF)
 
