@@ -1,4 +1,5 @@
 import scala.util.Random._
+import scala.util.Random
 import scala.math.BigDecimal._
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -20,5 +21,17 @@ object Alg {
     val dec = nextFloat()
     val price = whole + dec.setScale(2, BigDecimal.RoundingMode.HALF_UP).toFloat
     return price
+  }
+
+  def readFile(filename: String): String = {
+    val bufferedSource = io.Source.fromFile(filename)
+    val countries = (for (line <- bufferedSource.getLines()) yield line).toList
+    bufferedSource.close
+    val random = new Random
+    var randomCountry = countries(
+      random.nextInt(countries.length)
+    )
+    return randomCountry
+
   }
 }
