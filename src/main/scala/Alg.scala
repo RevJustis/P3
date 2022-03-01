@@ -8,12 +8,12 @@ import scala.io.Source
 object Alg {
   def yourFunctions(): Unit = {}
 
-  def nameGenerator(): String = {
+  def nameGen(): String = {
     val namer = fabricator.Contact()
     namer.fullName(false, false)
   }
 
-  def timestampGenerator: String = {
+  def timestampGen: String = {
     val now = Calendar.getInstance().getTime()
     val newDate = now.toString
 
@@ -39,5 +39,10 @@ object Alg {
     )
     return randomCountry
 
+  }
+
+  def payment_txn_successGen(): Char = {
+    val r = nextInt(10)
+    if (r % 2 == 0) 'Y' else 'N'
   }
 }
