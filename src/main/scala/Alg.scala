@@ -20,5 +20,5 @@ object Alg {
     val dec = nextFloat()
     val price = whole + dec.setScale(2, BigDecimal.RoundingMode.HALF_UP).toFloat
     return price
-
+  }
 }
