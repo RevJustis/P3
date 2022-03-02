@@ -116,9 +116,9 @@ object Alg {
     }
     //creates random Float
     val dec = nextFloat()
-    //price = whole number + decimal number rounded to 2 places
+    //unitPrice = whole number + decimal number
     var unitPrice = whole + dec.toDouble
-    var totalPrice = 0.0 //price per unit sold
+    var totalPrice = 0.0 //price of transaction
     var qty = 0
     if (unitPrice > 499) { // 9.5% of possible outcomes
       qty = nextInt(5) + 1
