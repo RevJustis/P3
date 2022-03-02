@@ -204,14 +204,23 @@ object Alg {
       "Expired Card",
       "Invalid CVC",
       "Invalid Pin",
+      "Expired Card",
       "Lost/Stolen Card",
+      "Invalid CVC",
       "Withdrawal Exceeded Allowed Amount",
+      "Invalid Pin",
       "Declined by Issuer",
+      "Expired Card",
       "Invalid Postal Code",
+      "Invalid CVC",
       "Card Not Supported",
       "Currency Not Supported",
+      "Invalid Pin",
+      "Expired Card",
       "Fraud Alert",
-      "Purchase Restriction")
+      "Purchase Restriction",
+      "Expired Card",
+      "Invalid Pin")
 
       val randomFail = x(random.nextInt(x.length))
 
