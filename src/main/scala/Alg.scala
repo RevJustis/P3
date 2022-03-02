@@ -1,10 +1,10 @@
-import java.util.Calendar
+import java.io.{File, FileOutputStream, PrintWriter}
+import java.util.{Calendar, Scanner}
 import scala.collection.mutable
 import scala.math.BigDecimal._
 import scala.util.Random
 import scala.util.Random._
-import java.io.{File, FileOutputStream, PrintWriter}
-import java.util.Scanner
+
 
 object Alg {
   // Checks if an int is already a customer id, returns an array
@@ -115,10 +115,34 @@ object Alg {
     // https://google.com/getNewId?id=100&name=John+Lennon&coordinates=30.03
   }
 
-  def hostGen(): String = {
+  /*def hostGen(): String = {
     val r = nextInt(10)
     if (r % 2 == 0) "amazon.com" else "alibaba.com"
+  }*/
+
+  def hostGen(): String = {
+    val random = new Random
+    val x = IndexedSeq(
+      "Amazon.com",
+      "Alibaba.com",
+      "Walmart.com",
+      "Target.com",
+      "eBay.com",
+      "Wish.com",
+      "Etsy.com",
+      "AliExpress.com",
+      "BestBuy.com",
+      "Microcenter.com",
+      "Newegg.com",
+      "Google.com",
+      "Intel.com",
+      "Amd.com"
+    )
+
+    val randomHost = x(random.nextInt(x.length))
+    return randomHost
   }
+
 
   def paySuccessGen(): Char = {
     val r = nextInt(10)
