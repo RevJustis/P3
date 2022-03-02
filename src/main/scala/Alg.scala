@@ -70,15 +70,15 @@ object Alg {
     //creates random Float
     val dec = nextFloat()
     //price = whole number + decimal number rounded to 2 places
-    val price = whole + dec.setScale(2, BigDecimal.RoundingMode.HALF_UP).toFloat
+    val price = whole + BigDecimal(dec).setScale(2, BigDecimal.RoundingMode.HALF_UP).toFloat
     var unitPrice = 0.0 //price per unit sold
     var qty = 0
-    if (price > 999) { // <20% of possible outcomes
+    if (price > 999) { // 18% of possible outcomes
       qty = nextInt(5) + 1
-      unitPrice = (price / qty).setScale(2, BigDecimal.RoundingMode.HALF_UP).toFloat
-    } else { // >80% of possible outcomes
+      unitPrice = BigDecimal(price/qty).setScale(2, BigDecimal.RoundingMode.HALF_UP).toFloat
+    } else { // 82% of possible outcomes
       qty = nextInt(50) + 1
-      unitPrice = (price / qty).setScale(2, BigDecimal.RoundingMode.HALF_UP).toFloat
+      unitPrice = BigDecimal(price/qty).setScale(2, BigDecimal.RoundingMode.HALF_UP).toFloat
     }
     return (price, unitPrice, qty)
   }
@@ -107,7 +107,7 @@ object Alg {
       .params(
         mutable.Map[String, Any](
           "id" -> nextInt(101),
-          "name" -> proNameGen(),
+          "name" -> cusNameGen(),
           "coordinates" -> 30.03
         )
       )
