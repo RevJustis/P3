@@ -1,4 +1,4 @@
-
+import java.util.Calendar
 
 
 object Producer {
@@ -8,10 +8,27 @@ object Producer {
   import org.apache.kafka.clients.producer._
 
 
+  def timestampGen: String = {
+    val now = Calendar.getInstance().getTime()
+    val newDate = now.toString
+    return newDate
+  }
+
+  def randomGen(): String = {
+    val first = "This is first,"
+    val second = "This is second,"
+    val third = "3333,"
+    val fourth = "This is last"
+    val fifth = "Heres a timestamp," + timestampGen
+
+    return first + second + third + fourth + fifth
+  }
+
+
   def sendRecord(producer: KafkaProducer[String, String], topic: String): Unit = {
 
     val key = getKey()
-    val value = "TestData"
+    val value = randomGen()
 
     val record = new ProducerRecord[String, String](
       topic,
