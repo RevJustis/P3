@@ -47,7 +47,8 @@ object Producer {
   }
 
   val props = new Properties()
-  props.put("bootstrap.servers", "localhost:9092")
+  //for apple users / windows 11 users, change [::1] below to localhost to run
+  props.put("bootstrap.servers", "[::1]:9092")
 
   props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer")
   props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer")
