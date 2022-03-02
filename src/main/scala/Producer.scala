@@ -40,17 +40,16 @@ object Producer {
     while (true) {
 
 
-      sendRecord(producer, "topic1")
+      sendRecord(producer, "TopicNew111")
 
-      sendRecord(producer, "topic2")
+      sendRecord(producer, "TopicNew222")
 
-      sendRecord(producer, "topic3")
+      sendRecord(producer, "TopicNew333")
 
-      sendRecord(producer, "topic4")
+      sendRecord(producer, "TopicNew444")
 
-      sendRecord(producer, "topic5")
+      sendRecord(producer, "TopicNew555")
 
-      sendRecord(producer, "topic6")
 
     }
 
