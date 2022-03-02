@@ -119,8 +119,11 @@ object Alg {
       "Card Not Supported",
       "Currency Not Supported",
       "Fraud Alert",
-      "Purchase Restriction"
-    )
+      "Purchase Restriction")
+
+      val randomFail = x(Random.nextInt(x.length))
+
+      return randomFail
 
 
   }
