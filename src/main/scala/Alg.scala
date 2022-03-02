@@ -3,20 +3,56 @@ import scala.collection.mutable
 import scala.math.BigDecimal._
 import scala.util.Random
 import scala.util.Random._
+import java.io.{File, FileOutputStream, PrintWriter}
+import java.util.Scanner
 
 object Alg {
-  def yourFunctions(): Unit = {}
+  // Checks if an int is already a customer id, returns an array
+  // returnedArray(0) == customer id
+  // returnedArray(1) == customer name
+  def cusRecord(n: Int): Array[String] = {
+    val f = new File("input/customers.txt")
+    val sc = new Scanner(f)
+    var id = ""
+    var name = ""
+    var exists = false
+    while (sc.hasNext && !exists) { // Attempt to find the id in record, if found get name
+      val s = sc.next.split(',')
+      id = s(0)
+      if (id == n.toString) {
+        exists = true
+        name = s(1)
+      }
+    }
+    if (!exists) { // Not in the record already? Then put it in there!
+      val pw = new PrintWriter(new FileOutputStream(f, true))
+      name = cusNameGen
+      id = n.toString
+      pw.append(s"$n,$name\n")
+      pw.close
+    }
+    Array(id, name)
+  }
 
-  def nameGen(): String = {
+  def cusNameGen(): String = {
     val namer = fabricator.Contact()
     namer.fullName(false, false)
+  }
+
+  def proNameGen(): String = {
+    val namer = fabricator.Words()
+    namer.word
+  }
+
+  def payTypeGen(): String = {
+    val c = Array("card", "IB", "UPI", "Wallet")
+    c(nextInt(c.length))
   }
 
   def timestampGen: String = {
     val now = Calendar.getInstance().getTime()
     val newDate = now.toString
-
-    return newDate
+    newDate
   }
 
   def priceGen(): Double = {
@@ -36,10 +72,10 @@ object Alg {
     var randomCountry = countries(
       random.nextInt(countries.length)
     )
-    return randomCountry
-
+    randomCountry
   }
-  def payment_txn_id(): Int = {
+
+  def payIdGen(): Int = {
     nextInt(90000) + 10000
   }
 
@@ -64,7 +100,8 @@ object Alg {
     val r = nextInt(10)
     if (r % 2 == 0) "amazon.com" else "alibaba.com"
   }
-  def payment_txn_successGen(): Char = {
+
+  def paySuccessGen(): Char = {
     val r = nextInt(10)
     if (r % 2 == 0) 'Y' else 'N'
   }
