@@ -107,7 +107,7 @@ object Alg {
       .params(
         mutable.Map[String, Any](
           "id" -> nextInt(101),
-          "name" -> nameGen(),
+          "name" -> cusNameGen(),
           "coordinates" -> 30.03
         )
       )
