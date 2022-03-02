@@ -10,6 +10,10 @@ object Main {
 
   def main(args: Array[String]): Unit = {
     hostGen()
+    val (a, b, c) = priceGen()
+    println(a)
+    println(b)
+    println(c)
 
     // This is the code from https://drive.google.com/drive/u/1/folders/1t8XbhV7p99POeHhWi6PAJBZ8p1KyDZMJ
     // Logger.getLogger("org").setLevel(Level.OFF)

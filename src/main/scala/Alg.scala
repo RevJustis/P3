@@ -117,9 +117,7 @@ object Alg {
     //creates random Float
     val dec = nextFloat()
     //price = whole number + decimal number rounded to 2 places
-    val price = whole + BigDecimal(dec)
-      .setScale(2, BigDecimal.RoundingMode.HALF_UP)
-      .toDouble
+    var price = whole + dec.toDouble
     var unitPrice = 0.0 //price per unit sold
     var qty = 0
     if (price > 999) { // 18% of possible outcomes
@@ -133,6 +131,7 @@ object Alg {
         .setScale(2, BigDecimal.RoundingMode.HALF_UP)
         .toDouble
     }
+    price = BigDecimal(price).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble
     return (price, unitPrice, qty)
 
   }
