@@ -1,7 +1,7 @@
 import java.util.Calendar
 
 
-object Producer {
+object Producer extends App{
 
   import java.util.Properties
 
@@ -18,7 +18,7 @@ object Producer {
     val first = "This is first,"
     val second = "This is second,"
     val third = "3333,"
-    val fourth = "This is last"
+    val fourth = "This is last,"
     val fifth = "Heres a timestamp," + timestampGen
 
     return first + second + third + fourth + fifth
@@ -47,7 +47,8 @@ object Producer {
   }
 
   val props = new Properties()
-  props.put("bootstrap.servers", "localhost:9092")
+  //for apple users / windows 11 users, change [::1] below to localhost to run
+  props.put("bootstrap.servers", "[::1]:9092")
 
   props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer")
   props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer")
@@ -58,15 +59,11 @@ object Producer {
     while (true) {
 
 
-      sendRecord(producer, "TopicNew111")
+      sendRecord(producer, "Topic")
 
-      sendRecord(producer, "TopicNew222")
+      //sendRecord(producer, "Topic2")
+      //can send multiple topics if needed.
 
-      sendRecord(producer, "TopicNew333")
-
-      sendRecord(producer, "TopicNew444")
-
-      sendRecord(producer, "TopicNew555")
 
 
     }
