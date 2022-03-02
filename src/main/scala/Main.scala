@@ -2,6 +2,7 @@ import Alg._
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.SparkConf
 import org.apache.spark.streaming.StreamingContext._
+import scala.util.Random._
 import org.apache.spark.streaming._
 import org.apache.spark.streaming.kafka.KafkaUtils
 
@@ -27,5 +28,6 @@ object Main {
     ssc.start
     ssc.awaitTermination()
     hostGen()
+
   }
 }

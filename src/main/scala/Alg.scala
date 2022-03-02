@@ -39,9 +39,57 @@ object Alg {
     namer.fullName(false, false)
   }
 
+  def proRecord(n: Int): Array[String] = {
+    val f = new File("input/products.txt")
+    val sc = new Scanner(f)
+    var pid = ""
+    var name = ""
+    var pcat = ""
+    var exists = false
+    while (sc.hasNext && !exists) { // Attempt to find the id in record, if found get name
+      val s = sc.next.split(',')
+      pid = s(0)
+      if (pid == n.toString) {
+        exists = true
+        name = s(1)
+      }
+    }
+    if (!exists) { // Not in the record already? Then put it in there!
+      val pw = new PrintWriter(new FileOutputStream(f, true))
+      name = proNameGen()
+      pid = n.toString
+      pcat = s"($proCategoryGen)"
+      pw.append(s"$n,$name\n")
+      pw.close
+    }
+    Array(pid, name, pcat)
+  }
+
   def proNameGen(): String = {
     val namer = fabricator.Words()
     namer.word
+  }
+
+  def proCategoryGen(): String = {
+    val random = new Random
+    val x = IndexedSeq(
+      "Appliances",
+      "Automotive Parts & Accessories",
+      "Arts & Crafts",
+      "Beauty & Personal Care",
+      "Books",
+      "Electronics",
+      "Garden & Outdoor",
+      "Grocery & Food",
+      "Health",
+      "Home & Kitchen",
+      "Movies & TV",
+      "Toys & Games"
+    )
+
+    val randomCategory = x(random.nextInt(x.length))
+
+    return randomCategory
   }
 
   def payTypeGen(): String = {
@@ -70,17 +118,18 @@ object Alg {
     //creates random Float
     val dec = nextFloat()
     //price = whole number + decimal number rounded to 2 places
-    val price = whole + BigDecimal(dec).setScale(2, BigDecimal.RoundingMode.HALF_UP).toFloat
+    val price = whole + BigDecimal(dec).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble
     var unitPrice = 0.0 //price per unit sold
     var qty = 0
     if (price > 999) { // 18% of possible outcomes
       qty = nextInt(5) + 1
-      unitPrice = BigDecimal(price/qty).setScale(2, BigDecimal.RoundingMode.HALF_UP).toFloat
+      unitPrice = BigDecimal(price/qty).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble
     } else { // 82% of possible outcomes
       qty = nextInt(50) + 1
-      unitPrice = BigDecimal(price/qty).setScale(2, BigDecimal.RoundingMode.HALF_UP).toFloat
+      unitPrice = BigDecimal(price/qty).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble
     }
     return (price, unitPrice, qty)
+
   }
 
   def readFile(filename: String): String = {
@@ -149,8 +198,8 @@ object Alg {
     if (r % 2 == 0) 'Y' else 'N'
   }
 
-  def payfailgen [A] (x: IndexedSeq[A], value: A): Unit = {
-
+  def payfailgen (): String = {
+    val random = new Random
     val x = IndexedSeq(
       "Expired Card",
       "Invalid CVC",
@@ -164,7 +213,7 @@ object Alg {
       "Fraud Alert",
       "Purchase Restriction")
 
-      val randomFail = x(Random.nextInt(x.length))
+      val randomFail = x(random.nextInt(x.length))
 
       return randomFail
 
