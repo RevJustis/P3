@@ -33,11 +33,16 @@ object Alg {
     Array(id, name)
   }
 
+  //randomly generates a customer name
+  //used in cusRecord()
   def cusNameGen(): String = {
     val namer = fabricator.Contact()
     namer.fullName(false, false)
   }
 
+  // Checks if an int is already a product id, returns an array
+  // returnedArray(0) == product id
+  // returnedArray(1) == product name
   def proRecord(n: Int): Array[String] = {
     val f = new File("input/products.txt")
     val sc = new Scanner(f)
@@ -64,11 +69,15 @@ object Alg {
     Array(pid, name, pcat)
   }
 
+  //creates a random product name
+  //used in proRecord()
   def proNameGen(): String = {
     val namer = fabricator.Words()
     namer.word
   }
 
+  //randomly picks a category from an indexed sequence
+  //used in proRecord()
   def proCategoryGen(): String = {
     val random = new Random
     val x = IndexedSeq(
@@ -91,11 +100,13 @@ object Alg {
     return randomCategory
   }
 
+  //randomly picks a payment type from an array
   def payTypeGen(): String = {
     val c = Array("card", "IB", "UPI", "Wallet")
     c(nextInt(c.length))
   }
 
+  //generates a timestamp
   def timestampGen: String = {
     val now = Calendar.getInstance().getTime()
     val newDate = now.toString
@@ -168,6 +179,11 @@ object Alg {
     // https://google.com/getNewId?id=100&name=John+Lennon&coordinates=30.03
   }
 
+  /*def hostGen(): String = {
+    val r = nextInt(10)
+    if (r % 2 == 0) "amazon.com" else "alibaba.com"
+  }*/
+
   def hostGen(): String = {
     val random = new Random
     val x = IndexedSeq(
@@ -191,12 +207,17 @@ object Alg {
     return randomHost
   }
 
-  def paySuccessGen(): Char = {
-    val r = nextInt(10)
-    if (r % 2 == 0) 'Y' else 'N'
-  }
 
-  def payfailgen(): String = {
+  /*
+  //randomly selects a status for payment success rate
+  def paySuccessGen(status: String): Char = {
+    //val r = nextInt(10)
+    //if (r % 2 == 0) 'Y' else 'N'
+  }
+   */
+
+  //randomly chooses a reason why a payment would have failed from an indexed seq
+  def payStatusGen (): (String, String) = {
     val random = new Random
     val x = IndexedSeq(
       "Expired Card",
@@ -221,9 +242,23 @@ object Alg {
       "Invalid Pin"
     )
 
-    val randomFail = x(random.nextInt(x.length))
+    //randomly selects a status for payment success rate
+    var status = ""
+    val r = nextInt(10)
+    if (r % 2 == 0) status = "Y" else status = "N"
+    //println("Was payment successful?: " + paySuccessGen(status))
+    //print("Why did the payment fail? ")
 
-    return randomFail
+
+    if (status == "N"){
+      val randomFail = x(random.nextInt(x.length))
+
+      return (status, randomFail)
+    }
+    else{
+      val randomSuccess = "No failure."
+      return (status, randomSuccess)
+    }
 
   }
 
