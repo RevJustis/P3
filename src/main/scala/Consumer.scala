@@ -9,16 +9,16 @@ object Consumer extends App {
   import java.util.Properties
 
 
-  val topics = List[String] ("Topic1")
+  val topics = List[String]("Topic1")
 
-  val  props = new Properties()
+  val props = new Properties()
   props.put("bootstrap.servers", "localhost:9092")
 
   props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
   props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
   props.put("group.id", "something")
 
-  
+
   /*val consumer = new KafkaConsumer(props)
   try {
     consumer.subscribe(topics.asJava)
@@ -44,7 +44,7 @@ object Consumer extends App {
   var count = 0
 
   consumer.subscribe(topics.asJava)
-  while(count < 5) {
+  while (count < 5) {
     val records = consumer.poll(10)
     for (record <- records.asScala) {
       println("************")
@@ -58,4 +58,5 @@ object Consumer extends App {
 
 
     }
+  }
 }
