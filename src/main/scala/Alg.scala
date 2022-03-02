@@ -142,7 +142,9 @@ object Alg {
         .setScale(2, BigDecimal.RoundingMode.HALF_UP)
         .toDouble
     }
-    unitPrice = BigDecimal(unitPrice).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble
+    unitPrice = BigDecimal(unitPrice)
+      .setScale(2, BigDecimal.RoundingMode.HALF_UP)
+      .toDouble
     return (totalPrice, unitPrice, qty)
 
   }
@@ -179,12 +181,7 @@ object Alg {
     // https://google.com/getNewId?id=100&name=John+Lennon&coordinates=30.03
   }
 
-  /*def hostGen(): String = {
-    val r = nextInt(10)
-    if (r % 2 == 0) "amazon.com" else "alibaba.com"
-  }*/
-
-  def hostGen(): String = {
+  def urlGenHelper(): String = {
     val random = new Random
     val x = IndexedSeq(
       "Amazon.com",
