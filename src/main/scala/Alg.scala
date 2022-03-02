@@ -55,13 +55,32 @@ object Alg {
     newDate
   }
 
-  def priceGen(): Double = {
-    //creates random Int
-    val whole = nextInt(5000)
+  def priceGen(): (Double, Double, Int) = {
+    //creates value for weight
+    val weight = nextInt(10) + 1
+    //whole number
+    var whole = 0
+    if (weight > 8) { //20% of possible outcomes
+      //price is anywhere from 0 to 9999
+      whole = nextInt(10000)
+    } else { //80% of possible outcomes
+      //price is anywhere from 0 to 999
+      whole = nextInt(1000)
+    }
     //creates random Float
     val dec = nextFloat()
+    //price = whole number + decimal number rounded to 2 places
     val price = whole + dec.setScale(2, BigDecimal.RoundingMode.HALF_UP).toFloat
-    return price
+    var unitPrice = 0.0 //price per unit sold
+    var qty = 0
+    if (price > 999) { // <20% of possible outcomes
+      qty = nextInt(5) + 1
+      unitPrice = (price / qty).setScale(2, BigDecimal.RoundingMode.HALF_UP).toFloat
+    } else { // >80% of possible outcomes
+      qty = nextInt(50) + 1
+      unitPrice = (price / qty).setScale(2, BigDecimal.RoundingMode.HALF_UP).toFloat
+    }
+    return (price, unitPrice, qty)
   }
 
   def readFile(filename: String): String = {
