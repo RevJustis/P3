@@ -5,7 +5,6 @@ import scala.math.BigDecimal._
 import scala.util.Random
 import scala.util.Random._
 
-
 object Alg {
   // Checks if an int is already a customer id, returns an array
   // returnedArray(0) == customer id
@@ -118,15 +117,21 @@ object Alg {
     //creates random Float
     val dec = nextFloat()
     //price = whole number + decimal number rounded to 2 places
-    val price = whole + BigDecimal(dec).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble
+    val price = whole + BigDecimal(dec)
+      .setScale(2, BigDecimal.RoundingMode.HALF_UP)
+      .toDouble
     var unitPrice = 0.0 //price per unit sold
     var qty = 0
     if (price > 999) { // 18% of possible outcomes
       qty = nextInt(5) + 1
-      unitPrice = BigDecimal(price/qty).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble
+      unitPrice = BigDecimal(price / qty)
+        .setScale(2, BigDecimal.RoundingMode.HALF_UP)
+        .toDouble
     } else { // 82% of possible outcomes
       qty = nextInt(50) + 1
-      unitPrice = BigDecimal(price/qty).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble
+      unitPrice = BigDecimal(price / qty)
+        .setScale(2, BigDecimal.RoundingMode.HALF_UP)
+        .toDouble
     }
     return (price, unitPrice, qty)
 
@@ -164,11 +169,6 @@ object Alg {
     // https://google.com/getNewId?id=100&name=John+Lennon&coordinates=30.03
   }
 
-  /*def hostGen(): String = {
-    val r = nextInt(10)
-    if (r % 2 == 0) "amazon.com" else "alibaba.com"
-  }*/
-
   def hostGen(): String = {
     val random = new Random
     val x = IndexedSeq(
@@ -192,13 +192,12 @@ object Alg {
     return randomHost
   }
 
-
   def paySuccessGen(): Char = {
     val r = nextInt(10)
     if (r % 2 == 0) 'Y' else 'N'
   }
 
-  def payfailgen (): String = {
+  def payfailgen(): String = {
     val random = new Random
     val x = IndexedSeq(
       "Expired Card",
@@ -220,14 +219,13 @@ object Alg {
       "Fraud Alert",
       "Purchase Restriction",
       "Expired Card",
-      "Invalid Pin")
+      "Invalid Pin"
+    )
 
-      val randomFail = x(random.nextInt(x.length))
+    val randomFail = x(random.nextInt(x.length))
 
-      return randomFail
-
+    return randomFail
 
   }
 
 }
-
