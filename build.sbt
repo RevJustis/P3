@@ -9,8 +9,6 @@ lazy val root = (project in file("."))
 
 libraryDependencies += "org.scala-lang.modules" %% "scala-parser-combinators" % "1.1.2"
 libraryDependencies += "org.apache.spark" % "spark-streaming_2.11" % "2.2.0"
-libraryDependencies += "org.apache.spark" % "spark-streaming-kafka-0-8_2.11" % "2.1.0"
-//libraryDependencies += "org.apache.spark" %% "spark-core" % "1.6.0"
 libraryDependencies += "org.apache.spark" %% "spark-streaming" % "1.6.0"
 libraryDependencies += "org.apache.spark" %% "spark-streaming-kafka" % "1.6.0"
 libraryDependencies += "org.apache.spark" % "spark-streaming-kafka-0-10_2.11" % "2.2.0"
@@ -19,7 +17,6 @@ libraryDependencies += "org.apache.spark" % "spark-streaming-kafka-0-10_2.11" % 
 libraryDependencies += "org.apache.spark" %% "spark-core" % "2.4.8"
 // https://mvnrepository.com/artifact/org.apache.spark/spark-sql
 libraryDependencies += "org.apache.spark" %% "spark-sql" % "2.4.8"
-
 
 dependencyOverrides ++= {
   Seq(
