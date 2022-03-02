@@ -12,7 +12,9 @@ object Consumer extends App {
   val topics = List[String]("Topic1")
 
   val props = new Properties()
-  props.put("bootstrap.servers", "localhost:9092")
+  //for apple users / windows 11 users, change [::1] below to localhost to run
+  props.put("bootstrap.servers", "[::1]:9092")
+
 
   props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
   props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
