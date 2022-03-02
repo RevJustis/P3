@@ -18,7 +18,7 @@ object Producer {
     val first = "This is first,"
     val second = "This is second,"
     val third = "3333,"
-    val fourth = "This is last"
+    val fourth = "This is last,"
     val fifth = "Heres a timestamp," + timestampGen
 
     return first + second + third + fourth + fifth
@@ -58,15 +58,11 @@ object Producer {
     while (true) {
 
 
-      sendRecord(producer, "TopicNew111")
+      sendRecord(producer, "Topic")
 
-      sendRecord(producer, "TopicNew222")
+      //sendRecord(producer, "Topic2")
+      //can send multiple topics if needed.
 
-      sendRecord(producer, "TopicNew333")
-
-      sendRecord(producer, "TopicNew444")
-
-      sendRecord(producer, "TopicNew555")
 
 
     }

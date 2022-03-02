@@ -8,9 +8,8 @@ object Consumer extends App {
 
   import java.util.Properties
 
-  //val TOPIC="TopicNewTest1"
-  //val TOPIC2="TopicNewTest2"
-  val topics = List[String] ("TopicNew111","TopicNew222","TopicNew333","TopicNew444","TopicNew555")
+
+  val topics = List[String] ("Topic1")
 
   val  props = new Properties()
   props.put("bootstrap.servers", "localhost:9092")
@@ -19,20 +18,8 @@ object Consumer extends App {
   props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
   props.put("group.id", "something")
 
-  /*val consumer = new KafkaConsumer[String, String](props)
-  val a = Collections.singletonList(topics)
-
-  consumer.subscribe(util.Collections.singletonList(TOPIC))
-
-  while(true){
-    Thread.sleep(1000)
-    val records=consumer.poll(100)
-    for (record<-records.asScala){
-      println(record)
-    }
-  }*/
-
-  val consumer = new KafkaConsumer(props)
+  
+  /*val consumer = new KafkaConsumer(props)
   try {
     consumer.subscribe(topics.asJava)
     while(true) {
@@ -50,5 +37,25 @@ object Consumer extends App {
     case e: Exception => {
       e.printStackTrace()
     }
-  }
+  }*/
+
+  var test = ""
+  val consumer = new KafkaConsumer(props)
+  var count = 0
+
+  consumer.subscribe(topics.asJava)
+  while(count < 5) {
+    val records = consumer.poll(10)
+    for (record <- records.asScala) {
+      println("************")
+
+      println(s"Topic: ${record.topic()}")
+      println("*************")
+      test = record.value()
+      consumer.subscribe(topics.asJava)
+      println(test)
+      count += 1
+
+
+    }
 }
