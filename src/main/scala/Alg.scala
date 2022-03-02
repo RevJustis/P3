@@ -168,7 +168,7 @@ object Alg {
     val g = fabricator.Internet()
     g.urlBuilder
       .scheme("https")
-      .host(hostGen())
+      .host(urlGenHelper())
       .path("/getNewId")
       .params(
         mutable.Map[String, Any](
@@ -204,7 +204,6 @@ object Alg {
     return randomHost
   }
 
-
   /*
   //randomly selects a status for payment success rate
   def paySuccessGen(status: String): Char = {
@@ -214,7 +213,7 @@ object Alg {
    */
 
   //randomly chooses a reason why a payment would have failed from an indexed seq
-  def payStatusGen (): (String, String) = {
+  def payStatusGen(): (String, String) = {
     val random = new Random
     val x = IndexedSeq(
       "Expired Card",
@@ -246,13 +245,11 @@ object Alg {
     //println("Was payment successful?: " + paySuccessGen(status))
     //print("Why did the payment fail? ")
 
-
-    if (status == "N"){
+    if (status == "N") {
       val randomFail = x(random.nextInt(x.length))
 
       return (status, randomFail)
-    }
-    else{
+    } else {
       val randomSuccess = "No failure."
       return (status, randomSuccess)
     }
