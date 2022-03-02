@@ -18,6 +18,7 @@ object Producer {
       key,
       value
     )
+    Thread.sleep(1000)
     producer.send(record)
     println("New record sent...")
   }
