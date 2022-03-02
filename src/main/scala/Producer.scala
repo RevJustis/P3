@@ -1,7 +1,7 @@
 import java.util.Calendar
 
 
-object Producer {
+object Producer extends App{
 
   import java.util.Properties
 
