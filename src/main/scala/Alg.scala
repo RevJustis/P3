@@ -47,12 +47,13 @@ object Alg {
   // returnedArray(1) == product name
   // TODO Overhaul this so that it just uses the name given
   // by the proNameGen()
-  def proRecord(n: Int): Array[String] = {
+  def proRecord(n: Int, unitPrice: Double, host: String): (String, String, String) = {
     val f = new File("input/products.txt")
     val sc = new Scanner(f)
     var pid = ""
     var name = ""
     var pcat = ""
+    var price = 0.0
     var exists = false
     while (sc.hasNext && !exists) { // Attempt to find the id in record, if found get name
       val s = sc.next.split(',')
@@ -64,23 +65,38 @@ object Alg {
     }
     if (!exists) { // Not in the record already? Then put it in there!
       val pw = new PrintWriter(new FileOutputStream(f, true))
-      name = proNameGen()
+      //name = proNameGen()
+      val h = host
+      h match {
+        case "Amazon.com" ->
+        case "Walmart.com" ->
+        case "eBay.com" ->
+      }
       pid = n.toString
       pcat = s"($proCategoryGen)"
+      price = unitPrice
       pw.append(s"$n,$name\n")
       pw.close
     }
-    Array(pid, name, pcat)
+    return (pid, name, pcat)
   }
 
   //creates a random product name
   //used in proRecord()
   // TODO Don't random gen, instead find a product name inside
   // one of the files, based on which url is chosen.
-  def proNameGen(): String = {
-    val namer = fabricator.Words()
-    namer.word
+  /*
+  def proNameGen(host: String): String = {
+    //val namer = fabricator.Words()
+    //namer.word
+    val h = host
+    h match {
+      case "Amazon.com"
+    }
+
   }
+
+   */
 
   //randomly picks a category from an indexed sequence
   //used in proRecord()
@@ -191,7 +207,7 @@ object Alg {
 
   // Limited to those sites that we have data for
   // TODO Expand and group as keys mapped to product file
-  def urlGenHelper(): String = {
+  def hostNameGen(): String = {
     val random = new Random
     val x = IndexedSeq(
       "Amazon.com",
@@ -267,7 +283,7 @@ object Alg {
   }
 
   def randomCityCountry(sparkSession: SparkSession): (Any, Any) = {
-    val df1 = spark.read
+    val df1 = sparkSession.read
       .format("csv")
       .option("header", "true")
       .load("input/citiesCountries.csv")
