@@ -7,7 +7,7 @@ import org.apache.spark.SparkConf
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.streaming.StreamingContext._
 import org.apache.spark.streaming._
-import org.apache.spark.streaming.kafka.KafkaUtils
+
 
 object Main {
   def main(args: Array[String]): Unit = {
@@ -61,7 +61,15 @@ object Main {
         "payment_txn_success" -> pay._1,
         "failure_reason" -> pay._2
       )
+
+      val location = randomCityCountry(spark)
+      p += (
+        "city" -> location._1,
+        "country" -> location._2
+        )
       println(p)
+
+
       // FIXME the code currently coded to only loop once
       keepLooping = false
     }
