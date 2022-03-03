@@ -63,7 +63,7 @@ object Alg {
       host: String,
       spark: SparkSession
   ): (String, String, String) = {
-    //try {
+    try {
       val f = new File("input/products.txt")
       //f.createNewFile
       val sc = new Scanner(f)
@@ -113,11 +113,11 @@ object Alg {
         pw.close
       }
       (pid, name, pcat)
-    //} catch {
-      //case e: Throwable => println("Improper Input Exception")
-      //  println(e)
-      //  ("Tuple", "Tuple", "Tuple")
-    //}
+    } catch {
+      case e: Throwable => println("Improper Input Exception")
+        println(e)
+        ("Tuple", "Tuple", "Tuple")
+    }
   }
 
   //creates a random product name
@@ -322,7 +322,7 @@ object Alg {
 
   }
 
-  def randomCityCountry(spark: SparkSession): (Any, Any) = {
+  def randomCityCountry(spark: SparkSession): (String, String) = {
     try {
       var df = spark.read
         .format("csv")
