@@ -45,6 +45,8 @@ object Alg {
   // Checks if an int is already a product id, returns an array
   // returnedArray(0) == product id
   // returnedArray(1) == product name
+  // TODO Overhaul this so that it just uses the name given
+  // by the proNameGen()
   def proRecord(n: Int): Array[String] = {
     val f = new File("input/products.txt")
     val sc = new Scanner(f)
@@ -73,6 +75,8 @@ object Alg {
 
   //creates a random product name
   //used in proRecord()
+  // TODO Don't random gen, instead find a product name inside
+  // one of the files, based on which url is chosen.
   def proNameGen(): String = {
     val namer = fabricator.Words()
     namer.word
@@ -183,23 +187,25 @@ object Alg {
     // https://google.com/getNewId?id=100&name=John+Lennon&coordinates=30.03
   }
 
+  // Limited to those sites that we have data for
+  // TODO Expand and group as keys mapped to product file
   def urlGenHelper(): String = {
     val random = new Random
     val x = IndexedSeq(
       "Amazon.com",
-      "Alibaba.com",
       "Walmart.com",
-      "Target.com",
-      "eBay.com",
-      "Wish.com",
-      "Etsy.com",
-      "AliExpress.com",
-      "BestBuy.com",
-      "Microcenter.com",
-      "Newegg.com",
-      "Google.com",
-      "Intel.com",
-      "Amd.com"
+      "eBay.com"
+      // "Target.com",
+      // "Alibaba.com",
+      // "Wish.com",
+      // "Etsy.com",
+      // "AliExpress.com",
+      // "BestBuy.com",
+      // "Microcenter.com",
+      // "Newegg.com",
+      // "Google.com",
+      // "Intel.com",
+      // "Amd.com"
     )
 
     val randomHost = x(random.nextInt(x.length))
@@ -259,7 +265,10 @@ object Alg {
   }
 
   def randomCityCountry(sparkSession: SparkSession): (Any, Any) = {
-    val df1 = spark.read.format("csv").option("header", "true").load("input/citiesCountries.csv")
+    val df1 = spark.read
+      .format("csv")
+      .option("header", "true")
+      .load("input/citiesCountries.csv")
     df1.show(5)
     val r = new Random()
     val id = r.nextInt(41001)
