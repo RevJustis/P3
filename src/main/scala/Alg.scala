@@ -6,33 +6,40 @@ import scala.collection.mutable
 import scala.math.BigDecimal._
 import scala.util.Random
 import scala.util.Random._
+import java.io.IOException
+import java.util.InputMismatchException
 
 object Alg {
   // Checks if an int is already a customer id, returns an array
   // returnedArray(0) == customer id
   // returnedArray(1) == customer name
   def cusRecord(n: Int): (String, String) = {
-    val f = new File("input/customers.txt")
-    val sc = new Scanner(f)
-    var id = ""
-    var name = ""
-    var exists = false
-    while (sc.hasNext && !exists) { // Attempt to find the id in record, if found get name
-      val s = sc.next.split(',')
-      id = s(0)
-      if (id == n.toString) {
-        exists = true
-        name = s(1)
+    try {
+      val f = new File("input/customers.txt")
+      val sc = new Scanner(f)
+      var id = ""
+      var name = ""
+      var exists = false
+      while (sc.hasNext && !exists) { // Attempt to find the id in record, if found get name
+        val s = sc.next.split(',')
+        id = s(0)
+        if (id == n.toString) {
+          exists = true
+          name = s(1)
+        }
       }
+      if (!exists) { // Not in the record already? Then put it in there!
+        val pw = new PrintWriter(new FileOutputStream(f, true))
+        name = cusNameGen
+        id = n.toString
+        pw.append(s"$n,$name\n")
+        pw.close
+      }
+      (id, name)
+    } catch {
+      case e: InputMismatchException => println("Improper Input Exception")
+        ("Tuple", "Tuple")
     }
-    if (!exists) { // Not in the record already? Then put it in there!
-      val pw = new PrintWriter(new FileOutputStream(f, true))
-      name = cusNameGen
-      id = n.toString
-      pw.append(s"$n,$name\n")
-      pw.close
-    }
-    (id, name)
   }
 
   //randomly generates a customer name
@@ -50,39 +57,54 @@ object Alg {
   def proRecord(
       n: Int,
       unitPrice: Double,
-      host: String
+      host: String,
+      spark: SparkSession
   ): (String, String, String) = {
-    val f = new File("input/products.txt")
-    val sc = new Scanner(f)
-    var pid = ""
-    var name = ""
-    var pcat = ""
-    var price = 0.0
-    var exists = false
-    while (sc.hasNext && !exists) { // Attempt to find the id in record, if found get name
-      val s = sc.next.split(',')
-      pid = s(0)
-      if (pid == n.toString) {
-        exists = true
-        name = s(1)
+    try {
+      val f = new File("input/products.txt")
+      val sc = new Scanner(f)
+      var pid = ""
+      var name = ""
+      var pcat = ""
+      var price = 0.0
+      var exists = false
+      while (sc.hasNext && !exists) { // Attempt to find the id in record, if found get name
+        val s = sc.next.split(',')
+        pid = s(0)
+        if (pid == n.toString) {
+          exists = true
+          name = s(1)
+        }
       }
+      if (!exists) { // Not in the record already? Then put it in there!
+        val pw = new PrintWriter(new FileOutputStream(f, true))
+        //name = proNameGen()
+        val h = host
+        price = unitPrice
+        val maxPrice = price * 1.1
+        val minPrice = price * 0.9
+        h match {
+          case "Amazon.com" =>
+            val dfAmazon = spark.read.format("csv").option("header","true").load("input/amazon.csv")
+            dfAmazon.select("Product Name").where(dfAmazon("Selling Price").between(minPrice,maxPrice)).first.getString(0)
+          case "Walmart.com" =>
+            val dfWalmart = spark.read.format("csv").option("header","true").load("input/walmartC.csv")
+            dfWalmart.select("Product Name").where(dfWalmart("Sale Price").between(minPrice,maxPrice)).first.getString(0)
+          case "eBay.com" =>
+            val dfEbay = spark.read.format("csv").option("header","true").load("input/ebay.csv")
+            dfEbay.select("Title").where(dfEbay("Price").between(minPrice,maxPrice)).first.getString(0)
+        }
+        pid = n.toString
+        pcat = s"($proCategoryGen)"
+
+        pw.append(s"$n,$name\n")
+        pw.close
+      }
+      (pid, name, pcat)
+    } catch {
+      case e: Throwable => println("Improper Input Exception")
+        ("Tuple", "Tuple", "Tuple")
     }
-    if (!exists) { // Not in the record already? Then put it in there!
-      val pw = new PrintWriter(new FileOutputStream(f, true))
-      //name = proNameGen()
-      val h = host
-      // h match {
-      //   case "Amazon.com" ->
-      //   case "Walmart.com" ->
-      //   case "eBay.com" ->
-      // }
-      pid = n.toString
-      pcat = s"($proCategoryGen)"
-      price = unitPrice
-      pw.append(s"$n,$name\n")
-      pw.close
-    }
-    (pid, name, pcat)
   }
 
   //creates a random product name
@@ -284,21 +306,24 @@ object Alg {
       val randomSuccess = "No failure."
       (status, randomSuccess)
     }
-
   }
 
   def randomCityCountry(spark: SparkSession): (Any, Any) = {
-    var df = spark.read
-      .format("csv")
-      .option("header", "true")
-      .load("input/citiesCountries.csv")
-    df.show(5)
-    val r = new Random()
-    val id = r.nextInt(41001)
-    df = df.select("city", "country").where(s"id = $id").limit(1).toDF()
-    println("Your city is " + df.first.getString(0))
-    println("Your country is " + df.first.getString(1))
-    (df.first.getString(0), df.first.getString(1))
+    try {
+      var df = spark.read
+        .format("csv")
+        .option("header", "true")
+        .load("input/citiesCountries.csv")
+      df.show(5)
+      val r = new Random()
+      val id = r.nextInt(41001)
+      df = df.select("city", "country").where(s"id = $id").limit(1).toDF()
+      println("Your city is " + df.first.getString(0))
+      println("Your country is " + df.first.getString(1))
+      (df.first.getString(0), df.first.getString(1))
+    } catch {
+      case e: InputMismatchException => println("Improper Input Exception")
+        ("Tuple", "Tuple")
+    }
   }
-
 }
