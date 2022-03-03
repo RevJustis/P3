@@ -209,7 +209,7 @@ object Alg {
     )
 
     val randomHost = x(random.nextInt(x.length))
-    return randomHost
+    randomHost.toLowerCase
   }
 
   /*
