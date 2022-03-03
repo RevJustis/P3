@@ -129,7 +129,7 @@ object Alg {
       whole = nextInt(10000)
     } else { //90% of possible outcomes
       //price is anywhere from 0 to 999
-      whole = nextInt(500)
+      whole = nextInt(200)
     }
     //creates random Float
     val dec = nextFloat()
@@ -137,22 +137,23 @@ object Alg {
     var unitPrice = whole + dec.toDouble
     var totalPrice = 0.0 //price of transaction
     var qty = 0
-    if (unitPrice > 499) { // 9.5% of possible outcomes
+    if (unitPrice > 199) { // 9.8% of possible outcomes
       qty = nextInt(5) + 1
-      totalPrice = BigDecimal(unitPrice * qty)
-        .setScale(2, BigDecimal.RoundingMode.HALF_UP)
-        .toDouble
-    } else { // 90.5% of possible outcomes
-      qty = nextInt(50) + 1
-      totalPrice = BigDecimal(unitPrice * qty)
-        .setScale(2, BigDecimal.RoundingMode.HALF_UP)
-        .toDouble
+    } else { // 90.2% of possible outcomes
+      val weightQty = nextInt(10)
+      if (weightQty > 7) {
+        qty = nextInt(50) + 1
+      } else {
+        qty = nextInt(5) + 1
+      }
     }
+    totalPrice = BigDecimal(unitPrice * qty)
+      .setScale(2, BigDecimal.RoundingMode.HALF_UP)
+      .toDouble
     unitPrice = BigDecimal(unitPrice)
       .setScale(2, BigDecimal.RoundingMode.HALF_UP)
       .toDouble
     return (totalPrice, unitPrice, qty)
-
   }
 
   def readFile(filename: String): String = {
@@ -166,8 +167,9 @@ object Alg {
     randomCountry
   }
 
-  def payIdGen(): Int = {
-    nextInt(90000) + 10000
+  def payIdGen(): String = {
+    val id = nextInt(100000)
+    f"$id%05.0f"
   }
 
   def urlGen(h: String): String = {

@@ -14,6 +14,7 @@ object Main {
     println(a)
     println(b)
     println(c)
+    println(payIdGen())
 
     // This is the code from https://drive.google.com/drive/u/1/folders/1t8XbhV7p99POeHhWi6PAJBZ8p1KyDZMJ
     // Logger.getLogger("org").setLevel(Level.OFF)
