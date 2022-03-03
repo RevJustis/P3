@@ -11,7 +11,7 @@ object Alg {
   // Checks if an int is already a customer id, returns an array
   // returnedArray(0) == customer id
   // returnedArray(1) == customer name
-  def cusRecord(n: Int): Array[String] = {
+  def cusRecord(n: Int): (String, String) = {
     val f = new File("input/customers.txt")
     val sc = new Scanner(f)
     var id = ""
@@ -274,29 +274,26 @@ object Alg {
     if (status == "N") {
       val randomFail = x(random.nextInt(x.length))
 
-      return (status, randomFail)
+      (status, randomFail)
     } else {
       val randomSuccess = "No failure."
-      return (status, randomSuccess)
+      (status, randomSuccess)
     }
 
   }
 
-  def randomCityCountry(sparkSession: SparkSession): (Any, Any) = {
-    val df1 = sparkSession.read
+  def randomCityCountry(spark: SparkSession): (Any, Any) = {
+    var df = spark.read
       .format("csv")
       .option("header", "true")
       .load("input/citiesCountries.csv")
-    df1.show(5)
+    df.show(5)
     val r = new Random()
     val id = r.nextInt(41001)
-    val dfCity = df1.select("city").where(s"id = $id").first()
-    println("Your city is " + dfCity(0))
-    val dfCountry = df1.select("country").where(s"id = $id").first()
-    println("Your country is " + dfCountry(0))
-    val CityString = dfCity(0)
-    val CountryString = dfCountry(0)
-    return (CityString, CountryString)
+    df = df.select("city", "country").where(s"id = $id").limit(1).toDF()
+    println("Your city is " + df(0)(0))
+    println("Your country is " + df(0)(1))
+    return (df(0)(0), df(0)(1))
   }
 
 }
