@@ -78,7 +78,7 @@ object Alg {
       pw.append(s"$n,$name\n")
       pw.close
     }
-    return (pid, name, pcat)
+    (pid, name, pcat)
   }
 
   //creates a random product name
@@ -118,8 +118,7 @@ object Alg {
     )
 
     val randomCategory = x(random.nextInt(x.length))
-
-    return randomCategory
+    randomCategory
   }
 
   //randomly picks a payment type from an array
@@ -169,7 +168,7 @@ object Alg {
     unitPrice = BigDecimal(unitPrice)
       .setScale(2, BigDecimal.RoundingMode.HALF_UP)
       .toDouble
-    return (totalPrice, unitPrice, qty)
+    (totalPrice, unitPrice, qty)
   }
 
   def readFile(filename: String): String = {
@@ -291,9 +290,9 @@ object Alg {
     val r = new Random()
     val id = r.nextInt(41001)
     df = df.select("city", "country").where(s"id = $id").limit(1).toDF()
-    println("Your city is " + df(0)(0))
-    println("Your country is " + df(0)(1))
-    return (df(0)(0), df(0)(1))
+    println("Your city is " + df.first.getString(0)
+    println("Your country is " + df.first.getString(1)
+    (df.first.getString(0), df.first.getString(1))
   }
 
 }
