@@ -7,12 +7,12 @@ import org.apache.spark.streaming.StreamingContext._
 import scala.util.Random._
 import org.apache.spark.streaming._
 import org.apache.spark.streaming.kafka.KafkaUtils
-import scala.collection.mutable.ArrayBuffer
 
 object Main {
-
   def main(args: Array[String]): Unit = {
     var p = Map[String, String]()
+    var id = 1
+    println(id)
     // Order ID and timestamp generation
     // p = p + ("order_id" -> orderId, "dateTime" -> timestampGen)
     // Customer info gen
@@ -32,7 +32,7 @@ object Main {
     p = p + ("unitPrice" -> price._2.toString())
     p = p + ("quantity" -> price._3.toString())
     // create url and store
-    val host = urlGenHelper()
+    val host = hostNameGen()
     p = p + ("url" -> urlGen(host))
     // Product info generation
     // val product = proRecord(price._1, host)

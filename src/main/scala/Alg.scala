@@ -32,7 +32,7 @@ object Alg {
       pw.append(s"$n,$name\n")
       pw.close
     }
-    Array(id, name)
+    (id, name)
   }
 
   //randomly generates a customer name
@@ -47,7 +47,11 @@ object Alg {
   // returnedArray(1) == product name
   // TODO Overhaul this so that it just uses the name given
   // by the proNameGen()
-  def proRecord(n: Int, unitPrice: Double, host: String): (String, String, String) = {
+  def proRecord(
+      n: Int,
+      unitPrice: Double,
+      host: String
+  ): (String, String, String) = {
     val f = new File("input/products.txt")
     val sc = new Scanner(f)
     var pid = ""
@@ -67,11 +71,11 @@ object Alg {
       val pw = new PrintWriter(new FileOutputStream(f, true))
       //name = proNameGen()
       val h = host
-      h match {
-        case "Amazon.com" ->
-        case "Walmart.com" ->
-        case "eBay.com" ->
-      }
+      // h match {
+      //   case "Amazon.com" ->
+      //   case "Walmart.com" ->
+      //   case "eBay.com" ->
+      // }
       pid = n.toString
       pcat = s"($proCategoryGen)"
       price = unitPrice
@@ -290,8 +294,8 @@ object Alg {
     val r = new Random()
     val id = r.nextInt(41001)
     df = df.select("city", "country").where(s"id = $id").limit(1).toDF()
-    println("Your city is " + df.first.getString(0)
-    println("Your country is " + df.first.getString(1)
+    println("Your city is " + df.first.getString(0))
+    println("Your country is " + df.first.getString(1))
     (df.first.getString(0), df.first.getString(1))
   }
 
