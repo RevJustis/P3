@@ -1,0 +1,1 @@
+headphone,speaker,TRS,3.5mm,earphone,CD,record,music

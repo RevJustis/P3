@@ -1,0 +1,1 @@
+coffee,water,juice,punch,milk,coke,energy drink,beer,wine,pack,iced tea

@@ -1,0 +1,1 @@
+fruit,chips,bread,pizza,cereal,pasta

@@ -1,0 +1,1 @@
+controller,usb,wired,console,headset,memory

@@ -1,0 +1,1 @@
+mask,bandana,gloves,hoodie,shirt,hat,scarf,gaiter

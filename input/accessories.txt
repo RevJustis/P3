@@ -1,0 +1,1 @@
+bracelet,necklace,purse,bag,blender,toaster,refrigerator,cooler,freezer,swimsuit,pillow,umbrella
