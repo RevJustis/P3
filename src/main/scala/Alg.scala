@@ -147,7 +147,7 @@ object Alg {
       //price is anywhere from 0 to 9999
       whole = nextInt(10000)
     } else { //90% of possible outcomes
-      //price is anywhere from 0 to 999
+      //price is anywhere from 0 to 199
       whole = nextInt(200)
     }
     //creates random Float
@@ -159,10 +159,12 @@ object Alg {
     if (unitPrice > 199) { // 9.8% of possible outcomes
       qty = nextInt(5) + 1
     } else { // 90.2% of possible outcomes
+      //since most purchases are going to be in smaller quantities,
+      //this ensures that smaller amounts will happen more frequently.
       val weightQty = nextInt(10)
-      if (weightQty > 7) {
+      if (weightQty > 7) { //80% of possible outcomes
         qty = nextInt(50) + 1
-      } else {
+      } else { //20% of possible outcomes
         qty = nextInt(5) + 1
       }
     }
