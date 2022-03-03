@@ -18,6 +18,10 @@ libraryDependencies += "org.apache.spark" %% "spark-core" % "2.4.8"
 // https://mvnrepository.com/artifact/org.apache.spark/spark-sql
 libraryDependencies += "org.apache.spark" %% "spark-sql" % "2.4.8"
 
+// https://mvnrepository.com/artifact/org.apache.spark/spark-sql-kafka-0-10
+libraryDependencies += "org.apache.spark" %% "spark-sql-kafka-0-10" % "2.4.8"
+
+
 dependencyOverrides ++= {
   Seq(
     "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.6.7.1",
