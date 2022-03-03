@@ -7,11 +7,13 @@ lazy val root = (project in file("."))
     name := "P3"
   )
 
+lazy val excludeJpountz = ExclusionRule(organization = "net.jpountz.lz4", name = "lz4")
+
 libraryDependencies += "org.scala-lang.modules" %% "scala-parser-combinators" % "1.1.2"
 libraryDependencies += "org.apache.spark" % "spark-streaming_2.11" % "2.2.0"
 libraryDependencies += "org.apache.spark" %% "spark-streaming" % "1.6.0"
-libraryDependencies += "org.apache.spark" %% "spark-streaming-kafka" % "1.6.0"
-libraryDependencies += "org.apache.spark" % "spark-streaming-kafka-0-10_2.11" % "2.2.0"
+libraryDependencies += "org.apache.spark" %% "spark-streaming-kafka" % "1.6.0" excludeAll(excludeJpountz)
+libraryDependencies += "org.apache.spark" % "spark-streaming-kafka-0-10_2.11" % "2.2.0" excludeAll(excludeJpountz)
 
 // https://mvnrepository.com/artifact/org.apache.spark/spark-core
 libraryDependencies += "org.apache.spark" %% "spark-core" % "2.4.8"
@@ -19,7 +21,7 @@ libraryDependencies += "org.apache.spark" %% "spark-core" % "2.4.8"
 libraryDependencies += "org.apache.spark" %% "spark-sql" % "2.4.8"
 
 // https://mvnrepository.com/artifact/org.apache.spark/spark-sql-kafka-0-10
-libraryDependencies += "org.apache.spark" %% "spark-sql-kafka-0-10" % "2.4.8"
+libraryDependencies += "org.apache.spark" %% "spark-sql-kafka-0-10" % "2.4.8" excludeAll(excludeJpountz)
 
 
 dependencyOverrides ++= {

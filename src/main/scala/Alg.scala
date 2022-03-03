@@ -8,6 +8,8 @@ import scala.util.Random
 import scala.util.Random._
 import java.io.IOException
 import java.util.InputMismatchException
+import org.apache.spark.sql.functions._
+import org.apache.spark.sql.types._
 
 object Alg {
   // Checks if an int is already a customer id, returns an array
@@ -16,6 +18,7 @@ object Alg {
   def cusRecord(n: Int): (String, String) = {
     try {
       val f = new File("input/customers.txt")
+      //f.createNewFile
       val sc = new Scanner(f)
       var id = ""
       var name = ""
@@ -60,8 +63,9 @@ object Alg {
       host: String,
       spark: SparkSession
   ): (String, String, String) = {
-    try {
+    //try {
       val f = new File("input/products.txt")
+      //f.createNewFile
       val sc = new Scanner(f)
       var pid = ""
       var name = ""
@@ -81,18 +85,26 @@ object Alg {
         //name = proNameGen()
         val h = host
         price = unitPrice
-        val maxPrice = price * 1.1
-        val minPrice = price * 0.9
+        val maxPrice = price + 10.0
+        val minPrice = price
         h match {
-          case "Amazon.com" =>
+          case "amazon.com" =>
             val dfAmazon = spark.read.format("csv").option("header","true").load("input/amazon.csv")
-            dfAmazon.select("Product Name").where(dfAmazon("Selling Price").between(minPrice,maxPrice)).first.getString(0)
-          case "Walmart.com" =>
+            //dfAmazon.select(max(col("Selling Price"))).show()
+            val dfA = dfAmazon.withColumn("SellingPrice",col("SellingPrice").cast(DoubleType))
+            name = dfA.select("Product Name").where(dfA("SellingPrice") > minPrice).
+              orderBy("SellingPrice").first.getString(0)
+          case "walmart.com" =>
             val dfWalmart = spark.read.format("csv").option("header","true").load("input/walmartC.csv")
-            dfWalmart.select("Product Name").where(dfWalmart("Sale Price").between(minPrice,maxPrice)).first.getString(0)
-          case "eBay.com" =>
+            val dfW = dfWalmart.withColumn("SalePrice",col("SalePrice").cast(DoubleType))
+            //dfWalmart.select(max(col("Sale Price"))).show()
+            name = dfW.select("Product Name").where(dfW("SalePrice") > minPrice).
+              orderBy("SalePrice").first.getString(0)
+          case "ebay.com" =>
             val dfEbay = spark.read.format("csv").option("header","true").load("input/ebay.csv")
-            dfEbay.select("Title").where(dfEbay("Price").between(minPrice,maxPrice)).first.getString(0)
+            val dfE = dfEbay.withColumn("Price",col("Price").cast(DoubleType))
+            //df1.select(max(col("Price"))).show()
+            name = dfE.select("Title").where(dfE("Price") > minPrice).orderBy("Price").first.getString(0)
         }
         pid = n.toString
         pcat = s"($proCategoryGen)"
@@ -101,10 +113,11 @@ object Alg {
         pw.close
       }
       (pid, name, pcat)
-    } catch {
-      case e: Throwable => println("Improper Input Exception")
-        ("Tuple", "Tuple", "Tuple")
-    }
+    //} catch {
+      //case e: Throwable => println("Improper Input Exception")
+      //  println(e)
+      //  ("Tuple", "Tuple", "Tuple")
+    //}
   }
 
   //creates a random product name
@@ -167,10 +180,10 @@ object Alg {
     var whole = 0
     if (weight > 9) { //10% of possible outcomes
       //price is anywhere from 0 to 9999
-      whole = nextInt(10000)
+      whole = nextInt(10000) + 2
     } else { //90% of possible outcomes
       //price is anywhere from 0 to 199
-      whole = nextInt(200)
+      whole = nextInt(200) + 2
     }
     //creates random Float
     val dec = nextFloat()
@@ -225,7 +238,7 @@ object Alg {
         mutable.Map[String, Any](
           "id" -> nextInt(101),
           "name" -> cusNameGen(),
-          "coordinates" -> 30.03 // FIXME This is hardcoded!!!
+          "coordinates" -> nextDouble()
         )
       )
       .toString()
@@ -306,6 +319,7 @@ object Alg {
       val randomSuccess = "No failure."
       (status, randomSuccess)
     }
+
   }
 
   def randomCityCountry(spark: SparkSession): (Any, Any) = {
@@ -326,4 +340,5 @@ object Alg {
         ("Tuple", "Tuple")
     }
   }
+
 }
