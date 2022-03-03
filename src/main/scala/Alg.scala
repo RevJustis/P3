@@ -225,7 +225,7 @@ object Alg {
         mutable.Map[String, Any](
           "id" -> nextInt(101),
           "name" -> cusNameGen(),
-          "coordinates" -> 30.03
+          "coordinates" -> 30.03 // FIXME This is hardcoded!!!
         )
       )
       .toString()
