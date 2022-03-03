@@ -11,7 +11,7 @@ import org.apache.spark.streaming.kafka.KafkaUtils
 
 object Main {
   def main(args: Array[String]): Unit = {
-    var id = 1
+    var id = 1 // starting point for the incrementing id
     var keepLooping = true
     while (keepLooping) {
       var p = mutable.Map[String, String]()
