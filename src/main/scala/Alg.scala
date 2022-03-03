@@ -170,11 +170,11 @@ object Alg {
     nextInt(90000) + 10000
   }
 
-  def urlGen(): String = {
+  def urlGen(h: String): String = {
     val g = fabricator.Internet()
     g.urlBuilder
       .scheme("https")
-      .host(urlGenHelper())
+      .host(h)
       .path("/getNewId")
       .params(
         mutable.Map[String, Any](
