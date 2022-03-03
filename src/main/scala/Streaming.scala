@@ -2,6 +2,7 @@ import java.util
 import org.apache.kafka.clients.consumer.KafkaConsumer
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.execution.streaming.FileStreamSource.Timestamp
+import org.apache.spark.sql.functions.col
 
 import scala.collection.JavaConverters._
 
@@ -21,9 +22,12 @@ object streaming {
       .option("kafka.bootstrap.servers", "[::1]:9092")
       .option("subscribe", "topic1")
       .load()
+      .select(col("value").cast("string"))
+
     df.printSchema()
     import spark.implicits._
-    df.selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)","CAST(topic AS STRING)","CAST(partition AS STRING)","CAST(offset AS STRING)","CAST(timestamp AS STRING)","CAST(timestampType AS STRING)").as[(String,String,String,String,String,String,String)]
+    //Doesnt work as intended, method on line 25 replaces line 30
+    //df.selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)","CAST(topic AS STRING)","CAST(partition AS STRING)","CAST(offset AS STRING)","CAST(timestamp AS STRING)","CAST(timestampType AS STRING)").as[(String,String,String,String,String,String,String)]
     val query = df.writeStream
       .outputMode("append")
       .format("console")
