@@ -1,3 +1,5 @@
+import org.apache.spark.sql.SparkSession
+
 import java.io.{File, FileOutputStream, PrintWriter}
 import java.util.{Calendar, Scanner}
 import scala.collection.mutable
@@ -254,6 +256,20 @@ object Alg {
       return (status, randomSuccess)
     }
 
+  }
+
+  def randomCityCountry(sparkSession: SparkSession): (Any, Any) = {
+    val df1 = spark.read.format("csv").option("header", "true").load("input/citiesCountries.csv")
+    df1.show(5)
+    val r = new Random()
+    val id = r.nextInt(41001)
+    val dfCity = df1.select("city").where(s"id = $id").first()
+    println("Your city is " + dfCity(0))
+    val dfCountry = df1.select("country").where(s"id = $id").first()
+    println("Your country is " + dfCountry(0))
+    val CityString = dfCity(0)
+    val CountryString = dfCountry(0)
+    return (CityString, CountryString)
   }
 
 }
