@@ -31,7 +31,8 @@ object Main {
         "customer_id" -> customer._1,
         "customer_name" -> customer._2
       )
-      // val location = locGen
+
+      //val location = locGen
       // produced += (
       // "country" -> location._1
       // "city" -> location._2,
