@@ -84,27 +84,27 @@ object Alg {
         val pw = new PrintWriter(new FileOutputStream(f, true))
         //name = proNameGen()
         val h = host
-        price = unitPrice
-        val maxPrice = price + 10.0
-        val minPrice = price
+        var maxPrice = unitPrice
         h match {
           case "amazon.com" =>
             val dfAmazon = spark.read.format("csv").option("header","true").load("input/amazon.csv")
             //dfAmazon.select(max(col("Selling Price"))).show()
             val dfA = dfAmazon.withColumn("SellingPrice",col("SellingPrice").cast(DoubleType))
-            name = dfA.select("Product Name").where(dfA("SellingPrice") > minPrice).
-              orderBy("SellingPrice").first.getString(0)
+            name = dfA.select("Product Name").where(dfA("SellingPrice") < maxPrice).
+              orderBy(desc("SellingPrice")).first.getString(0)
+            //highest is about 1000
           case "walmart.com" =>
             val dfWalmart = spark.read.format("csv").option("header","true").load("input/walmartC.csv")
             val dfW = dfWalmart.withColumn("SalePrice",col("SalePrice").cast(DoubleType))
             //dfWalmart.select(max(col("Sale Price"))).show()
-            name = dfW.select("Product Name").where(dfW("SalePrice") > minPrice).
-              orderBy("SalePrice").first.getString(0)
+            name = dfW.select("Product Name").where(dfW("SalePrice") < maxPrice).
+              orderBy(desc("SalePrice")).first.getString(0)
           case "ebay.com" =>
             val dfEbay = spark.read.format("csv").option("header","true").load("input/ebay.csv")
             val dfE = dfEbay.withColumn("Price",col("Price").cast(DoubleType))
             //df1.select(max(col("Price"))).show()
-            name = dfE.select("Title").where(dfE("Price") > minPrice).orderBy("Price").first.getString(0)
+            name = dfE.select("Title").where(dfE("Price") < maxPrice).orderBy(desc("Price")).first.getString(0)
+            //highest is about 1000
         }
         pid = n.toString
         pcat = s"($proCategoryGen)"
@@ -179,11 +179,11 @@ object Alg {
     //whole number
     var whole = 0
     if (weight > 9) { //10% of possible outcomes
-      //price is anywhere from 0 to 9999
-      whole = nextInt(10000) + 2
+      //price is anywhere from 2 to 999
+      whole = nextInt(998) + 2
     } else { //90% of possible outcomes
-      //price is anywhere from 0 to 199
-      whole = nextInt(200) + 2
+      //price is anywhere from 2 to 199
+      whole = nextInt(198) + 2
     }
     //creates random Float
     val dec = nextFloat()
@@ -191,9 +191,9 @@ object Alg {
     var unitPrice = whole + dec.toDouble
     var totalPrice = 0.0 //price of transaction
     var qty = 0
-    if (unitPrice > 199) { // 9.8% of possible outcomes
+    if (unitPrice > 199) { // 8% of possible outcomes
       qty = nextInt(5) + 1
-    } else { // 90.2% of possible outcomes
+    } else { // 92% of possible outcomes
       //since most purchases are going to be in smaller quantities,
       //this ensures that smaller amounts will happen more frequently.
       val weightQty = nextInt(10)
