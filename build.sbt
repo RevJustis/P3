@@ -52,3 +52,4 @@ dependencyOverrides ++= {
 // For Name Generation/Fabrication
 resolvers += "Fabricator" at "https://dl.bintray.com/biercoff/Fabricator"
 libraryDependencies += "com.github.azakordonets" % "fabricator_2.12" % "2.1.5"
+
