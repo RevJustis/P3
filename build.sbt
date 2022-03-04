@@ -43,9 +43,9 @@ libraryDependencies += "org.apache.spark" %% "spark-sql" % "3.2.0"
 
 dependencyOverrides ++= {
   Seq(
-    "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.6.7.1",
-    "com.fasterxml.jackson.core" % "jackson-databind" % "2.6.7",
-    "com.fasterxml.jackson.core" % "jackson-core" % "2.6.7"
+    "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.12.2",
+    "com.fasterxml.jackson.core" % "jackson-databind" % "2.12.2",
+    "com.fasterxml.jackson.core" % "jackson-core" % "2.12.2"
   )
 }
 
