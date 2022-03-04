@@ -328,7 +328,7 @@ object Alg {
         .format("csv")
         .option("header", "true")
         .load("input/citiesCountries.csv")
-      df.show(5)
+      //df.show(5)
       val r = new Random()
       val id = r.nextInt(41001)
       df = df.select("city", "country").where(s"id = $id").limit(1).toDF()
