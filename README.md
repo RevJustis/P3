@@ -1,2 +1,1 @@
-# P3
-Team A
+# P3: Team Pandora's Box
