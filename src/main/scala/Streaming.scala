@@ -20,7 +20,7 @@ object streaming {
 
     val df = spark.readStream.format("kafka")
       .option("kafka.bootstrap.servers", "[::1]:9092")
-      .option("subscribe", "topic1")
+      .option("subscribe", "Topic")
       .load()
       .select(col("value").cast("string"))
 
