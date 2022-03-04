@@ -307,7 +307,7 @@ object Alg {
     //randomly selects a status for payment success rate
     var status = ""
     val r = nextInt(10)
-    if (r % 2 == 0) status = "Y" else status = "N"
+    if (r > 1) status = "Y" else status = "N"
     //println("Was payment successful?: " + paySuccessGen(status))
     //print("Why did the payment fail? ")
 

@@ -1,12 +1,14 @@
 import Alg._
+
 import scala.util.Random._
 import scala.collection.mutable
-
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.streaming.StreamingContext._
 import org.apache.spark.streaming._
+
+import scala.util.Random
 
 
 object Main {
@@ -55,12 +57,34 @@ object Main {
       )
       // Payment info generation
       val pay = payStatusGen
+
       p += (
         "payment_type" -> payTypeGen,
         "payment_txn_id" -> payIdGen,
         "payment_txn_success" -> pay._1,
         "failure_reason" -> pay._2
       )
+      if(pay._1 == "N") {
+        val weight = nextInt(10)
+        val random = new Random()
+        val x = IndexedSeq(
+          "Yash Dhayal",
+          "Hyung Ro Yoon",
+          "Betty Boyett",
+          "Bryan Chou",
+          "Mandeep Atwal",
+          "Jacob Nottingham",
+          "Brandon Conover",
+          "Cameron Lim",
+          "Mark Coffer",
+          "Yueqi Peng",
+          "Grace Alberts"
+        )
+        if(weight == 0) {
+          val randomName = x(random.nextInt(x.length))
+          //change Customer name to randomName
+        }
+      }
 
       val location = randomCityCountry(spark)
       p += (
