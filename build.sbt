@@ -53,3 +53,13 @@ dependencyOverrides ++= {
 resolvers += "Fabricator" at "https://dl.bintray.com/biercoff/Fabricator"
 libraryDependencies += "com.github.azakordonets" % "fabricator_2.12" % "2.1.5"
 
+//This gives a new name for the jar file so we can find it easier in the target/scala folder
+assemblyJarName in assembly := "P2.jar"
+//When using sbt-assembly we can encounter errors caused by the default deduplicate merge strategy.
+//In most cases this is caused by files in the META-INF directory.
+//This code resolves merge issues by choosing the appropriate merge strategy for the paths
+//that are causing errors.
+assemblyMergeStrategy in assembly := {
+  case PathList("META-INF", xs @ _*) => MergeStrategy.discard
+  case x => MergeStrategy.first
+}
