@@ -53,18 +53,23 @@ object Producer {
 
     val producer = new KafkaProducer[String, String](props)
 
-    try {
-      //testing, sending a single record
-      sendRecord(producer, "ingest")
-      Thread.sleep(2000)
+    while (true) {
+      try {
+        //testing, sending a single record
+        sendRecord(producer, "ingest")
+        Thread.sleep(2000)
 
 
-    } catch {
-      case e: Exception => {
-        e.printStackTrace()
+      } catch {
+        case e: Exception => {
+          e.printStackTrace()
+        }
       }
-    } finally {
-      producer.close()
+      /*finally {
+        producer.close()
+        }
+       */
+
     }
   }
 }
