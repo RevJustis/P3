@@ -29,9 +29,11 @@ object Main {
 
       // Price, unit price and quantity gen
       val price = priceGen() // Total, Unit, qty
-      record += ("price" -> price._1.toString())
-      record += ("unitPrice" -> price._2.toString())
-      record += ("qty" -> price._3.toString())
+      record += (
+        "price" -> price._1.toString(),
+        "unitPrice" -> price._2.toString(),
+        "qty" -> price._3.toString()
+      )
 
       // Payment info generation
       val pay = payStatusGen
@@ -51,7 +53,7 @@ object Main {
 
       // create url and store
       val host = hostNameGen()
-      record += ("ecommerce_website_name" -> urlGen(host))
+      record += ("ecommerce_website_name" -> urlGen(host, customer._2))
       // Product info generation
       val product = proRecord(nextInt(1000), price._2, host, spark)
       record += (

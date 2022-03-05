@@ -257,16 +257,16 @@ object Alg {
     f"$id%05.0f"
   }
 
-  def urlGen(h: String): String = {
+  def urlGen(host: String, name: String): String = {
     val g = fabricator.Internet()
     g.urlBuilder
       .scheme("https")
-      .host(h)
+      .host(host)
       .path("/getNewId")
       .params(
         mutable.Map[String, Any](
           "id" -> nextInt(101),
-          "name" -> cusNameGen(),
+          "name" -> name,
           "coordinates" -> nextDouble()
         )
       )
@@ -299,14 +299,6 @@ object Alg {
     randomHost.toLowerCase
   }
 
-  /*
-  //randomly selects a status for payment success rate
-  def paySuccessGen(status: String): Char = {
-    //val r = nextInt(10)
-    //if (r % 2 == 0) 'Y' else 'N'
-  }
-   */
-
   //randomly chooses a reason why a payment would have failed from an indexed seq
   def payStatusGen(): (String, String) = {
     val random = new Random
@@ -336,9 +328,7 @@ object Alg {
     //randomly selects a status for payment success rate
     var status = ""
     val r = nextInt(10)
-    if (r > 1) status = "Y" else status = "N"
-    //println("Was payment successful?: " + paySuccessGen(status))
-    //print("Why did the payment fail? ")
+    status = if (r > 1) "Y" else "N"
 
     if (status == "N") {
       val randomFail = x(random.nextInt(x.length))
