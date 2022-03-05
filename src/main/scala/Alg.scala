@@ -162,26 +162,9 @@ object Alg {
       case e: Throwable =>
         println("Improper Input Exception")
         println(e)
-        ("Tuple", "Tuple", "Tuple")
+        ("ERROR", "ERROR", "ERROR")
     }
   }
-
-  //creates a random product name
-  //used in proRecord()
-  // TODO Don't random gen, instead find a product name inside
-  // one of the files, based on which url is chosen.
-  /*
-  def proNameGen(host: String): String = {
-    //val namer = fabricator.Words()
-    //namer.word
-    val h = host
-    h match {
-      case "Amazon.com"
-    }
-
-  }
-
-   */
 
   //randomly picks a category from an indexed sequence
   //used in proRecord()
@@ -368,7 +351,7 @@ object Alg {
 
   }
 
-  def randomCityCountry(spark: SparkSession): (String, String) = {
+  def cityCountryGen(spark: SparkSession): (String, String) = {
     try {
       var df = spark.read
         .format("csv")
@@ -387,5 +370,4 @@ object Alg {
         ("Tuple", "Tuple")
     }
   }
-
 }
