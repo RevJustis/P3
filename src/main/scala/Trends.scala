@@ -9,7 +9,11 @@ import org.apache.spark.streaming.StreamingContext._
 import org.apache.spark.streaming._
 
 object Trends {
-
-
-
+  def isEnemyName(pay: String): Boolean = {
+    if (pay == "N") {
+      val weight = nextInt(10)
+      if (nextInt(10) == 0) true
+    }
+    false
+  }
 }

@@ -15,7 +15,23 @@ object Alg {
   // Checks if an int is already a customer id, returns an array
   // returnedArray(0) == customer id
   // returnedArray(1) == customer name
-  def cusRecord(n: Int): (String, String) = {
+  def cusRecord(n: Int, isEnemyName: Boolean): (String, String) = {
+    if (isEnemyName) {
+      val x: Map[String, String] = Map(
+        "1001" -> "Yash Dhayal",
+        "1002" -> "Hyung Ro Yoon",
+        "1003" -> "Betty Boyett",
+        "1004" -> "Bryan Chou",
+        "1005" -> "Mandeep Atwal",
+        "1006" -> "Jacob Nottingham",
+        "1007" -> "Brandon Conover",
+        "1008" -> "Cameron Lim",
+        "1009" -> "Mark Coffer",
+        "1010" -> "Yueqi Peng",
+        "1011" -> "Grace Alberts"
+      )
+      x getOrElse ((nextInt(1012) + 1001).toString, ("ERROR", "ERROR"))
+    }
     try {
       val f = new File("input/customers.txt")
       //f.createNewFile
@@ -40,8 +56,9 @@ object Alg {
       }
       (id, name)
     } catch {
-      case e: InputMismatchException => println("Improper Input Exception")
-        ("Tuple", "Tuple")
+      case e: InputMismatchException =>
+        println(s"Improper Input Exception:$e")
+        ("n/a", "n/a")
     }
   }
 
@@ -87,24 +104,52 @@ object Alg {
         var maxPrice = unitPrice
         h match {
           case "amazon.com" =>
-            val dfAmazon = spark.read.format("csv").option("header","true").load("input/amazon.csv")
+            val dfAmazon = spark.read
+              .format("csv")
+              .option("header", "true")
+              .load("input/amazon.csv")
             //dfAmazon.select(max(col("Selling Price"))).show()
-            val dfA = dfAmazon.withColumn("SellingPrice",col("SellingPrice").cast(DoubleType))
-            name = dfA.select("Product Name").where(dfA("SellingPrice") < maxPrice).
-              orderBy(desc("SellingPrice")).first.getString(0)
-            //highest is about 1000
+            val dfA = dfAmazon.withColumn(
+              "SellingPrice",
+              col("SellingPrice").cast(DoubleType)
+            )
+            name = dfA
+              .select("Product Name")
+              .where(dfA("SellingPrice") < maxPrice)
+              .orderBy(desc("SellingPrice"))
+              .first
+              .getString(0)
+          //highest is about 1000
           case "walmart.com" =>
-            val dfWalmart = spark.read.format("csv").option("header","true").load("input/walmartC.csv")
-            val dfW = dfWalmart.withColumn("SalePrice",col("SalePrice").cast(DoubleType))
+            val dfWalmart = spark.read
+              .format("csv")
+              .option("header", "true")
+              .load("input/walmartC.csv")
+            val dfW = dfWalmart.withColumn(
+              "SalePrice",
+              col("SalePrice").cast(DoubleType)
+            )
             //dfWalmart.select(max(col("Sale Price"))).show()
-            name = dfW.select("Product Name").where(dfW("SalePrice") < maxPrice).
-              orderBy(desc("SalePrice")).first.getString(0)
+            name = dfW
+              .select("Product Name")
+              .where(dfW("SalePrice") < maxPrice)
+              .orderBy(desc("SalePrice"))
+              .first
+              .getString(0)
           case "ebay.com" =>
-            val dfEbay = spark.read.format("csv").option("header","true").load("input/ebay.csv")
-            val dfE = dfEbay.withColumn("Price",col("Price").cast(DoubleType))
+            val dfEbay = spark.read
+              .format("csv")
+              .option("header", "true")
+              .load("input/ebay.csv")
+            val dfE = dfEbay.withColumn("Price", col("Price").cast(DoubleType))
             //df1.select(max(col("Price"))).show()
-            name = dfE.select("Title").where(dfE("Price") < maxPrice).orderBy(desc("Price")).first.getString(0)
-            //highest is about 1000
+            name = dfE
+              .select("Title")
+              .where(dfE("Price") < maxPrice)
+              .orderBy(desc("Price"))
+              .first
+              .getString(0)
+          //highest is about 1000
         }
         pid = n.toString
         pcat = s"($proCategoryGen)"
@@ -114,7 +159,8 @@ object Alg {
       }
       (pid, name, pcat)
     } catch {
-      case e: Throwable => println("Improper Input Exception")
+      case e: Throwable =>
+        println("Improper Input Exception")
         println(e)
         ("Tuple", "Tuple", "Tuple")
     }
@@ -336,7 +382,8 @@ object Alg {
       println("Your country is " + df.first.getString(1))
       (df.first.getString(0), df.first.getString(1))
     } catch {
-      case e: InputMismatchException => println("Improper Input Exception")
+      case e: InputMismatchException =>
+        println("Improper Input Exception")
         ("Tuple", "Tuple")
     }
   }
