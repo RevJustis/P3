@@ -18,7 +18,7 @@ object Trends {
   }
   def spenderCities(): String = {
     var rand = nextInt(10)
-    if(rand == 0) {
+    if (rand == 0) {
       val x = IndexedSeq(
         "New York",
         "Paris",
@@ -35,23 +35,18 @@ object Trends {
     } else "Other"
   }
 
-  def fitness(): Unit = {
+  def fitness(): Unit = {}
+  def payFailTime(time: String, status: String): Boolean = {
 
+    if (time <= "00:01:00" && time >= "00:04:00") {
 
-  }
-}
-
-
-def payFailTime (time:String, status: String): Boolean = {
-
-  if (time <= "00:01:00" && time >= "00:04:00") {
-
-    val w = nextInt(10)
-    if (w<=4) {
-      status == "N"
+      val w = nextInt(10)
+      if (w <= 4) {
+        status == "N"
+      }
+    } else {
+      "Y"
     }
-  } else {
-    "Y"
+    false
   }
-  false
 }
