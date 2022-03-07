@@ -11,6 +11,7 @@ import java.util.InputMismatchException
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types._
 import java.util.Locale.Category
+import Trends._
 
 object Alg {
   // Checks if an int is already a customer id, returns an array
@@ -202,11 +203,11 @@ object Alg {
     //whole number
     var whole = 0
     if (weight > 9) { //10% of possible outcomes
-      //price is anywhere from 2 to 999
-      whole = nextInt(998) + 2
+      //price is anywhere from 0 to 999
+      whole = nextInt(1000)
     } else { //90% of possible outcomes
-      //price is anywhere from 2 to 199
-      whole = nextInt(198) + 2
+      //price is anywhere from 0 to 199
+      whole = nextInt(200)
     }
     //creates random Float
     val dec = nextFloat()
@@ -220,9 +221,9 @@ object Alg {
       //since most purchases are going to be in smaller quantities,
       //this ensures that smaller amounts will happen more frequently.
       val weightQty = nextInt(10)
-      if (weightQty > 7) { //80% of possible outcomes
+      if (weightQty > 7) { //20% of possible outcomes
         qty = nextInt(50) + 1
-      } else { //20% of possible outcomes
+      } else { //80% of possible outcomes
         qty = nextInt(5) + 1
       }
     }
@@ -322,7 +323,7 @@ object Alg {
     //randomly selects a status for payment success rate
     var status = ""
     val r = nextInt(10)
-    status = if (r > 1) "Y" else "N"
+    status = if (r > 0) "Y" else "N"
 
     if (status == "N") {
       val randomFail = x(random.nextInt(x.length))
@@ -344,14 +345,21 @@ object Alg {
       //df.show(5)
       val r = new Random()
       val id = r.nextInt(41001)
-      df = df.select("city", "country").where(s"id = $id").limit(1).toDF()
-      println("Your city is " + df.first.getString(0))
-      println("Your country is " + df.first.getString(1))
-      (df.first.getString(0), df.first.getString(1))
+      val rand = spenderCities()
+      if(rand == "Other") {
+        df = df.select("city", "country").where(s"id = $id").limit(1).toDF()
+        println("Your city is " + df.first.getString(0))
+        println("Your country is " + df.first.getString(1))
+        (df.first.getString(0), df.first.getString(1))
+      } else {
+        val dftrend = df.select("country").where(s"city = $rand").toDF()
+        (rand, dftrend.first.getString(0))
+      }
+
     } catch {
       case e: InputMismatchException =>
         println("Improper Input Exception")
-        ("Tuple", "Tuple")
+        ("ERROR", "ERROR")
     }
   }
 }
