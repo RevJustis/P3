@@ -290,6 +290,9 @@ object Alg {
     val random = new Random
     val x = IndexedSeq(
       "Amazon.com",
+      "Amazon.com",
+      "Amazon.com",
+      "Walmart.com",
       "Walmart.com",
       "eBay.com"
       // "Target.com",
