@@ -61,7 +61,9 @@ object Alg {
       }
       val dur4 = (System.nanoTime - t4) / 1e9d
       println()
-      println("The execution time of the customer function is: " + dur4 + " seconds.")
+      println(
+        "The execution time of the customer function is: " + dur4 + " seconds."
+      )
 
       (id, name)
     } catch {
@@ -140,7 +142,7 @@ object Alg {
             name = e.getString(0)
             price = e.getDouble(1)
             pcat = "n/a"
-            url = e.getString(3)
+            url = e.getString(2)
           //highest is about 1000
         }
         pw.append(s"$n,$name,$pcat,$price,$url\n")
@@ -148,7 +150,9 @@ object Alg {
       }
       val dur5 = (System.nanoTime - t5) / 1e9d
       println()
-      println("The execution time of the product function is: " + dur5 + " seconds.")
+      println(
+        "The execution time of the product function is: " + dur5 + " seconds."
+      )
       (n.toString, name, pcat, price.toString, url)
     } catch {
       case e: Throwable =>
@@ -201,10 +205,10 @@ object Alg {
     var unitPrice = 0.0
     if (weight > 9) { //10% of possible outcomes
       //price is anywhere from 0 to 999
-      unitPrice = (nextInt(100000).toDouble/100)
+      unitPrice = (nextInt(100000).toDouble / 100)
     } else { //90% of possible outcomes
       //price is anywhere from 0 to 199
-      unitPrice = (nextInt(200).toDouble/100)
+      unitPrice = (nextInt(200).toDouble / 100)
     }
     var totalPrice = 0.0 //price of transaction
     var qty = 0
@@ -327,7 +331,9 @@ object Alg {
 
     val dur3 = (System.nanoTime - t3) / 1e9d
     println()
-    println("The execution time of the payment function is: " + dur3 + " seconds.")
+    println(
+      "The execution time of the payment function is: " + dur3 + " seconds."
+    )
 
     if (status == "N") {
       val randomFail = x(random.nextInt(x.length))
@@ -353,14 +359,17 @@ object Alg {
       val rand = spenderCities()
       val dur6 = (System.nanoTime - t6) / 1e9d
       println()
-      println("The execution time of the country function is: " + dur6 + " seconds.")
-      if(rand == "Other") {
+      println(
+        "The execution time of the country function is: " + dur6 + " seconds."
+      )
+      if (rand == "Other") {
         df = df.select("city", "country").where(s"id = $id").limit(1).toDF()
         println("Your city is " + df.first.getString(0))
         println("Your country is " + df.first.getString(1))
         (df.first.getString(0), df.first.getString(1))
       } else {
-        val dftrend = df.select( "country").where(s"city = '$rand'").limit(1).toDF()
+        val dftrend =
+          df.select("country").where(s"city = '$rand'").limit(1).toDF()
         (rand, dftrend.first.getString(0))
       }
 
