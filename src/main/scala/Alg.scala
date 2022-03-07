@@ -213,18 +213,14 @@ object Alg {
     //creates value for weight
     val weight = nextInt(10) + 1
     //whole number
-    var whole = 0
+    var unitPrice = 0.0
     if (weight > 9) { //10% of possible outcomes
       //price is anywhere from 0 to 999
-      whole = nextInt(1000)
+      unitPrice = (nextInt(100000).toDouble/100)
     } else { //90% of possible outcomes
       //price is anywhere from 0 to 199
-      whole = nextInt(200)
+      unitPrice = (nextInt(200).toDouble/100)
     }
-    //creates random Float
-    val dec = nextFloat()
-    //unitPrice = whole number + decimal number
-    var unitPrice = whole + dec.toDouble
     var totalPrice = 0.0 //price of transaction
     var qty = 0
     if (unitPrice > 199) { // 8% of possible outcomes
