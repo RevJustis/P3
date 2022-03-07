@@ -10,12 +10,30 @@ import java.io.IOException
 import java.util.InputMismatchException
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types._
+import java.util.Locale.Category
+import Trends._
 
 object Alg {
   // Checks if an int is already a customer id, returns an array
   // returnedArray(0) == customer id
   // returnedArray(1) == customer name
-  def cusRecord(n: Int): (String, String) = {
+  def cusRecord(n: Int, isEnemyName: Boolean): (String, String) = {
+    if (isEnemyName) {
+      val x: Map[String, String] = Map(
+        "1001" -> "Yash Dhayal",
+        "1002" -> "Hyung Ro Yoon",
+        "1003" -> "Betty Boyett",
+        "1004" -> "Bryan Chou",
+        "1005" -> "Mandeep Atwal",
+        "1006" -> "Jacob Nottingham",
+        "1007" -> "Brandon Conover",
+        "1008" -> "Cameron Lim",
+        "1009" -> "Mark Coffer",
+        "1010" -> "Yueqi Peng",
+        "1011" -> "Grace Alberts"
+      )
+      x getOrElse ((nextInt(1012) + 1001).toString, ("ERROR", "ERROR"))
+    }
     try {
       val f = new File("input/customers.txt")
       //f.createNewFile
@@ -40,8 +58,9 @@ object Alg {
       }
       (id, name)
     } catch {
-      case e: InputMismatchException => println("Improper Input Exception")
-        ("Tuple", "Tuple")
+      case e: InputMismatchException =>
+        println(s"Improper Input Exception:$e")
+        ("ERROR", "ERROR")
     }
   }
 
@@ -55,87 +74,92 @@ object Alg {
   // Checks if an int is already a product id, returns an array
   // returnedArray(0) == product id
   // returnedArray(1) == product name
-  // TODO Overhaul this so that it just uses the name given
-  // by the proNameGen()
+  // TODO Does not account for when the generator finds a product that is actually matched to an ID already
   def proRecord(
       n: Int,
-      unitPrice: Double,
+      genPrice: Double,
       host: String,
       spark: SparkSession
-  ): (String, String, String) = {
+  ): (String, String, String, String, String) = {
     try {
       val f = new File("input/products.txt")
       //f.createNewFile
       val sc = new Scanner(f)
-      var pid = ""
       var name = ""
       var pcat = ""
       var price = 0.0
+      var url = ""
       var exists = false
       while (sc.hasNext && !exists) { // Attempt to find the id in record, if found get name
         val s = sc.next.split(',')
-        pid = s(0)
-        if (pid == n.toString) {
+        if (s(0) == n.toString) {
           exists = true
           name = s(1)
+          pcat = s(2)
+          price = s(3).toDouble
+          url = s(4)
         }
       }
       if (!exists) { // Not in the record already? Then put it in there!
         val pw = new PrintWriter(new FileOutputStream(f, true))
         //name = proNameGen()
-        val h = host
-        var maxPrice = unitPrice
-        h match {
+        var maxPrice = genPrice
+        host match {
           case "amazon.com" =>
-            val dfAmazon = spark.read.format("csv").option("header","true").load("input/amazon.csv")
-            //dfAmazon.select(max(col("Selling Price"))).show()
-            val dfA = dfAmazon.withColumn("SellingPrice",col("SellingPrice").cast(DoubleType))
-            name = dfA.select("Product Name").where(dfA("SellingPrice") < maxPrice).
-              orderBy(desc("SellingPrice")).first.getString(0)
-            //highest is about 1000
+            val df = spark.read
+              .parquet("input/pq/amazon.parquet")
+              .withColumn(
+                "SellingPrice",
+                col("SellingPrice").cast(DoubleType)
+              )
+              .select("ProductName", "Category", "SellingPrice", "ProductUrl")
+              .where(col("SellingPrice") <= maxPrice)
+              .orderBy(desc("SellingPrice"))
+              .first
+            name = df.getString(0)
+            pcat = df.getString(1)
+            price = df.getDouble(2)
+            url = df.getString(3)
+          //highest is about 1000
           case "walmart.com" =>
-            val dfWalmart = spark.read.format("csv").option("header","true").load("input/walmartC.csv")
-            val dfW = dfWalmart.withColumn("SalePrice",col("SalePrice").cast(DoubleType))
-            //dfWalmart.select(max(col("Sale Price"))).show()
-            name = dfW.select("Product Name").where(dfW("SalePrice") < maxPrice).
-              orderBy(desc("SalePrice")).first.getString(0)
+            val df = spark.read
+              .parquet("input/pq/walmart.parquet")
+              .withColumn(
+                "SalePrice",
+                col("SalePrice").cast(DoubleType)
+              )
+              .select("ProductName", "Category", "SalePrice", "ProductUrl")
+              .where(col("SalePrice") < maxPrice)
+              .orderBy(desc("SalePrice"))
+              .first
+            name = df.getString(0)
+            pcat = df.getString(1)
+            price = df.getDouble(2)
+            url = df.getString(3)
           case "ebay.com" =>
-            val dfEbay = spark.read.format("csv").option("header","true").load("input/ebay.csv")
-            val dfE = dfEbay.withColumn("Price",col("Price").cast(DoubleType))
-            //df1.select(max(col("Price"))).show()
-            name = dfE.select("Title").where(dfE("Price") < maxPrice).orderBy(desc("Price")).first.getString(0)
-            //highest is about 1000
+            val df = spark.read
+              .parquet("input/pq/ebay.parquet")
+              .withColumn("Price", col("Price").cast(DoubleType))
+              .select("Title", "Price", "Pageurl")
+              .where(col("Price") < maxPrice)
+              .orderBy(desc("Price"))
+              .first
+            name = df.getString(0)
+            price = df.getDouble(1)
+            pcat = "n/a"
+            url = df.getString(3)
+          //highest is about 1000
         }
-        pid = n.toString
-        pcat = s"($proCategoryGen)"
-
-        pw.append(s"$n,$name\n")
+        pw.append(s"$n,$name,$pcat,$price,$url\n")
         pw.close
       }
-      (pid, name, pcat)
+      (n.toString, name, pcat, price.toString, url)
     } catch {
-      case e: Throwable => println("Improper Input Exception")
-        println(e)
-        ("Tuple", "Tuple", "Tuple")
+      case e: Throwable =>
+        println(s"Exception!:\n$e")
+        ("ERROR", "ERROR", "ERROR", "ERROR", "ERROR")
     }
   }
-
-  //creates a random product name
-  //used in proRecord()
-  // TODO Don't random gen, instead find a product name inside
-  // one of the files, based on which url is chosen.
-  /*
-  def proNameGen(host: String): String = {
-    //val namer = fabricator.Words()
-    //namer.word
-    val h = host
-    h match {
-      case "Amazon.com"
-    }
-
-  }
-
-   */
 
   //randomly picks a category from an indexed sequence
   //used in proRecord()
@@ -179,11 +203,11 @@ object Alg {
     //whole number
     var whole = 0
     if (weight > 9) { //10% of possible outcomes
-      //price is anywhere from 2 to 999
-      whole = nextInt(998) + 2
+      //price is anywhere from 0 to 999
+      whole = nextInt(1000)
     } else { //90% of possible outcomes
-      //price is anywhere from 2 to 199
-      whole = nextInt(198) + 2
+      //price is anywhere from 0 to 199
+      whole = nextInt(200)
     }
     //creates random Float
     val dec = nextFloat()
@@ -197,9 +221,9 @@ object Alg {
       //since most purchases are going to be in smaller quantities,
       //this ensures that smaller amounts will happen more frequently.
       val weightQty = nextInt(10)
-      if (weightQty > 7) { //80% of possible outcomes
+      if (weightQty > 7) { //20% of possible outcomes
         qty = nextInt(50) + 1
-      } else { //20% of possible outcomes
+      } else { //80% of possible outcomes
         qty = nextInt(5) + 1
       }
     }
@@ -228,16 +252,16 @@ object Alg {
     f"$id%05.0f"
   }
 
-  def urlGen(h: String): String = {
+  def urlGen(host: String, name: String): String = {
     val g = fabricator.Internet()
     g.urlBuilder
       .scheme("https")
-      .host(h)
+      .host(host)
       .path("/getNewId")
       .params(
         mutable.Map[String, Any](
           "id" -> nextInt(101),
-          "name" -> cusNameGen(),
+          "name" -> name,
           "coordinates" -> nextDouble()
         )
       )
@@ -270,18 +294,10 @@ object Alg {
     randomHost.toLowerCase
   }
 
-  /*
-  //randomly selects a status for payment success rate
-  def paySuccessGen(status: String): Char = {
-    //val r = nextInt(10)
-    //if (r % 2 == 0) 'Y' else 'N'
-  }
-   */
-
   //randomly chooses a reason why a payment would have failed from an indexed seq
   def payStatusGen(): (String, String) = {
     val random = new Random
-    val x = IndexedSeq(
+    val x = List(
       "Expired Card",
       "Invalid CVC",
       "Invalid Pin",
@@ -307,9 +323,7 @@ object Alg {
     //randomly selects a status for payment success rate
     var status = ""
     val r = nextInt(10)
-    if (r > 1) status = "Y" else status = "N"
-    //println("Was payment successful?: " + paySuccessGen(status))
-    //print("Why did the payment fail? ")
+    status = if (r > 0) "Y" else "N"
 
     if (status == "N") {
       val randomFail = x(random.nextInt(x.length))
@@ -322,7 +336,7 @@ object Alg {
 
   }
 
-  def randomCityCountry(spark: SparkSession): (String, String) = {
+  def cityCountryGen(spark: SparkSession): (String, String) = {
     try {
       var df = spark.read
         .format("csv")
@@ -331,14 +345,21 @@ object Alg {
       //df.show(5)
       val r = new Random()
       val id = r.nextInt(41001)
-      df = df.select("city", "country").where(s"id = $id").limit(1).toDF()
-      println("Your city is " + df.first.getString(0))
-      println("Your country is " + df.first.getString(1))
-      (df.first.getString(0), df.first.getString(1))
+      val rand = spenderCities()
+      if(rand == "Other") {
+        df = df.select("city", "country").where(s"id = $id").limit(1).toDF()
+        println("Your city is " + df.first.getString(0))
+        println("Your country is " + df.first.getString(1))
+        (df.first.getString(0), df.first.getString(1))
+      } else {
+        val dftrend = df.select( "country").where(s"city = '$rand'").limit(1).toDF()
+        (rand, dftrend.first.getString(0))
+      }
+
     } catch {
-      case e: InputMismatchException => println("Improper Input Exception")
-        ("Tuple", "Tuple")
+      case e: InputMismatchException =>
+        println("Improper Input Exception")
+        ("ERROR", "ERROR")
     }
   }
-
 }
