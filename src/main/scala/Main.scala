@@ -35,7 +35,7 @@ object Main {
 
       // val location = locGen
       // produced += (
-      // "country" -> location._1
+      //"country" -> location._1
       // "city" -> location._2,
       // )
       // Price, unit price and quantity gen
