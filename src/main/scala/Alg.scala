@@ -227,13 +227,8 @@ object Alg {
         qty = nextInt(5) + 1
       }
     }
-    totalPrice = BigDecimal(unitPrice * qty)
-      .setScale(2, BigDecimal.RoundingMode.HALF_UP)
-      .toDouble
-    unitPrice = BigDecimal(unitPrice)
-      .setScale(2, BigDecimal.RoundingMode.HALF_UP)
-      .toDouble
-    (totalPrice, unitPrice, qty)
+    totalPrice = unitPrice * qty
+    (f"$totalPrice%1.2f".toDouble, f"$unitPrice%1.2f".toDouble, qty)
   }
 
   def readFile(filename: String): String = {
