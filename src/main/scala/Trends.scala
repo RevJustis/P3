@@ -1,13 +1,11 @@
 import Alg._
 import Producer.ID
-import scala.util.Random._
-import scala.collection.mutable
-
-import org.apache.log4j.{Level, Logger}
-import org.apache.spark.SparkConf
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.streaming.StreamingContext._
 import org.apache.spark.streaming._
+
+import scala.collection.mutable
+import scala.util.Random._
 
 object Trends {
   def getMap(spark: SparkSession): mutable.Map[String, String] = {
@@ -71,4 +69,19 @@ object Trends {
     }
     false
   }
+}
+
+//payment fails between 1am and 4am more frequently. Maybe add fail types.
+def payFailTime (time:String, status: String): Boolean = {
+
+  if (time <= "00:01:00" && time >= "00:04:00") {
+
+    val w = nextInt(10)
+    if (w<=4) {
+      status == "N"
+    }
+  } else {
+    "Y"
+  }
+  false
 }
