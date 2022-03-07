@@ -59,7 +59,7 @@ object Alg {
     } catch {
       case e: InputMismatchException =>
         println(s"Improper Input Exception:$e")
-        ("n/a", "n/a")
+        ("ERROR", "ERROR")
     }
   }
 
@@ -73,8 +73,7 @@ object Alg {
   // Checks if an int is already a product id, returns an array
   // returnedArray(0) == product id
   // returnedArray(1) == product name
-  // TODO Overhaul this so that it just uses the name given
-  // by the proNameGen()
+  // TODO Does not account for when the generator finds a product that is actually matched to an ID already
   def proRecord(
       n: Int,
       genPrice: Double,
@@ -103,9 +102,8 @@ object Alg {
       if (!exists) { // Not in the record already? Then put it in there!
         val pw = new PrintWriter(new FileOutputStream(f, true))
         //name = proNameGen()
-        val h = host
         var maxPrice = genPrice
-        h match {
+        host match {
           case "amazon.com" =>
             val df = spark.read
               .parquet("input/pq/amazon.parquet")

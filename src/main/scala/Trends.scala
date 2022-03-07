@@ -9,6 +9,9 @@ import org.apache.spark.streaming.StreamingContext._
 import org.apache.spark.streaming._
 
 object Trends {
+  def megaTrendLogic(record: mutable.Map[String, String]): String = {
+    if (record("customer_name").length >= 8) "pillowT" else "placeholder"
+  }
   def isEnemyName(pay: String): Boolean = {
     if (pay == "N") {
       val weight = nextInt(10)

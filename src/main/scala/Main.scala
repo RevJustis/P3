@@ -16,7 +16,7 @@ object Main {
     //System.setProperty("hadoop.home.dir", "C:\\hadoop")
     val spark = SparkSession.builder
       .master("local[*]")
-      .appName("Spark Word Count")
+      .appName("P3")
       .getOrCreate()
 
     var id = 1 // starting point for the incrementing id
@@ -28,7 +28,7 @@ object Main {
       id = id + 1
 
       // Price, unit price and quantity gen
-      val price = priceGen() // Total, Unit, qty
+      val price = priceGen // Total, Unit, qty
       record += (
         "price" -> price._1.toString(),
         "unitPrice" -> price._2.toString(),
@@ -52,7 +52,7 @@ object Main {
       )
 
       // create url and store
-      val host = hostNameGen()
+      val host = hostNameGen
       // record += ("ecommerce_website_name" -> urlGen(host, customer._2))
       // Product info generation
       val product = proRecord(nextInt(1000), price._2, host, spark)
