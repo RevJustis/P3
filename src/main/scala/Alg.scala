@@ -91,74 +91,75 @@ object Alg {
       spark: SparkSession
   ): (String, String, String, String, String) = {
     val t5 = System.nanoTime
-    try {
-      val f = new File("input/products.txt")
-      //f.createNewFile
-      val sc = new Scanner(f)
-      var name = ""
-      var pcat = ""
-      var price = 0.0
-      var url = ""
-      var exists = false
-      while (sc.hasNext && !exists) { // Attempt to find the id in record, if found get name
-        val s = sc.next.split(',')
-        if (s(0) == n.toString) {
-          exists = true
-          name = s(1)
-          pcat = s(2)
-          price = s(3).toDouble
-          url = s(4)
-        }
+    // try {
+    val f = new File("input/products.txt")
+    //f.createNewFile
+    val sc = new Scanner(f)
+    var name = ""
+    var pcat = ""
+    var price = 0.0
+    var url = ""
+    var exists = false
+    while (sc.hasNext && !exists) { // Attempt to find the id in record, if found get name
+      val s = sc.next.split(',')
+      if (s(0) == n.toString) {
+        exists = true
+        name = s(1)
+        pcat = s(2)
+        price = s(3).toDouble
+        url = s(4)
       }
-      if (!exists) { // Not in the record already? Then put it in there!
-        val pw = new PrintWriter(new FileOutputStream(f, true))
-        //name = proNameGen()
-        var maxPrice = genPrice
-        host match {
-          case "amazon.com" =>
-            val a = dfA
-              .where(col("SellingPrice") <= maxPrice)
-              .orderBy(desc("SellingPrice"))
-              .first
-            name = a.getString(0)
-            pcat = a.getString(1)
-            price = a.getDouble(2)
-            url = a.getString(3)
-          //highest is about 1000
-          case "walmart.com" =>
-            val w = dfW
-              .where(col("SalePrice") < maxPrice)
-              .orderBy(desc("SalePrice"))
-              .first
-            name = w.getString(0)
-            pcat = w.getString(1)
-            price = w.getDouble(2)
-            url = w.getString(3)
-          case "ebay.com" =>
-            val e = dfE
-              .where(col("Price") < maxPrice)
-              .orderBy(desc("Price"))
-              .first
-            name = e.getString(0)
-            price = e.getDouble(1)
-            pcat = "n/a"
-            url = e.getString(2)
-          //highest is about 1000
-        }
-        pw.append(s"$n,$name,$pcat,$price,$url\n")
-        pw.close
-      }
-      val dur5 = (System.nanoTime - t5) / 1e9d
-      println()
-      println(
-        "The execution time of the product function is: " + dur5 + " seconds."
-      )
-      (n.toString, name, pcat, price.toString, url)
-    } catch {
-      case e: Throwable =>
-        println(s"Exception!:\n$e")
-        ("ERROR", "ERROR", "ERROR", "ERROR", "ERROR")
     }
+    if (!exists) { // Not in the record already? Then put it in there!
+      val pw = new PrintWriter(new FileOutputStream(f, true))
+      //name = proNameGen()
+      var maxPrice = genPrice
+      println(maxPrice)
+      host match {
+        case "amazon.com" =>
+          val a = dfA
+            .where(col("SellingPrice") <= maxPrice)
+            .orderBy(desc("SellingPrice"))
+            .first
+          name = a.getString(0)
+          pcat = a.getString(1)
+          price = a.getDouble(2)
+          url = a.getString(3)
+        //highest is about 1000
+        case "walmart.com" =>
+          val w = dfW
+            .where(col("SalePrice") < maxPrice)
+            .orderBy(desc("SalePrice"))
+            .first
+          name = w.getString(0)
+          pcat = w.getString(1)
+          price = w.getDouble(2)
+          url = w.getString(3)
+        case "ebay.com" =>
+          val e = dfE
+            .where(col("Price") < maxPrice)
+            .orderBy(desc("Price"))
+            .first
+          name = e.getString(0)
+          price = e.getDouble(1)
+          pcat = "n/a"
+          url = e.getString(2)
+        //highest is about 1000
+      }
+      pw.append(s"$n,$name,$pcat,$price,$url\n")
+      pw.close
+    }
+    val dur5 = (System.nanoTime - t5) / 1e9d
+    println()
+    println(
+      "The execution time of the product function is: " + dur5 + " seconds."
+    )
+    (n.toString, name, pcat, price.toString, url)
+    // } catch {
+    // case e: Throwable =>
+    // println(s"Exception!:\n$e")
+    // ("ERROR", "ERROR", "ERROR", "ERROR", "ERROR")
+    // }
   }
 
   //randomly picks a category from an indexed sequence

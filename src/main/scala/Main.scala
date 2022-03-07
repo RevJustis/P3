@@ -10,6 +10,7 @@ import org.apache.spark.streaming.StreamingContext._
 import org.apache.spark.streaming._
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types._
+import org.apache.spark.storage.StorageLevel
 
 object Main {
   System.setProperty("hadoop.home.dir", "C:\\hadoop")
@@ -17,6 +18,7 @@ object Main {
     .master("local[*]")
     .appName("P3")
     .getOrCreate()
+  spark.sparkContext.setLogLevel("ERROR")
   // Create the DataFrames at global scope so that they are made once and used many times
   val dfA = spark.read
     .parquet("input/pq/amazon.parquet")
@@ -41,13 +43,13 @@ object Main {
 
   def main(args: Array[String]): Unit = {
     val t1 = System.nanoTime
-    dfA.cache()
-    dfW.cache()
-    dfE.cache()
+    dfA.persist(StorageLevel.MEMORY_ONLY_SER_2)
+    dfW.persist(StorageLevel.MEMORY_ONLY_SER_2)
+    dfE.persist(StorageLevel.MEMORY_ONLY_SER_2)
 
     var id = 1 // starting point for the incrementing id
     var i = 0
-    while (i < 3) {
+    while (i < 10) {
       var record = mutable.Map[String, String]()
       // Order ID and timestamp generation
       record += ("order_id" -> id.toString, "datetime" -> timestampGen)
@@ -102,10 +104,10 @@ object Main {
 
       val duration = (System.nanoTime - t1) / 1e9d
 
-      println()
       println(
         "The execution time of the function is: " + duration + " seconds."
       )
+      println("*******************")
 
       i += 1
     }
