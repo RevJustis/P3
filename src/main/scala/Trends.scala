@@ -38,7 +38,7 @@ object Trends {
         "Geneva",
         "Copenhagen"
       )
-      x(random.nextInt(x.length))
+      x(nextInt(x.length))
     } else "Other"
   }
 
