@@ -42,7 +42,6 @@ object Main {
     .select("Title", "Price", "Pageurl")
 
   def main(args: Array[String]): Unit = {
-    val t1 = System.nanoTime
     dfA.persist(StorageLevel.MEMORY_ONLY_SER_2)
     dfW.persist(StorageLevel.MEMORY_ONLY_SER_2)
     dfE.persist(StorageLevel.MEMORY_ONLY_SER_2)
@@ -50,6 +49,7 @@ object Main {
     var id = 1 // starting point for the incrementing id
     var i = 0
     while (i < 10) {
+      val t1 = System.nanoTime
       var record = mutable.Map[String, String]()
       // Order ID and timestamp generation
       record += ("order_id" -> id.toString, "datetime" -> timestampGen)
