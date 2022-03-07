@@ -40,7 +40,8 @@ object Alg {
       }
       (id, name)
     } catch {
-      case e: InputMismatchException => println("Improper Input Exception")
+      case e: InputMismatchException =>
+        println("Improper Input Exception")
         ("Tuple", "Tuple")
     }
   }
@@ -89,22 +90,50 @@ object Alg {
         val minPrice = price
         h match {
           case "amazon.com" =>
-            val dfAmazon = spark.read.format("csv").option("header","true").load("input/amazon.csv")
+            val dfAmazon = spark.read
+              .format("csv")
+              .option("header", "true")
+              .load("input/amazon.csv")
             //dfAmazon.select(max(col("Selling Price"))).show()
-            val dfA = dfAmazon.withColumn("SellingPrice",col("SellingPrice").cast(DoubleType))
-            name = dfA.select("Product Name").where(dfA("SellingPrice") > minPrice).
-              orderBy("SellingPrice").first.getString(0)
+            val dfA = dfAmazon.withColumn(
+              "SellingPrice",
+              col("SellingPrice").cast(DoubleType)
+            )
+            name = dfA
+              .select("Product Name")
+              .where(dfA("SellingPrice") > minPrice)
+              .orderBy("SellingPrice")
+              .first
+              .getString(0)
           case "walmart.com" =>
-            val dfWalmart = spark.read.format("csv").option("header","true").load("input/walmartC.csv")
-            val dfW = dfWalmart.withColumn("SalePrice",col("SalePrice").cast(DoubleType))
+            val dfWalmart = spark.read
+              .format("csv")
+              .option("header", "true")
+              .load("input/walmartC.csv")
+            val dfW = dfWalmart.withColumn(
+              "SalePrice",
+              col("SalePrice").cast(DoubleType)
+            )
             //dfWalmart.select(max(col("Sale Price"))).show()
-            name = dfW.select("Product Name").where(dfW("SalePrice") > minPrice).
-              orderBy("SalePrice").first.getString(0)
+            name = dfW
+              .select("Product Name")
+              .where(dfW("SalePrice") > minPrice)
+              .orderBy("SalePrice")
+              .first
+              .getString(0)
           case "ebay.com" =>
-            val dfEbay = spark.read.format("csv").option("header","true").load("input/ebay.csv")
-            val dfE = dfEbay.withColumn("Price",col("Price").cast(DoubleType))
+            val dfEbay = spark.read
+              .format("csv")
+              .option("header", "true")
+              .load("input/ebay.csv")
+            val dfE = dfEbay.withColumn("Price", col("Price").cast(DoubleType))
             //df1.select(max(col("Price"))).show()
-            name = dfE.select("Title").where(dfE("Price") > minPrice).orderBy("Price").first.getString(0)
+            name = dfE
+              .select("Title")
+              .where(dfE("Price") > minPrice)
+              .orderBy("Price")
+              .first
+              .getString(0)
         }
         pid = n.toString
         pcat = s"($proCategoryGen)"
@@ -114,7 +143,8 @@ object Alg {
       }
       (pid, name, pcat)
     } catch {
-      case e: Throwable => println("Improper Input Exception")
+      case e: Throwable =>
+        println("Improper Input Exception")
         println(e)
         ("Tuple", "Tuple", "Tuple")
     }
@@ -322,7 +352,7 @@ object Alg {
 
   }
 
-  def randomCityCountry(spark: SparkSession): (String, String) = {
+  def cityCountryGen(spark: SparkSession): (String, String) = {
     try {
       var df = spark.read
         .format("csv")
@@ -336,7 +366,8 @@ object Alg {
       println("Your country is " + df.first.getString(1))
       (df.first.getString(0), df.first.getString(1))
     } catch {
-      case e: InputMismatchException => println("Improper Input Exception")
+      case e: InputMismatchException =>
+        println("Improper Input Exception")
         ("Tuple", "Tuple")
     }
   }
