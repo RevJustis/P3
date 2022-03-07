@@ -1,5 +1,5 @@
+import Main._
 import org.apache.spark.sql.SparkSession
-
 import java.io.{File, FileOutputStream, PrintWriter}
 import java.util.{Calendar, Scanner}
 import scala.collection.mutable
@@ -114,48 +114,33 @@ object Alg {
         var maxPrice = genPrice
         host match {
           case "amazon.com" =>
-            val df = spark.read
-              .parquet("input/pq/amazon.parquet")
-              .withColumn(
-                "SellingPrice",
-                col("SellingPrice").cast(DoubleType)
-              )
-              .select("ProductName", "Category", "SellingPrice", "ProductUrl")
+            val a = dfA
               .where(col("SellingPrice") <= maxPrice)
               .orderBy(desc("SellingPrice"))
               .first
-            name = df.getString(0)
-            pcat = df.getString(1)
-            price = df.getDouble(2)
-            url = df.getString(3)
+            name = a.getString(0)
+            pcat = a.getString(1)
+            price = a.getDouble(2)
+            url = a.getString(3)
           //highest is about 1000
           case "walmart.com" =>
-            val df = spark.read
-              .parquet("input/pq/walmart.parquet")
-              .withColumn(
-                "SalePrice",
-                col("SalePrice").cast(DoubleType)
-              )
-              .select("ProductName", "Category", "SalePrice", "ProductUrl")
+            val w = dfW
               .where(col("SalePrice") < maxPrice)
               .orderBy(desc("SalePrice"))
               .first
-            name = df.getString(0)
-            pcat = df.getString(1)
-            price = df.getDouble(2)
-            url = df.getString(3)
+            name = w.getString(0)
+            pcat = w.getString(1)
+            price = w.getDouble(2)
+            url = w.getString(3)
           case "ebay.com" =>
-            val df = spark.read
-              .parquet("input/pq/ebay.parquet")
-              .withColumn("Price", col("Price").cast(DoubleType))
-              .select("Title", "Price", "Pageurl")
+            val e = dfE
               .where(col("Price") < maxPrice)
               .orderBy(desc("Price"))
               .first
-            name = df.getString(0)
-            price = df.getDouble(1)
+            name = e.getString(0)
+            price = e.getDouble(1)
             pcat = "n/a"
-            url = df.getString(3)
+            url = e.getString(3)
           //highest is about 1000
         }
         pw.append(s"$n,$name,$pcat,$price,$url\n")
