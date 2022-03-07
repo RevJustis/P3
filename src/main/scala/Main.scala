@@ -27,7 +27,7 @@ object Main {
     .select("ProductName", "Category", "SellingPrice", "ProductUrl")
 
   val dfW = spark.read
-    .parquet("input/walmart.parquet")
+    .parquet("input/pq/walmart.parquet")
     .withColumn(
       "SalePrice",
       col("SalePrice").cast(DoubleType)
@@ -35,7 +35,7 @@ object Main {
     .select("ProductName", "Category", "SalePrice", "ProductUrl")
 
   val dfE = spark.read
-    .parquet("input/ebay.parquet")
+    .parquet("input/pq/ebay.parquet")
     .withColumn("Price", col("Price").cast(DoubleType))
     .select("Title", "Price", "Pageurl")
 
@@ -103,7 +103,9 @@ object Main {
       val duration = (System.nanoTime - t1) / 1e9d
 
       println()
-      println("The execution time of the function is: " + duration + " seconds.")
+      println(
+        "The execution time of the function is: " + duration + " seconds."
+      )
 
       i += 1
     }
