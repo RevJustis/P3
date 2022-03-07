@@ -1,14 +1,9 @@
 import Alg._
-
-import scala.util.Random._
-import scala.collection.mutable
-import org.apache.log4j.{Level, Logger}
-import org.apache.spark.SparkConf
-import org.apache.spark.sql.SparkSession
 import org.apache.spark.streaming.StreamingContext._
 import org.apache.spark.streaming._
 
-import scala.util.Random
+import scala.collection.mutable
+import scala.util.Random._
 
 object Trends {
   def megaTrendLogic(record: mutable.Map[String, String]): Unit = {
@@ -44,4 +39,19 @@ object Trends {
 
 
   }
+}
+
+
+def payFailTime (time:String, status: String): Boolean = {
+
+  if (time <= "00:01:00" && time >= "00:04:00") {
+
+    val w = nextInt(10)
+    if (w<=4) {
+      status == "N"
+    }
+  } else {
+    "Y"
+  }
+  false
 }
