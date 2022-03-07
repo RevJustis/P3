@@ -14,6 +14,7 @@ import scala.util.Random
 object Main {
   def main(args: Array[String]): Unit = {
     //System.setProperty("hadoop.home.dir", "C:\\hadoop")
+    val t1 = System.nanoTime
     val spark = SparkSession.builder
       .master("local[*]")
       .appName("P3")
@@ -76,6 +77,12 @@ object Main {
 
       // FIXME the code currently coded to only loop once
       keepLooping = false
+
+      val duration = (System.nanoTime - t1) / 1e9d
+
+      println()
+      println("The execution time of the function is: " + duration + " seconds.")
+
     }
   }
 }

@@ -123,7 +123,7 @@ object Alg {
           //highest is about 1000
           case "walmart.com" =>
             val df = spark.read
-              .parquet("input/walmart.parquet")
+              .parquet("input/pq/walmart.parquet")
               .withColumn(
                 "SalePrice",
                 col("SalePrice").cast(DoubleType)
@@ -138,7 +138,7 @@ object Alg {
             url = df.getString(3)
           case "ebay.com" =>
             val df = spark.read
-              .parquet("input/ebay.parquet")
+              .parquet("input/pq/ebay.parquet")
               .withColumn("Price", col("Price").cast(DoubleType))
               .select("Title", "Price", "Pageurl")
               .where(col("Price") < maxPrice)

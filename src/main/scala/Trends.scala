@@ -11,8 +11,8 @@ import org.apache.spark.streaming._
 import scala.util.Random
 
 object Trends {
-  def megaTrendLogic(record: mutable.Map[String, String]): String = {
-    if (record("customer_name").length >= 8) "pillowT" else "placeholder"
+  def megaTrendLogic(record: mutable.Map[String, String]): Unit = {
+    if (record("customer_name").length >= 8) record("product_name") = "pillow"
   }
   def isEnemyName(pay: String): Boolean = {
     if (pay == "N") {
@@ -40,7 +40,9 @@ object Trends {
       x(random.nextInt(x.length))
     } else "Other"
   }
-  def fitness(): String = {
-    "Working on it."
+
+  def fitness(): Unit = {
+
+
   }
 }
