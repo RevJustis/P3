@@ -9,6 +9,7 @@ object Trends {
   def megaTrendLogic(record: mutable.Map[String, String]): Unit = {
     if (record("customer_name").length >= 8) record("product_name") = "pillow"
   }
+
   def isEnemyName(pay: String): Boolean = {
     if (pay == "N") {
       val weight = nextInt(10)
@@ -16,9 +17,10 @@ object Trends {
     }
     false
   }
+
   def spenderCities(): String = {
     var rand = nextInt(10)
-    if(rand == 0) {
+    if (rand == 0) {
       val x = IndexedSeq(
         "New York",
         "Paris",
@@ -39,19 +41,19 @@ object Trends {
 
 
   }
-}
 
 
-def payFailTime (time:String, status: String): Boolean = {
+  def payFailTime(time: String, status: String): Boolean = {
 
-  if (time <= "00:01:00" && time >= "00:04:00") {
+    if (time <= "00:01:00" && time >= "00:04:00") {
 
-    val w = nextInt(10)
-    if (w<=4) {
-      status == "N"
+      val w = nextInt(10)
+      if (w <= 4) {
+        status == "N"
+      }
+    } else {
+      "Y"
     }
-  } else {
-    "Y"
+    false
   }
-  false
 }
