@@ -41,6 +41,6 @@ object Trends {
     } else "Other"
   }
   def fitness(): String = {
-
+    "Working on it."
   }
 }
