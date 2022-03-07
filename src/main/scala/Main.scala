@@ -53,16 +53,18 @@ object Main {
 
       // create url and store
       val host = hostNameGen()
-      record += ("ecommerce_website_name" -> urlGen(host, customer._2))
+      // record += ("ecommerce_website_name" -> urlGen(host, customer._2))
       // Product info generation
       val product = proRecord(nextInt(1000), price._2, host, spark)
       record += (
-        "proName" -> product._2,
-        "proType" -> product._3,
-        "proID" -> product._1
+        "product_id" -> product._1,
+        "product_name" -> product._2,
+        "product_category" -> product._3,
+        "original_price" -> product._4,
+        "ecommerce_website_name" -> product._5
       )
 
-      val location = randomCityCountry(spark)
+      val location = cityCountryGen(spark)
       record += (
         "city" -> location._1,
         "country" -> location._2

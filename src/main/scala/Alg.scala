@@ -10,6 +10,7 @@ import java.io.IOException
 import java.util.InputMismatchException
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types._
+import java.util.Locale.Category
 
 object Alg {
   // Checks if an int is already a customer id, returns an array
@@ -76,93 +77,88 @@ object Alg {
   // by the proNameGen()
   def proRecord(
       n: Int,
-      unitPrice: Double,
+      genPrice: Double,
       host: String,
       spark: SparkSession
-  ): (String, String, String) = {
+  ): (String, String, String, String, String) = {
     try {
       val f = new File("input/products.txt")
       //f.createNewFile
       val sc = new Scanner(f)
-      var pid = ""
       var name = ""
       var pcat = ""
       var price = 0.0
+      var url = ""
       var exists = false
       while (sc.hasNext && !exists) { // Attempt to find the id in record, if found get name
         val s = sc.next.split(',')
-        pid = s(0)
-        if (pid == n.toString) {
+        if (s(0) == n.toString) {
           exists = true
           name = s(1)
+          pcat = s(2)
+          price = s(3).toDouble
+          url = s(4)
         }
       }
       if (!exists) { // Not in the record already? Then put it in there!
         val pw = new PrintWriter(new FileOutputStream(f, true))
         //name = proNameGen()
         val h = host
-        var maxPrice = unitPrice
+        var maxPrice = genPrice
         h match {
           case "amazon.com" =>
-            val dfAmazon = spark.read
-              .format("csv")
-              .option("header", "true")
-              .load("input/amazon.csv")
-            //dfAmazon.select(max(col("Selling Price"))).show()
-            val dfA = dfAmazon.withColumn(
-              "SellingPrice",
-              col("SellingPrice").cast(DoubleType)
-            )
-            name = dfA
-              .select("Product Name")
-              .where(dfA("SellingPrice") < maxPrice)
+            val df = spark.read
+              .parquet("input/pq/amazon.parquet")
+              .withColumn(
+                "SellingPrice",
+                col("SellingPrice").cast(DoubleType)
+              )
+              .select("ProductName", "Category", "SellingPrice", "ProductUrl")
+              .where(col("SellingPrice") <= maxPrice)
               .orderBy(desc("SellingPrice"))
               .first
-              .getString(0)
+            name = df.getString(0)
+            pcat = df.getString(1)
+            price = df.getDouble(2)
+            url = df.getString(3)
           //highest is about 1000
           case "walmart.com" =>
-            val dfWalmart = spark.read
-              .format("csv")
-              .option("header", "true")
-              .load("input/walmartC.csv")
-            val dfW = dfWalmart.withColumn(
-              "SalePrice",
-              col("SalePrice").cast(DoubleType)
-            )
-            //dfWalmart.select(max(col("Sale Price"))).show()
-            name = dfW
-              .select("Product Name")
-              .where(dfW("SalePrice") < maxPrice)
+            val df = spark.read
+              .parquet("input/walmart.parquet")
+              .withColumn(
+                "SalePrice",
+                col("SalePrice").cast(DoubleType)
+              )
+              .select("ProductName", "Category", "SalePrice", "ProductUrl")
+              .where(col("SalePrice") < maxPrice)
               .orderBy(desc("SalePrice"))
               .first
-              .getString(0)
+            name = df.getString(0)
+            pcat = df.getString(1)
+            price = df.getDouble(2)
+            url = df.getString(3)
           case "ebay.com" =>
-            val dfEbay = spark.read
-              .format("csv")
-              .option("header", "true")
-              .load("input/ebay.csv")
-            val dfE = dfEbay.withColumn("Price", col("Price").cast(DoubleType))
-            //df1.select(max(col("Price"))).show()
-            name = dfE
-              .select("Title")
-              .where(dfE("Price") < maxPrice)
+            val df = spark.read
+              .parquet("input/ebay.parquet")
+              .withColumn("Price", col("Price").cast(DoubleType))
+              .select("Title", "Price", "Pageurl")
+              .where(col("Price") < maxPrice)
               .orderBy(desc("Price"))
               .first
-              .getString(0)
+            name = df.getString(0)
+            price = df.getDouble(1)
+            pcat = "n/a"
+            url = df.getString(3)
           //highest is about 1000
         }
-        pid = n.toString
-        pcat = s"($proCategoryGen)"
-
-        pw.append(s"$n,$name\n")
+        pw.append(s"$n,$name,$pcat,$price\n")
         pw.close
       }
-      (pid, name, pcat)
+      (n.toString, name, pcat, price.toString, url)
     } catch {
       case e: Throwable =>
-        println("Improper Input Exception")
-        println(e)
-        ("ERROR", "ERROR", "ERROR")
+        println(s"Exception!:\n$e")
+        ("ERROR", "ERROR", "ERROR", "ERROR", "ERROR")
     }
   }
 
@@ -302,7 +298,7 @@ object Alg {
   //randomly chooses a reason why a payment would have failed from an indexed seq
   def payStatusGen(): (String, String) = {
     val random = new Random
-    val x = IndexedSeq(
+    val x = List(
       "Expired Card",
       "Invalid CVC",
       "Invalid Pin",
