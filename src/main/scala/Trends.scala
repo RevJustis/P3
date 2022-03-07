@@ -22,7 +22,8 @@ object Trends {
     false
   }
   def spenderCities(): String = {
-    val rand = nextInt(10)
+    var rand = nextInt(10)
+    rand = 0
     if(rand == 0) {
       val random = new Random
       val x = IndexedSeq(

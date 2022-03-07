@@ -352,7 +352,7 @@ object Alg {
         println("Your country is " + df.first.getString(1))
         (df.first.getString(0), df.first.getString(1))
       } else {
-        val dftrend = df.select("country").where(s"city = $rand").toDF()
+        val dftrend = df.select( "country").where(s"city = '$rand'").limit(1).toDF()
         (rand, dftrend.first.getString(0))
       }
 
