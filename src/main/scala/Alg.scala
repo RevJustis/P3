@@ -151,7 +151,7 @@ object Alg {
             url = df.getString(3)
           //highest is about 1000
         }
-        pw.append(s"$n,$name,$pcat,$price\n")
+        pw.append(s"$n,$name,$pcat,$price,$url\n")
         pw.close
       }
       (n.toString, name, pcat, price.toString, url)
