@@ -208,7 +208,7 @@ object Alg {
       unitPrice = (nextInt(100000).toDouble / 100)
     } else { //90% of possible outcomes
       //price is anywhere from 0 to 199
-      unitPrice = (nextInt(200).toDouble / 100)
+      unitPrice = (nextInt(20000).toDouble / 100)
     }
     var totalPrice = 0.0 //price of transaction
     var qty = 0
@@ -224,16 +224,11 @@ object Alg {
         qty = nextInt(5) + 1
       }
     }
-    totalPrice = BigDecimal(unitPrice * qty)
-      .setScale(2, BigDecimal.RoundingMode.HALF_UP)
-      .toDouble
-    unitPrice = BigDecimal(unitPrice)
-      .setScale(2, BigDecimal.RoundingMode.HALF_UP)
-      .toDouble
+    totalPrice = unitPrice * qty
     val dur = (System.nanoTime - t2) / 1e9d
     println()
     println("The execution time of the price function is: " + dur + " seconds.")
-    (totalPrice, unitPrice, qty)
+    (f"$totalPrice%1.2f".toDouble, f"$unitPrice%1.2f".toDouble, qty)
   }
 
   def readFile(filename: String): String = {

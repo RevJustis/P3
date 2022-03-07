@@ -12,7 +12,7 @@ import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types._
 
 object Main {
-  //System.setProperty("hadoop.home.dir", "C:\\hadoop")
+  System.setProperty("hadoop.home.dir", "C:\\hadoop")
   val spark = SparkSession.builder
     .master("local[*]")
     .appName("P3")
