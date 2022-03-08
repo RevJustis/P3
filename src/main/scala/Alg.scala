@@ -103,10 +103,15 @@ object Alg {
       while (sc.hasNext && !exists) { // Attempt to find the id in record, if found get name
         val s = sc.next.split(',')
         if (s(0) == n.toString) {
+          println(s(0))
+          println("CHECK")
           exists = true
           name = s(1)
+          println("CHECK")
           pcat = s(2)
+          println("CHECK")
           price = s(3).toDouble
+          println("CHECK")
           url = s(4)
         }
       }
@@ -114,6 +119,7 @@ object Alg {
         val pw = new PrintWriter(new FileOutputStream(f, true))
         //name = proNameGen()
         var maxPrice = genPrice
+        println(maxPrice)
         host match {
           case "amazon.com" =>
             val a = dfA
@@ -208,7 +214,7 @@ object Alg {
       unitPrice = (nextInt(100000).toDouble / 100)
     } else { //90% of possible outcomes
       //price is anywhere from 0 to 199
-      unitPrice = (nextInt(200).toDouble / 100)
+      unitPrice = (nextInt(20000).toDouble / 100)
     }
     var totalPrice = 0.0 //price of transaction
     var qty = 0
@@ -224,16 +230,11 @@ object Alg {
         qty = nextInt(5) + 1
       }
     }
-    totalPrice = BigDecimal(unitPrice * qty)
-      .setScale(2, BigDecimal.RoundingMode.HALF_UP)
-      .toDouble
-    unitPrice = BigDecimal(unitPrice)
-      .setScale(2, BigDecimal.RoundingMode.HALF_UP)
-      .toDouble
+    totalPrice = unitPrice * qty
     val dur = (System.nanoTime - t2) / 1e9d
     println()
     println("The execution time of the price function is: " + dur + " seconds.")
-    (totalPrice, unitPrice, qty)
+    (f"$totalPrice%1.2f".toDouble, f"$unitPrice%1.2f".toDouble, qty)
   }
 
   def readFile(filename: String): String = {
@@ -357,6 +358,7 @@ object Alg {
       val r = new Random()
       val id = r.nextInt(41001)
       val rand = spenderCities()
+      println(rand)
       val dur6 = (System.nanoTime - t6) / 1e9d
       println()
       println(
@@ -368,9 +370,7 @@ object Alg {
         println("Your country is " + df.first.getString(1))
         (df.first.getString(0), df.first.getString(1))
       } else {
-        val dftrend =
-          df.select("country").where(s"city = '$rand'").limit(1).toDF()
-        (rand, dftrend.first.getString(0))
+        (rand, df.select("country").where(s"city = '$rand'").first.getString(0))
       }
 
     } catch {
