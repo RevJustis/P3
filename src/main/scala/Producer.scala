@@ -1,123 +1,89 @@
-import java.util.Calendar
-
-
-object Producer extends App{
+object Producer {
 
   import java.util.Properties
 
   import org.apache.kafka.clients.producer._
+  var ID: Int = 1
 
+  def main(args: Array[String]): Unit = {
+    def sendRecord(
+        producer: KafkaProducer[String, String],
+        topic: String
+    ): Unit = {
 
-  def timestampGen: String = {
-    val now = Calendar.getInstance().getTime()
-    val newDate = now.toString
-    return newDate
-  }
+      val key = getKey()
 
-  def randomGen(): String = {
-    val first = "This is first,"
-    val second = "This is second,"
-    val third = "3333,"
-    val fourth = "This is last,"
-    val fifth = "Heres a timestamp," + timestampGen
+      val order_id = "23"
+      val customer_id = "1011"
+      val customer_name = "leo chen"
+      val product_id = "1234"
+      val product_name = "xbox"
+      val product_category = "gaming"
+      val payment_type = "visa"
+      val qty = "20"
+      val price = "499"
+      val datetime = "2022-03-04 10:00"
+      val country = "USA"
+      val city = "Los Angeles"
+      val ecommerce_website_name = "www.microsoft.com"
+      val payment_txn_id = "56789"
+      val payment_txn_success = "Y"
+      val failure_reason = ""
 
-    return first + second + third + fourth + fifth
-  }
+      //send json
+      //  val value = s"""{"order_id": "$order_id","customer_id": "$customer_id","customer_name": "$customer_name","product_id": "$product_id","product_name": "$product_name","product_category": "$product_category","payment_type": "$payment_type","qty": "$qty","price": "$price","datetime": "$datetime","country": "$country","city": "$city","ecommerce_website_name": "$ecommerce_website_name","payment_txn_id": "$payment_txn_id","payment_txn_success": "$payment_txn_success","failure_reason": "$failure_reason"}"""
+      //send csv
+      val value =
+        s"$order_id," + s"$customer_id," + s"$customer_name," + s"$product_id," + s"$product_name," + s"$product_category," + s"$payment_type," + s"$qty," + s"$price," + s"$datetime," + s"$country," + s"$city," + s"$ecommerce_website_name," + s"$payment_txn_id," + s"$payment_txn_success," + s"$failure_reason,"
+      val record = new ProducerRecord[String, String](
+        topic,
+        key,
+        value
+      )
+      producer.send(record)
+      println("New record sent...")
+    }
 
+    def getKey(): String = {
+      val r = scala.util.Random
+      val key = r.nextInt(1000).toString()
+      key
+    }
 
-  def sendRecord(producer: KafkaProducer[String, String], topic: String): Unit = {
-
-    val key = getKey()
-    val value = randomGen()
-
-    val record = new ProducerRecord[String, String](
-      topic,
-      key,
-      value
+    val props = new Properties()
+    //3.86.155.113:9092
+    props.put("bootstrap.servers", "[::1]:9092")
+    props.put(
+      "key.serializer",
+      "org.apache.kafka.common.serialization.StringSerializer"
     )
-    Thread.sleep(1000)
-    producer.send(record)
-    println("New record sent...")
-  }
+    props.put(
+      "value.serializer",
+      "org.apache.kafka.common.serialization.StringSerializer"
+    )
 
-  def getKey(): String = {
-    val r = scala.util.Random
-    val key = r.nextInt(1000).toString()
-    key
-  }
+    val producer = new KafkaProducer[String, String](props)
 
-  val props = new Properties()
-  //for apple users / windows 11 users, change [::1] below to localhost to run
-  props.put("bootstrap.servers", "[::1]:9092")
+    try {
+      //    while (true) {
 
-  props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer")
-  props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer")
+      //send csv
+      sendRecord(producer, "csv")
+      //send json
+      //  sendRecord(producer,"json")
 
-  val producer = new KafkaProducer[String, String](props)
+      Thread.sleep(2000)
+      //
 
-  try {
-    while (true) {
+      //    }
 
-
-      sendRecord(producer, "Topic")
-
-      //sendRecord(producer, "Topic2")
-      //can send multiple topics if needed.
-
-
-
+    } catch {
+      case e: Exception => {
+        e.printStackTrace()
+      }
+    } finally {
+      producer.close()
     }
 
-  } catch {
-    case e: Exception => {
-      e.printStackTrace()
-    }
-  } finally {
-    producer.close()
   }
-
-  /*val mySchema = StructType(Array(
-    StructField("id", IntegerType),
-    StructField("number", IntegerType),
-    StructField("name", StringType),
-    StructField("addressNumber", IntegerType),
-    StructField("address", StringType),
-    StructField("type", StringType),
-    StructField("number1", IntegerType),
-    StructField("number2", IntegerType),
-    StructField("timestamp", StringType),
-    StructField("country", StringType),
-    StructField("state", StringType),
-    StructField("website", StringType),
-    StructField("zip", IntegerType),
-    StructField("success", StringType)
-  ))
-
-  val streamingDataFrame = spark.readStream.schema(mySchema).csv("input/input.csv")
-
-
-  streamingDataFrame.selectExpr("CAST(id AS STRING) AS key", "to_json(struct(*)) AS value").
-    writeStream
-    .format("kafka")
-    .option("topic", "testTopic")
-    .option("kafka.bootstrap.servers", "localhost:9092")
-    .option("checkpointLocation", "path to your local dir")
-    .start()*/
-
-
-  /*val producer = new KafkaProducer[String, String](props)
-
-
-  val TOPIC="test"
-
-  for(i<- 1 to 50){
-    val record = new ProducerRecord(TOPIC, "key", s"hello $i")
-    producer.send(record)
-  }
-
-  val record = new ProducerRecord(TOPIC, "key", "the end "+new java.util.Date)
-  producer.send(record)
-
-  producer.close()*/
-
 }

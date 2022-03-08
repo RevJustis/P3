@@ -9,7 +9,7 @@ object Consumer extends App {
   import java.util.Properties
 
 
-  val topics = List[String]("Topic")
+  val topics = List[String]("Topic1")
 
   val props = new Properties()
   //for apple users / windows 11 users, change [::1] below to localhost to run
