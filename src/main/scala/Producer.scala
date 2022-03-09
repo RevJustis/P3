@@ -16,7 +16,8 @@ import org.apache.spark.storage.StorageLevel
 import org.apache.kafka.clients.producer._
 
 object Producer {
-  System.setProperty("hadoop.home.dir", "C:\\hadoop")
+  //System.setProperty("hadoop.home.dir", "c:/winutils")
+  //System.setProperty("hadoop.home.dir", "C:/hadoop")
   val spark = SparkSession.builder
     .master("local[*]")
     .appName("P3")

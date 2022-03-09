@@ -13,7 +13,9 @@ import org.apache.spark.sql.types._
 import org.apache.spark.storage.StorageLevel
 
 object Main {
-  System.setProperty("hadoop.home.dir", "C:\\hadoop")
+  //System.setProperty("hadoop.home.dir", "C:\\hadoop")
+  //System.setProperty("hadoop.home.dir", "c:/winutils")
+
   val spark = SparkSession.builder
     .master("local[*]")
     .appName("P3")

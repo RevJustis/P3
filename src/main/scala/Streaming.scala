@@ -12,13 +12,20 @@ object streaming {
 
   import java.util.Properties
   def main(args: Array[String]): Unit = {
-    System.setProperty("hadoop.home.dir", "c:/winutils")
+
+
+
+    //System.setProperty("hadoop.home.dir", "c:/hadoop")
+    //System.setProperty("hadoop.home.dir", "c:/winutils")
+
     val spark = SparkSession
       .builder()
       .appName("test")
       .config("spark.master","local")
       .config("spark.sql.streaming.noDataProgressEventInterval", 999999999)
       .getOrCreate()
+
+
 
 
     //json
@@ -55,7 +62,8 @@ object streaming {
 
     val df = spark.readStream.format("kafka")
       //3.86.155.113:9092
-      .option("kafka.bootstrap.servers", "[::1]:9092")
+      //.option("kafka.bootstrap.servers", "[::1]:9092")
+      .option("kafka.bootstrap.servers", "3.86.155.113:9092")
       .option("startingOffsets", "earliest")
       .option("subscribe", "pandoras_box")
       .load()
@@ -79,6 +87,8 @@ object streaming {
     //Both need the following
     //Sample querying
     df.printSchema()
+
+
     val df0=df
       .writeStream
       .outputMode("append")
