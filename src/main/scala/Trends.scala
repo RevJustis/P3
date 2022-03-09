@@ -54,9 +54,9 @@ object Trends {
       "ecommerce_website_name" -> product._5
     )
     //if price is decreased at the end of the month, increase qty purchased
-    if(record("product_category").contains("Clothing") && time.getDayOfMonth >= 24) {
+    if(record.keys.toString().contains("Clothing") && time.getDayOfMonth >= 24) {
       record("qty") = (record("qty").toInt + 5).toString
-    } else if(record("product_category").contains("Food") && time.getDayOfMonth >= 24) {
+    } else if(record.keys.toString().contains("Food") && time.getDayOfMonth >= 24) {
       record("qty") = (record("qty").toInt + 5).toString
     }
 
