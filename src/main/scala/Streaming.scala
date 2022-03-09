@@ -57,7 +57,7 @@ object streaming {
       //3.86.155.113:9092
       .option("kafka.bootstrap.servers", "[::1]:9092")
       .option("startingOffsets", "earliest")
-      .option("subscribe", "csv")
+      .option("subscribe", "pandoras_box")
       .load()
       .select(split(col("value"),",").getItem(0).as("order_id"),
         split(col("value"),",").getItem(1).as("customer_id"),
@@ -77,12 +77,28 @@ object streaming {
         split(col("value"),",").getItem(15).as("failure_reason"))
 
     //Both need the following
+    //Sample querying
     df.printSchema()
-    df.writeStream
+    val df0=df
+      .writeStream
       .outputMode("append")
       .format("console")
       .start()
-      .awaitTermination()
+    val df1=df.groupBy(col("country")).count()
+      .writeStream
+      .outputMode("complete")
+      .format("console")
+      .start()
+
+    val df2=df.select(col("price").cast("int"),col("product_name"))
+      .groupBy("product_name").max("price")
+      .writeStream
+      .outputMode("complete")
+      .format("console")
+      .start()
+    df0.awaitTermination()
+    df1.awaitTermination()
+    df2.awaitTermination()
   }
 }
 
