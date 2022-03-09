@@ -94,18 +94,17 @@ object Alg {
       time: LocalDateTime,
       spark: SparkSession
   ): (String, String, String, String, String) = {
-    val t5 = System.nanoTime
     try {
       val f = new File("input/products.txt")
       //f.createNewFile
-      val sc = new Scanner(f).useDelimiter("\n")
+      val sc = new Scanner(f)
       var name = ""
       var pcat = ""
       var price = 0.0
       var url = ""
       var exists = false
       while (sc.hasNext && !exists) { // Attempt to find the id in record, if found get name
-        val s = sc.next.split(',')
+        val s = sc.nextLine.split(',')
         if (s(0) == n.toString) {
           exists = true
           name = s(1)
