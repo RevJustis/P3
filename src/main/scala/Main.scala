@@ -18,6 +18,7 @@ object Main {
     .master("local[*]")
     .appName("P3")
     .getOrCreate()
+
   // Create the DataFrames at global scope so that they are made once and used many times
   val dfA = spark.read
     .parquet("input/pq/amazon.parquet")
