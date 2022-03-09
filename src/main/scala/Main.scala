@@ -18,6 +18,7 @@ object Main {
     .master("local[*]")
     .appName("P3")
     .getOrCreate()
+
   // Create the DataFrames at global scope so that they are made once and used many times
   val dfA = spark.read
     .parquet("input/pq/amazon.parquet")
@@ -49,7 +50,7 @@ object Main {
     dfE.persist(StorageLevel.MEMORY_ONLY_SER_2)
 
     var i = 0
-    while (i < 100) {
+    while (i < 30) {
       println(getMap())
       println("*************************")
       i += 1

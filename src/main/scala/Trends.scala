@@ -1,20 +1,23 @@
 import Alg._
-import Main._
-import Producer.ID
+import Producer._
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.streaming.StreamingContext._
 import org.apache.spark.streaming._
 
 import scala.collection.mutable
+import scala.util.Random
 import scala.util.Random._
+import DateTimeGenerator._
+import java.time._
 
 object Trends {
   def getMap(): mutable.Map[String, String] = {
     val t1 = System.nanoTime
     var record = mutable.Map[String, String]()
     // Order ID and timestamp generation
-    record += ("order_id" -> Main.ID.toString, "datetime" -> timestampGen)
-    Main.ID += 1
+    val time = createDateTime
+    record += ("order_id" -> ID.toString, "datetime" -> timestampGen)
+    ID += 1
 
     // Price, unit price and quantity gen
     val price = priceGen // Total, Unit, qty
@@ -44,7 +47,7 @@ object Trends {
     val host = hostNameGen
     // record += ("ecommerce_website_name" -> urlGen(host, customer._2))
     // Product info generation
-    val product = proRecord(nextInt(1000), price._2, host, spark)
+    val product = proRecord(nextInt(1000), price._2, host, time, spark)
     record += (
       "product_id" -> product._1,
       "product_name" -> product._2,
@@ -96,7 +99,34 @@ object Trends {
     } else "Other"
   }
 
-  def fitness(): Unit = {}
+  def fitness(): Unit = {
+    println("")
+  }
+
+  //Decreases price for purchases made last week of the month
+  def lastWeekDecrease(time: LocalDateTime): (Boolean, Int) = {
+    //val date = time.
+    val x = time.getDayOfMonth
+    var bool = true
+    var num = 0
+    if (x >= 24) {
+      bool = true
+    }
+    else if(x >= 26){
+      bool = true
+      num = 1
+    }
+    else if (x >= 28){
+      bool = true
+      num = 2
+    }
+    else {
+      bool = false
+    }
+    (bool, num)
+
+  }
+
   def payFailTime(time: String, status: String): Boolean = {
 
     if (time <= "00:01:00" && time >= "00:04:00") {
@@ -109,5 +139,22 @@ object Trends {
       "Y"
     }
     false
+  }
+
+  def pillow(): Unit = {
+    val name = cusNameGen().length
+    if (name > 10 && name < 20) {
+      println("hello")
+    }
+  }
+
+  def nameFailPay(name: String): String = {
+    var payStatus = ""
+    if (name == "Ava") {
+      payStatus = "Y"
+    } else {
+      payStatus = ""
+    }
+    payStatus
   }
 }

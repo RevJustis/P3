@@ -1,8 +1,30 @@
+import Main.spark
 import java.io.{File, FileOutputStream, PrintWriter}
 import scala.io.Source
 import scala.io.StdIn.readLine
 
 object Utilities {
+  def overwriteParquet(): Unit = {
+    spark.read
+      .option("header", true)
+      .csv("input/amazon.csv")
+      .write
+      .mode("overwrite")
+      .parquet("input/pq/amazon.parquet")
+    spark.read
+      .option("header", true)
+      .csv("input/walmart.csv")
+      .write
+      .mode("overwrite")
+      .parquet("input/pq/walmart.parquet")
+    spark.read
+      .option("header", true)
+      .csv("input/ebay.csv")
+      .write
+      .mode("overwrite")
+      .parquet("input/pq/ebay.parquet")
+  }
+
   def chooseN(n: Byte): Byte = {
     var input: Char = readLine().trim().charAt(0)
     var inByte: Byte = 0
