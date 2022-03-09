@@ -1,14 +1,12 @@
 import Alg._
+import DateTimeGenerator._
 import Producer._
-import org.apache.spark.sql.SparkSession
 import org.apache.spark.streaming.StreamingContext._
 import org.apache.spark.streaming._
 
-import scala.collection.mutable
-import scala.util.Random
-import scala.util.Random._
-import DateTimeGenerator._
 import java.time._
+import scala.collection.mutable
+import scala.util.Random._
 
 object Trends {
   def getMap(): mutable.Map[String, String] = {
@@ -128,16 +126,17 @@ object Trends {
 
   }
 
-  def payFailTime(time: String, status: String): Boolean = {
+  def payFailTime(time: LocalDateTime): Boolean = {
 
-    if (time <= "00:01:00" && time >= "00:04:00") {
-
+    var status = " "
+    val hour = time.getHour
+    if (hour >= 1 && hour <= 4) {
       val w = nextInt(10)
       if (w <= 4) {
-        status == "N"
+        status = "N"
+      } else {
+        status = "Y"
       }
-    } else {
-      "Y"
     }
     false
   }
