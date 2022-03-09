@@ -48,6 +48,7 @@ object Producer {
 
   def main(args: Array[String]): Unit = {
     spark.sparkContext.setLogLevel("ERROR")
+    // Utilities.overwriteParquet()
     dfA.persist(StorageLevel.MEMORY_ONLY_SER_2)
     dfW.persist(StorageLevel.MEMORY_ONLY_SER_2)
     dfE.persist(StorageLevel.MEMORY_ONLY_SER_2)
