@@ -84,25 +84,35 @@ object Alg {
       host: String,
       spark: SparkSession
   ): (String, String, String, String, String) = {
+    var exists = false
+    var name = ""
+    var pcat = ""
+    var price = 0.0
+    var url = ""
+    val f = new File("input/products.txt")
+
     try {
-      val f = new File("input/products.txt")
-      //f.createNewFile
       val sc = new Scanner(f).useDelimiter("\n")
-      var name = ""
-      var pcat = ""
-      var price = 0.0
-      var url = ""
-      var exists = false
       while (sc.hasNext && !exists) { // Attempt to find the id in record, if found get name
         val s = sc.next.split(',')
         if (s(0) == n.toString) {
           exists = true
           name = s(1)
+          println(name)
           pcat = s(2)
+          println(pcat)
           price = s(3).toDouble
+          println(price)
           url = s(4)
+          println(url)
         }
       }
+    } catch {
+      case e: Throwable =>
+        println(s"Exception with Scanner!:\n$e")
+        ("ERROR", "ERROR", "ERROR", "ERROR", "ERROR")
+    }
+    try {
       if (!exists) { // Not in the record already? Then put it in there!
         val pw = new PrintWriter(new FileOutputStream(f, true))
         //name = proNameGen()
@@ -145,7 +155,7 @@ object Alg {
       (n.toString, name, pcat, price.toString, url)
     } catch {
       case e: Throwable =>
-        println(s"Exception!:\n$e")
+        println(s"Exception with DF or PrintWriter!:\n$e")
         ("ERROR", "ERROR", "ERROR", "ERROR", "ERROR")
     }
   }

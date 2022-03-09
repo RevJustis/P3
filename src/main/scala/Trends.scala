@@ -85,7 +85,7 @@ object Trends {
         "Hong Kong",
         "Singapore",
         "Zurich",
-        "Tel Aviv-Yafo",
+        "Tel Aviv",
         "Osaka",
         "Los Angeles",
         "Geneva",

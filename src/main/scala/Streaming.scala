@@ -1,8 +1,9 @@
 import java.util
+import java.util.Properties
 import org.apache.kafka.clients.consumer.KafkaConsumer
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.execution.streaming.FileStreamSource.Timestamp
-import org.apache.spark.sql.functions.{col, from_json,split}
+import org.apache.spark.sql.functions.{col, from_json, split}
 import org.apache.spark.sql.types.{StringType, StructField, StructType}
 
 import java.security.Key
@@ -10,23 +11,17 @@ import scala.collection.JavaConverters._
 
 object streaming {
 
-  import java.util.Properties
   def main(args: Array[String]): Unit = {
-
-
-
     //System.setProperty("hadoop.home.dir", "c:/hadoop")
     //System.setProperty("hadoop.home.dir", "c:/winutils")
 
     val spark = SparkSession
       .builder()
       .appName("test")
-      .config("spark.master","local")
+      .config("spark.master", "local")
       .config("spark.sql.streaming.noDataProgressEventInterval", 999999999)
       .getOrCreate()
-
-
-
+    spark.sparkContext.setLogLevel("ERROR")
 
     //json
     //    val mySchema = StructType(Array(
@@ -57,51 +52,55 @@ object streaming {
     //      .select(from_json(col("value"),mySchema).as("table"))
     //      .select("table.*")
 
-
     //csv
 
-    val df = spark.readStream.format("kafka")
+    val df = spark.readStream
+      .format("kafka")
       //3.86.155.113:9092
       //.option("kafka.bootstrap.servers", "[::1]:9092")
       .option("kafka.bootstrap.servers", "3.86.155.113:9092")
       .option("startingOffsets", "earliest")
       .option("subscribe", "pandoras_box")
       .load()
-      .select(split(col("value"),",").getItem(0).as("order_id"),
-        split(col("value"),",").getItem(1).as("customer_id"),
-        split(col("value"),",").getItem(2).as("customer_name"),
-        split(col("value"),",").getItem(3).as("product_id"),
-        split(col("value"),",").getItem(4).as("product_name"),
-        split(col("value"),",").getItem(5).as("product_category"),
-        split(col("value"),",").getItem(6).as("payment_type"),
-        split(col("value"),",").getItem(7).as("qty"),
-        split(col("value"),",").getItem(8).as("price"),
-        split(col("value"),",").getItem(9).as("datetime"),
-        split(col("value"),",").getItem(10).as("country"),
-        split(col("value"),",").getItem(11).as("city"),
-        split(col("value"),",").getItem(12).as("ecommerce_website_name"),
-        split(col("value"),",").getItem(13).as("payment_txn_id"),
-        split(col("value"),",").getItem(14).as("payment_txn_success"),
-        split(col("value"),",").getItem(15).as("failure_reason"))
+      .select(
+        split(col("value"), ",").getItem(0).as("order_id"),
+        split(col("value"), ",").getItem(1).as("customer_id"),
+        split(col("value"), ",").getItem(2).as("customer_name"),
+        split(col("value"), ",").getItem(3).as("product_id"),
+        split(col("value"), ",").getItem(4).as("product_name"),
+        split(col("value"), ",").getItem(5).as("product_category"),
+        split(col("value"), ",").getItem(6).as("payment_type"),
+        split(col("value"), ",").getItem(7).as("qty"),
+        split(col("value"), ",").getItem(8).as("price"),
+        split(col("value"), ",").getItem(9).as("datetime"),
+        split(col("value"), ",").getItem(10).as("country"),
+        split(col("value"), ",").getItem(11).as("city"),
+        split(col("value"), ",").getItem(12).as("ecommerce_website_name"),
+        split(col("value"), ",").getItem(13).as("payment_txn_id"),
+        split(col("value"), ",").getItem(14).as("payment_txn_success"),
+        split(col("value"), ",").getItem(15).as("failure_reason")
+      )
 
     //Both need the following
     //Sample querying
     df.printSchema()
 
-
-    val df0=df
-      .writeStream
+    val df0 = df.writeStream
       .outputMode("append")
       .format("console")
       .start()
-    val df1=df.groupBy(col("country")).count()
+    val df1 = df
+      .groupBy(col("country"))
+      .count()
       .writeStream
       .outputMode("complete")
       .format("console")
       .start()
 
-    val df2=df.select(col("price").cast("int"),col("product_name"))
-      .groupBy("product_name").max("price")
+    val df2 = df
+      .select(col("price").cast("int"), col("product_name"))
+      .groupBy("product_name")
+      .max("price")
       .writeStream
       .outputMode("complete")
       .format("console")
@@ -111,4 +110,3 @@ object streaming {
     df2.awaitTermination()
   }
 }
-
