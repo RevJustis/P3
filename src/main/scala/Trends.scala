@@ -1,6 +1,6 @@
 import Alg._
 import Main._
-import Producer.ID
+//import Producer.ID
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.streaming.StreamingContext._
 import org.apache.spark.streaming._
@@ -110,4 +110,23 @@ object Trends {
     }
     false
   }
+  def pillow(): Unit = {
+      val name = cusNameGen().length
+      if(name > 10 && name < 20){
+        println("hello")
+      }
+    }
+  def nameFailPay(name: String): String = {
+      var payStatus = ""
+      if(name == "Ava") {
+        payStatus = "Y"
+      }else {
+        payStatus = ""
+      }
+      payStatus
+    }
+
 }
+
+
+
