@@ -92,19 +92,15 @@ object Alg {
     val f = new File("input/products.txt")
 
     try {
-      val sc = new Scanner(f).useDelimiter("\n")
+      val sc = new Scanner(f)
       while (sc.hasNext && !exists) { // Attempt to find the id in record, if found get name
-        val s = sc.next.split(',')
+        val s = sc.nextLine.split(',')
         if (s(0) == n.toString) {
           exists = true
           name = s(1)
-          println(name)
           pcat = s(2)
-          println(pcat)
           price = s(3).toDouble
-          println(price)
           url = s(4)
-          println(url)
         }
       }
     } catch {

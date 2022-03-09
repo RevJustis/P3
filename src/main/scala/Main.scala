@@ -20,6 +20,7 @@ object Main {
     .master("local[*]")
     .appName("P3")
     .getOrCreate()
+  import spark.implicits._
 
   // Create the DataFrames at global scope so that they are made once and used many times
   val dfA = spark.read
@@ -53,7 +54,7 @@ object Main {
 
     var i = 0
     while (i < 30) {
-      println(getMap())
+      getMap.toSeq.toDF.show
       println("*************************")
       i += 1
     }
