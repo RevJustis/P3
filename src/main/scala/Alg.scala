@@ -118,7 +118,7 @@ object Alg {
         //name = proNameGen()
         var maxPrice = genPrice
         println(maxPrice)
-        val l = lastWeekDecrease(time)
+        val (l, n) = lastWeekDecrease(time)
         host match {
           case "amazon.com" =>
             val a = dfA
@@ -151,7 +151,7 @@ object Alg {
           //highest is about 1000
         }
         if (l == true){
-          price = price * 0.9
+          price = price * (0.9 - (n * 0.05))
         }
         pw.append(s"$n,$name,$pcat,$price,$url\n")
         pw.close

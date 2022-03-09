@@ -103,14 +103,28 @@ object Trends {
     println("")
   }
 
-  def lastWeekDecrease(time: LocalDateTime): Boolean = {
+  //Decreases price for purchases made last week of the month
+  def lastWeekDecrease(time: LocalDateTime): (Boolean, Int) = {
     //val date = time.
     val x = time.getDayOfMonth
+    var bool = true
+    var num = 0
     if (x >= 24) {
-      return true
-    } else {
-      false
+      bool = true
     }
+    else if(x >= 26){
+      bool = true
+      num = 1
+    }
+    else if (x >= 28){
+      bool = true
+      num = 2
+    }
+    else {
+      bool = false
+    }
+    (bool, num)
+
   }
 
   def payFailTime(time: String, status: String): Boolean = {
