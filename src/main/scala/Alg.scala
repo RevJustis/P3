@@ -90,6 +90,7 @@ object Alg {
       n: Int,
       genPrice: Double,
       host: String,
+      fitStatus: String,
       time: LocalDateTime,
       spark: SparkSession
   ): (String, String, String, String, String) = {
@@ -121,27 +122,51 @@ object Alg {
         val (l, n) = lastWeekDecrease(time)
         host match {
           case "amazon.com" =>
-            val a = dfA
-              .where(col("SellingPrice") <= maxPrice)
-              .orderBy(desc("SellingPrice"))
-              .first
+            if(fitStatus == "false"){
+              val a = dfA
+                .where(col("SellingPrice") <= maxPrice)
+                .orderBy(desc("SellingPrice"))
+                .first
               name = a.getString(0)
               pcat = a.getString(1)
               price = a.getDouble(2)
               url = a.getString(3)
+            }
+            else{
+              val a = dfA
+                .where(col("Category").like("%Fitness%"))
+                .orderBy(desc("SellingPrice"))
+                .first
+              name = a.getString(0)
+              pcat = a.getString(1)
+              price = a.getDouble(2)
+              url = a.getString(3)
+            }
           //highest is about 1000
           case "walmart.com" =>
-            val w = dfW
-              .where(col("SalePrice") < maxPrice)
-              .orderBy(desc("SalePrice"))
-              .first
+            if(fitStatus == "false"){
+              val w = dfW
+                .where(col("SalePrice") < maxPrice)
+                .orderBy(desc("SalePrice"))
+                .first
               name = w.getString(0)
               pcat = w.getString(1)
               price = w.getDouble(2)
               url = w.getString(3)
+            }
+            else{
+              val w = dfW
+                .where(col("Category").like("%Fitness%"))
+                .orderBy(desc("SalePrice"))
+                .first
+              name = w.getString(0)
+              pcat = w.getString(1)
+              price = w.getDouble(2)
+              url = w.getString(3)
+            }
           case "ebay.com" =>
             val e = dfE
-              .where(col("Price") < maxPrice)
+              .where(col("Price") <= maxPrice)
               .orderBy(desc("Price"))
               .first
               name = e.getString(0)

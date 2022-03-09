@@ -41,11 +41,18 @@ object Trends {
       "customer_name" -> customer._2
     )
 
+    val location = cityCountryGen(spark)
+    record += (
+      "city" -> location._1,
+      "country" -> location._2
+    )
+
+    val fitStatus = fitness(location._1)
     // create url and store
     val host = hostNameGen
     // record += ("ecommerce_website_name" -> urlGen(host, customer._2))
     // Product info generation
-    val product = proRecord(nextInt(1000), price._2, host, time, spark)
+    val product = proRecord(nextInt(1000), price._2, host, fitStatus, time, spark)
     record += (
       "product_id" -> product._1,
       "product_name" -> product._2,
@@ -59,12 +66,6 @@ object Trends {
     } else if(record.keys.toString().contains("Food") && time.getDayOfMonth >= 24) {
       record("qty") = (record("qty").toInt + 5).toString
     }
-
-    val location = cityCountryGen(spark)
-    record += (
-      "city" -> location._1,
-      "country" -> location._2
-    )
 
     println(
       "The execution time of the function is: " + (System.nanoTime - t1) / 1e9 + " seconds."
@@ -103,8 +104,39 @@ object Trends {
     } else "Other"
   }
 
-  def fitness(): Unit = {
-    println("")
+  //Customers from these cities buy fitness items 50% of the time
+  def fitness(city: String): String = {
+    var b = ""
+    var num = 0
+    val rand = nextInt(1)
+    if (rand == 0){
+      val x = IndexedSeq(
+        "Los Angeles",
+        "Amsterdam",
+        "Berlin",
+        "Copenhagen",
+        "Stockholm",
+        "San Francisco",
+        "Boston",
+        "Dublin",
+        "Montreal",
+        "Miami"
+      )
+      for(i <- x){
+        if(i == city){
+          num += 1
+        }
+        else{
+          num += 0
+        }
+      }
+      if(num == 1){
+        b = "true"
+      }
+      else{b = "false"}
+      b
+    }else "false"
+
   }
 
   //Decreases price for purchases made last week of the month
@@ -123,7 +155,6 @@ object Trends {
       num = 2
     }
     (bool, num)
-
   }
 
   def payFailTime(time: LocalDateTime): Boolean = {
