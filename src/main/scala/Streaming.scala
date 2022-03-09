@@ -57,7 +57,7 @@ object streaming {
       //3.86.155.113:9092
       .option("kafka.bootstrap.servers", "[::1]:9092")
       .option("startingOffsets", "earliest")
-      .option("subscribe", "csv")
+      .option("subscribe", "pandoras_box")
       .load()
       .select(split(col("value"),",").getItem(0).as("order_id"),
         split(col("value"),",").getItem(1).as("customer_id"),
