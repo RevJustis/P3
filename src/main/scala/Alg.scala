@@ -94,7 +94,7 @@ object Alg {
     try {
       val f = new File("input/products.txt")
       //f.createNewFile
-      val sc = new Scanner(f)
+      val sc = new Scanner(f).useDelimiter("\n")
       var name = ""
       var pcat = ""
       var price = 0.0
@@ -103,15 +103,10 @@ object Alg {
       while (sc.hasNext && !exists) { // Attempt to find the id in record, if found get name
         val s = sc.next.split(',')
         if (s(0) == n.toString) {
-          println(s(0))
-          println("CHECK")
           exists = true
           name = s(1)
-          println("CHECK")
           pcat = s(2)
-          println("CHECK")
           price = s(3).toDouble
-          println("CHECK")
           url = s(4)
         }
       }

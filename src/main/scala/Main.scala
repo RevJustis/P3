@@ -49,7 +49,7 @@ object Main {
     dfE.persist(StorageLevel.MEMORY_ONLY_SER_2)
 
     var i = 0
-    while (i < 100) {
+    while (i < 30) {
       println(getMap())
       println("*************************")
       i += 1
