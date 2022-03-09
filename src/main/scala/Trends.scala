@@ -1,6 +1,5 @@
 import Alg._
-import Main._
-import Producer.ID
+import Producer._
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.streaming.StreamingContext._
 import org.apache.spark.streaming._
@@ -13,8 +12,8 @@ object Trends {
     val t1 = System.nanoTime
     var record = mutable.Map[String, String]()
     // Order ID and timestamp generation
-    record += ("order_id" -> Main.ID.toString, "datetime" -> timestampGen)
-    Main.ID += 1
+    record += ("order_id" -> ID.toString, "datetime" -> timestampGen)
+    ID += 1
 
     // Price, unit price and quantity gen
     val price = priceGen // Total, Unit, qty
