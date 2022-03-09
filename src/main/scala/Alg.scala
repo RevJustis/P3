@@ -14,6 +14,8 @@ import org.apache.spark.sql.types._
 import java.util.Locale.Category
 import Trends._
 import org.apache.spark.storage.StorageLevel
+import java.text.SimpleDateFormat
+import java.time.{LocalDate, LocalDateTime, LocalTime}
 
 object Alg {
   // Checks if an int is already a customer id, returns an array
@@ -88,6 +90,7 @@ object Alg {
       n: Int,
       genPrice: Double,
       host: String,
+      time: LocalDateTime,
       spark: SparkSession
   ): (String, String, String, String, String) = {
     val t5 = System.nanoTime
@@ -115,36 +118,40 @@ object Alg {
         //name = proNameGen()
         var maxPrice = genPrice
         println(maxPrice)
+        val l = lastWeekDecrease(time)
         host match {
           case "amazon.com" =>
             val a = dfA
               .where(col("SellingPrice") <= maxPrice)
               .orderBy(desc("SellingPrice"))
               .first
-            name = a.getString(0)
-            pcat = a.getString(1)
-            price = a.getDouble(2)
-            url = a.getString(3)
+              name = a.getString(0)
+              pcat = a.getString(1)
+              price = a.getDouble(2)
+              url = a.getString(3)
           //highest is about 1000
           case "walmart.com" =>
             val w = dfW
               .where(col("SalePrice") < maxPrice)
               .orderBy(desc("SalePrice"))
               .first
-            name = w.getString(0)
-            pcat = w.getString(1)
-            price = w.getDouble(2)
-            url = w.getString(3)
+              name = w.getString(0)
+              pcat = w.getString(1)
+              price = w.getDouble(2)
+              url = w.getString(3)
           case "ebay.com" =>
             val e = dfE
               .where(col("Price") < maxPrice)
               .orderBy(desc("Price"))
               .first
-            name = e.getString(0)
-            price = e.getDouble(1)
-            pcat = "n/a"
-            url = e.getString(2)
+              name = e.getString(0)
+              price = e.getDouble(1)
+              pcat = "n/a"
+              url = e.getString(2)
           //highest is about 1000
+        }
+        if (l == true){
+          price = price * 0.9
         }
         pw.append(s"$n,$name,$pcat,$price,$url\n")
         pw.close
@@ -180,7 +187,6 @@ object Alg {
       "Movies & TV",
       "Toys & Games"
     )
-
     val randomCategory = x(random.nextInt(x.length))
     randomCategory
   }
