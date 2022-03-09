@@ -59,7 +59,7 @@ object Trends {
     )
 
     println(
-      "The execution time of the function is: " + (System.nanoTime - t1) / 1e9 + " seconds."
+      "Time to create " + ID + " record is: " + (System.nanoTime - t1) / 1e9 + " seconds."
     )
     record
   }

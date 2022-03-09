@@ -20,7 +20,6 @@ object Alg {
   // returnedArray(0) == customer id
   // returnedArray(1) == customer name
   def cusRecord(n: Int, isEnemyName: Boolean): (String, String) = {
-    val t4 = System.nanoTime
     if (isEnemyName) {
       val x: Map[String, String] = Map(
         "1001" -> "Yash Dhayal",
@@ -59,11 +58,6 @@ object Alg {
         pw.append(s"$n,$name\n")
         pw.close
       }
-      val dur4 = (System.nanoTime - t4) / 1e9d
-      println()
-      println(
-        "The execution time of the customer function is: " + dur4 + " seconds."
-      )
 
       (id, name)
     } catch {
@@ -90,7 +84,6 @@ object Alg {
       host: String,
       spark: SparkSession
   ): (String, String, String, String, String) = {
-    val t5 = System.nanoTime
     try {
       val f = new File("input/products.txt")
       //f.createNewFile
@@ -149,11 +142,6 @@ object Alg {
         pw.append(s"$n,$name,$pcat,$price,$url\n")
         pw.close
       }
-      val dur5 = (System.nanoTime - t5) / 1e9d
-      println()
-      println(
-        "The execution time of the product function is: " + dur5 + " seconds."
-      )
       (n.toString, name, pcat, price.toString, url)
     } catch {
       case e: Throwable =>
@@ -199,7 +187,6 @@ object Alg {
   }
 
   def priceGen(): (Double, Double, Int) = {
-    val t2 = System.nanoTime
     //creates value for weight
     val weight = nextInt(10) + 1
     //whole number
@@ -226,9 +213,6 @@ object Alg {
       }
     }
     totalPrice = unitPrice * qty
-    val dur = (System.nanoTime - t2) / 1e9d
-    println()
-    println("The execution time of the price function is: " + dur + " seconds.")
     (f"$totalPrice%1.2f".toDouble, f"$unitPrice%1.2f".toDouble, qty)
   }
 
@@ -295,7 +279,6 @@ object Alg {
 
   //randomly chooses a reason why a payment would have failed from an indexed seq
   def payStatusGen(): (String, String) = {
-    val t3 = System.nanoTime
     val random = new Random
     val x = List(
       "Expired Card",
@@ -325,12 +308,6 @@ object Alg {
     val r = nextInt(10)
     status = if (r > 0) "Y" else "N"
 
-    val dur3 = (System.nanoTime - t3) / 1e9d
-    println()
-    println(
-      "The execution time of the payment function is: " + dur3 + " seconds."
-    )
-
     if (status == "N") {
       val randomFail = x(random.nextInt(x.length))
 
@@ -343,7 +320,6 @@ object Alg {
   }
 
   def cityCountryGen(spark: SparkSession): (String, String) = {
-    val t6 = System.nanoTime
     try {
       var df = spark.read
         .format("csv")
@@ -354,11 +330,6 @@ object Alg {
       val id = r.nextInt(41001)
       val rand = spenderCities()
       println(rand)
-      val dur6 = (System.nanoTime - t6) / 1e9d
-      println()
-      println(
-        "The execution time of the country function is: " + dur6 + " seconds."
-      )
       if (rand == "Other") {
         df = df.select("city", "country").where(s"id = $id").limit(1).toDF()
         println("Your city is " + df.first.getString(0))
