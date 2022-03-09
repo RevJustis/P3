@@ -55,6 +55,12 @@ object Trends {
       "original_price" -> product._4,
       "ecommerce_website_name" -> product._5
     )
+    //if price is decreased at the end of the month, increase qty purchased
+    if(record("product_category").contains("Clothing") && time.getDayOfMonth >= 24) {
+      record("qty") = (record("qty").toInt + 5).toString
+    } else if(record("product_category").contains("Food") && time.getDayOfMonth >= 24) {
+      record("qty") = (record("qty").toInt + 5).toString
+    }
 
     val location = cityCountryGen(spark)
     record += (
@@ -107,21 +113,16 @@ object Trends {
   def lastWeekDecrease(time: LocalDateTime): (Boolean, Int) = {
     //val date = time.
     val x = time.getDayOfMonth
-    var bool = true
+    var bool = false
     var num = 0
     if (x >= 24) {
       bool = true
     }
-    else if(x >= 26){
-      bool = true
+    if(x >= 26){
       num = 1
     }
-    else if (x >= 28){
-      bool = true
+    if (x >= 28){
       num = 2
-    }
-    else {
-      bool = false
     }
     (bool, num)
 
