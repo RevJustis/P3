@@ -1,7 +1,12 @@
 import Main._
+import Trends._
 import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.functions._
+import org.apache.spark.sql.types._
+
 import java.io.{File, FileOutputStream, PrintWriter}
-import java.util.{Calendar, Scanner}
+import java.time.LocalDateTime
+import java.util.{Calendar, InputMismatchException, Scanner}
 import scala.collection.mutable
 import scala.math.BigDecimal._
 import scala.util.Random
@@ -114,7 +119,8 @@ object Alg {
         //name = proNameGen()
         var maxPrice = genPrice
         println(maxPrice)
-        val (l, m) = lastWeekDecrease(time)
+        val (l, w) = lastWeekDecrease(time)
+        val h = holidayIncrease(time)
         host match {
           case "amazon.com" =>
             if (fitStatus == "false") {
@@ -169,7 +175,10 @@ object Alg {
           //highest is about 1000
         }
         if (l == true) {
-          price = price * (0.9 - (m * 0.05))
+          price = price * (0.9 - (w * 0.05))
+        }
+        if(h == true) {
+          price = price * 1.25
         }
         pw.append(s"$n,$name,$pcat,$price,$url\n")
         pw.close

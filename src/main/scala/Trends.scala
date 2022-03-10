@@ -6,11 +6,8 @@ import org.apache.spark.streaming._
 
 import java.time._
 import scala.collection.mutable
-import scala.util.Random._
 import scala.concurrent._
-import scala.util.{Failure, Success}
-import scala.concurrent.duration.Duration
-import ExecutionContext.Implicits.global
+import scala.util.Random._
 
 object Trends {
   def getMap(): mutable.Map[String, String] = {
@@ -228,4 +225,26 @@ object Trends {
     }
     payStatus
   }
-}
+
+  def holidayIncrease (time: LocalDateTime): Boolean ={
+
+    val x = time.getMonth
+    val y = time.getDayOfMonth
+    var bool = false
+    if (x == 11) {
+      if (y >= 26)
+        bool = true
+    }
+    if (x == 12) {
+      if (y < 25 && y >= 1)
+        bool = true
+    }
+    bool
+  }
+
+
+
+
+
+
+  }
