@@ -18,83 +18,6 @@ object Trends {
     record += ("order_id" -> ID.toString, "datetime" -> timestampGen)
     ID += 1
 
-    // Using below code to work on futures, uncomment and feel free to change or experiment as you wish
-
-    /*
-    //create future definitions
-
-    val host = hostNameGen
-
-    def priceFuture: Future[(Double,Double,Int)] = Future {priceGen()}
-    def payFuture: Future[(String,String)] = Future {payStatusGen()}
-    def locationFuture: Future[(String,String)] = Future {cityCountryGen(spark)}
-
-    /* below isn't working right now, trying to figure out an alternative way to get futures to execute immediately
-    val (price1,price2,price3): (Double, Double, Int) = Future {
-      val priceResult: (Double, Double, Int) = priceGen()
-      priceResult
-    }
-
-    val (pay1,pay2): (String,String) = Future {
-      val payResult: (String,String) = payStatusGen()
-      payResult
-    }
-
-    val (location1, location2): (String,String) = Future {
-      val locationResult: (String,String) = cityCountryGen(spark)
-      locationResult
-    }
-
-    val (product1,product2,product3,product4,product5): (String,String,String,String,String) = Future {
-      val productResult: (String,String,String,String,String) = proRecord(nextInt(1000), price2, host, spark)
-      productResult
-    }
-
-    val (customer1,customer2): (String,String) = Future {
-      val customerResult: (String,String) = cusRecord(nextInt(1000), isEnemyName(pay1))
-      customerResult
-    }
-
-     */
-
-    val (price1,price2,price3) = Await.result(priceFuture, Duration.Inf)
-    def productFuture: Future[(String,String,String,String,String)] = Future {proRecord(nextInt(1000), price2, host, spark)}
-
-    val (pay1,pay2) = Await.result(payFuture, Duration.Inf)
-
-    def customerFuture: Future[(String,String)] = Future {cusRecord(nextInt(1000), isEnemyName(pay1))}
-
-    val (product1,product2,product3,product4,product5) = Await.result(productFuture, Duration.Inf)
-    val (customer1,customer2) = Await.result(customerFuture, Duration.Inf)
-
-    val (location1,location2) = Await.result(locationFuture, Duration.Inf)
-
-
-
-
-    record += (
-      "price" -> price1.toString(),
-      "unitPrice" -> price2.toString(),
-      "qty" -> price3.toString(),
-      "payment_type" -> payTypeGen,
-      "payment_txn_id" -> payIdGen,
-      "payment_txn_success" -> pay1,
-      "failure_reason" -> pay2,
-      "customer_id" -> customer1,
-      "customer_name" -> customer2,
-      "product_id" -> product1,
-      "product_name" -> product2,
-      "product_category" -> product3,
-      "original_price" -> product4,
-      "ecommerce_website_name" -> product5,
-      "city" -> location1,
-      "country" -> location2
-    )
-
-     */
-
-    ///////Below is working code without futures, comment out if you want to test the above stuff
-
     // Price, unit price and quantity gen
     val price = priceGen // Total, Unit, qty
     record += (
@@ -116,24 +39,24 @@ object Trends {
     val customer = cusRecord(nextInt(1000), isEnemyName(pay._1))
     record += (
       "customer_id" -> customer._1,
-      "customer_name" -> customer._2
+      "customer_name" -> customer._2,
+      "city" -> customer._3,
+      "country" -> customer._4
     )
 
-    val location = cityCountryGen(spark)
+    /*val location = cityCountryGen(spark)
     record += (
       "city" -> location._1,
       "country" -> location._2
-    )
+    )*/
 
-    val fitStatus = fitness(location._1)
+    val fitStatus = fitness(customer._3)
     // create url and store
     val host = hostNameGen
     // record += ("ecommerce_website_name" -> urlGen(host, customer._2))
     // Product info generation
     val product =
       proRecord(nextInt(1000), price._2, host, fitStatus, time, spark)
-    // def productFuture: Future[(String, String, String, String, String)] =
-    // Future { proRecord(nextInt(1000), price._2, host, spark) }
     record += (
       "product_id" -> product._1,
       "product_name" -> product._2,
@@ -152,15 +75,33 @@ object Trends {
       record("qty") = (record("qty").toInt + 5).toString
     }
 
-    // val location = cityCountryGen(spark)
-    // def locationFuture: Future[(String, String)] = Future {
-    //   cityCountryGen(spark)
-    // }
-    // record += (
-    //   "city" -> location._1,
-    //   "country" -> location._2
-    // )
-
+    //if order is in certain countries, change price
+    if (record.keys.toString().contains("Canada")) {
+      val newPrice = (record("price").toDouble) * 1.2
+      val newTotal = (record("unitPrice").toDouble) * 1.2
+      record("price") = f"$newPrice%1.2f"
+      record("unitPrice") = f"$newTotal%1.2f"
+    } else if (record.keys.toString().contains("Venezuela")) {
+      val newPrice = (record("price").toDouble) * 5.0
+      val newTotal = (record("unitPrice").toDouble) * 5.0
+      record("price") = f"$newPrice%1.2f"
+      record("unitPrice") = f"$newTotal%1.2f"
+    } else if (record.keys.toString().contains("South Africa")) {
+      val newPrice = (record("price").toDouble) * 0.5
+      val newTotal = (record("unitPrice").toDouble) * 0.5
+      record("price") = f"$newPrice%1.2f"
+      record("unitPrice") = f"$newTotal%1.2f"
+    } else if (record.keys.toString().contains("Vietnam")) {
+      val newPrice = (record("price").toDouble) * 0.8
+      val newTotal = (record("unitPrice").toDouble) * 0.8
+      record("price") = f"$newPrice%1.2f"
+      record("unitPrice") = f"$newTotal%1.2f"
+    } else if (record.keys.toString().contains("Monaco")) {
+      val newPrice = (record("price").toDouble) * 3.0
+      val newTotal = (record("unitPrice").toDouble) * 3.0
+      record("price") = f"$newPrice%1.2f"
+      record("unitPrice") = f"$newTotal%1.2f"
+    }
     //end the uncomment here for testing futures
 
     println(
@@ -239,13 +180,13 @@ object Trends {
     val x = time.getDayOfMonth
     var bool = false
     var num = 0
-    if (x >= 24) {
+    if (x >= 24 && x < 26) {
       bool = true
     }
-    if (x >= 26) {
+    else if (x >= 26 && x < 26) {
       num = 1
     }
-    if (x >= 28) {
+    else if (x >= 28) {
       num = 2
     }
     (bool, num)
@@ -276,7 +217,7 @@ object Trends {
   def nameFailPay(name: String): String = {
     var payStatus = ""
     if (name == "Ava") {
-      payStatus = "N"
+      payStatus = "Y"
     } else {
       payStatus = ""
     }
