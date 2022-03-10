@@ -15,7 +15,7 @@ object Trends {
     var record = mutable.Map[String, String]()
     // Order ID and timestamp generation
     val time = createDateTime
-    record += ("order_id" -> ID.toString, "datetime" -> timestampGen)
+    record += ("order_id" -> ID.toString, "datetime" -> time.toString)
     ID += 1
 
     // Price, unit price and quantity gen
@@ -56,7 +56,7 @@ object Trends {
     // record += ("ecommerce_website_name" -> urlGen(host, customer._2))
     // Product info generation
     val product = {
-      proRecord(nextInt(1000), price._2, host, fitStatus, time, customer._2)
+      proRecord(nextInt(1000), price._2, host, fitStatus, time, spark)
     }
     val tempPrice = product._4.toDouble
     record += (
@@ -170,7 +170,9 @@ object Trends {
       }
       if (num == 1) {
         b = "true"
-      } else { b = "false" }
+      } else {
+        b = "false"
+      }
       b
     } else "false"
 
@@ -184,9 +186,11 @@ object Trends {
     var num = 0
     if (x >= 24 && x < 26) {
       bool = true
-    } else if (x >= 26 && x < 28) {
+    }
+    else if (x >= 26 && x < 28) {
       num = 1
-    } else if (x >= 28) {
+    }
+    else if (x >= 28) {
       num = 2
     }
     (bool, num)
@@ -207,16 +211,11 @@ object Trends {
     false
   }
 
-  def pillow(name: String): Boolean = {
-    val result = name.split(" ")(0)
-    val count = result.toCharArray.length
-    var long = false
-    //val name = cusNameGen().length
-    if (count > 7 && count < 20) {
-      long = true
-      //println("hello")
-    } else { long = false }
-    long
+  def pillow(): Unit = {
+    val name = cusNameGen().length
+    if (name > 10 && name < 20) {
+      println("hello")
+    }
   }
 
   def nameFailPay(name: String): String = {
@@ -229,19 +228,41 @@ object Trends {
     payStatus
   }
 
-  def holidayIncrease(time: LocalDateTime): Boolean = {
+  def holidayIncrease(): Boolean = {
+    val rand = nextInt(3)
+    var q = false
+    if (rand == 0) {
+      q = true
 
-    val x = time.getMonth
-    val y = time.getDayOfMonth
-    var bool = false
-    if (x == 11) {
-      if (y >= 26)
-        bool = true
+
+     // val x = time.getMonth
+      //val y = time.getDayOfMonth
+
+
+     /* if (x == 11) {
+        if (y >= 26) {
+          q = true
+        }
+      }
+      if (x == 12) {
+        if (y < 25 && y >= 1) {
+          q = true
+        }
+      }
+
+      if (x == 1) {
+        if (y <= 3 && y >= 1) {
+          q = true
+        }
+
+      }
+      */
+
     }
-    if (x == 12) {
-      if (y < 25 && y >= 1)
-        bool = true
-    }
-    bool
+    q
+
   }
 }
+
+
+
