@@ -239,13 +239,21 @@ object Alg {
       "Arts & Crafts",
       "Beauty & Personal Care",
       "Books",
+      "Books",
+      "Books",
+      "Books",
+      "Electronics",
       "Electronics",
       "Garden & Outdoor",
       "Grocery & Food",
       "Health",
       "Home & Kitchen",
       "Movies & TV",
+      "Movies & TV",
+      "Movies & TV",
+      "Toys & Games",
       "Toys & Games"
+
     )
     val randomCategory = x(random.nextInt(x.length))
     randomCategory
