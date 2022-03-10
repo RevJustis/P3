@@ -120,7 +120,7 @@ object Alg {
         //name = proNameGen()
         val maxPrice = genPrice
         println(maxPrice)
-        val (l, w) = lastWeekDecrease(time) //call to function for decreasing price last week of month
+        val (l, discount) = lastWeekDecrease(time) //call to function for decreasing price last week of month
         val p = pillow(cusName) //call to function for pillow trend
         val h = holidayIncrease(time)
         host match {
@@ -128,6 +128,7 @@ object Alg {
             if (fitStatus == "true") {
               val a = dfA
                 .where(col("Category").like("%Fitness%"))
+                .where(col("SellingPrice") <= maxPrice)
                 .orderBy(desc("SellingPrice"))
                 .first
               name = a.getString(0)
@@ -138,6 +139,7 @@ object Alg {
             else if(p == true){ //if name is longer than 7 chars, customer buys a pillow
               val a = dfA
                 .where(col("ProductName").like("%Pillow%"))
+                .where(col("SellingPrice") <= maxPrice)
                 .orderBy(desc("SellingPrice"))
                 .first
               name = a.getString(0)
@@ -160,6 +162,7 @@ object Alg {
             if (fitStatus == "true") {
               val w = dfW
                 .where(col("Category").like("%Fitness%"))
+                .where(col("SalePrice") <= maxPrice)
                 .orderBy(desc("SalePrice"))
                 .first
               name = w.getString(0)
@@ -170,6 +173,7 @@ object Alg {
             else if(p == true){ //if name is longer than 7 chars, customer buys a pillow
               val w = dfW
                 .where(col("ProductName").like("%Pillow%"))
+                .where(col("SalePrice") <= maxPrice)
                 .orderBy(desc("SalePrice"))
                 .first
               name = w.getString(0)
@@ -191,6 +195,7 @@ object Alg {
             if (p == true){ //if name is longer than 7 chars, customer buys a pillow
               val e = dfE
                 .where(col("Title").like("%Pillow%"))
+                .where(col("Price") <= maxPrice)
                 .orderBy(desc("Price"))
                 .first
               name = e.getString(0)
@@ -213,7 +218,7 @@ object Alg {
         //If it is the last week of the month, decrease the price
         if (l) {
 
-          price = price * (1.0 - w)
+          price = price * (1.0 - discount)
         }
         if(h) {
           price = price * 1.25
