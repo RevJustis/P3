@@ -48,7 +48,7 @@ object Test {
     dfW.persist(StorageLevel.MEMORY_ONLY_SER_2)
     dfE.persist(StorageLevel.MEMORY_ONLY_SER_2)
 
-    for (x <- 1 to 100) {
+    for (x <- 1 to 50) {
       var th = new MyThread()
       th.setName(x.toString())
       th.start()
