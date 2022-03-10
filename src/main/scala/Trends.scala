@@ -70,11 +70,11 @@ object Trends {
     if (
       record.keys.toString().contains("Clothing") && time.getDayOfMonth >= 24
     ) {
-      record("qty") = (record("qty").toInt + 5).toString
+      record("qty") = (record("qty").toInt + nextInt(6)).toString
     } else if (
       record.keys.toString().contains("Food") && time.getDayOfMonth >= 24
     ) {
-      record("qty") = (record("qty").toInt + 5).toString
+      record("qty") = (record("qty").toInt + nextInt(6)).toString
     }
 
     //if order is in certain countries, change price
@@ -118,7 +118,6 @@ object Trends {
 
   def isEnemyName(pay: String): Boolean = {
     if (pay == "N") {
-      val weight = nextInt(10)
       if (nextInt(10) == 0) true
     }
     false
@@ -173,23 +172,17 @@ object Trends {
       } else { b = "false" }
       b
     } else "false"
-
   }
 
-  //Decreases price for purchases made last week of the month
-  def lastWeekDecrease(time: LocalDateTime): (Boolean, Int) = {
+  //Decreases price for purchases made last week of the month by 0-20%
+  def lastWeekDecrease(time: LocalDateTime): (Boolean, Double) = {
     //val date = time.
     val x = time.getDayOfMonth
     var bool = false
-    var num = 0
-    if (x >= 24 && x < 26) {
+    var num = 0.0
+    if (x >= 24) {
       bool = true
-    }
-    else if (x >= 26 && x < 28) {
-      num = 1
-    }
-    else if (x >= 28) {
-      num = 2
+      num = nextInt(21)/100
     }
     (bool, num)
   }
@@ -228,7 +221,7 @@ object Trends {
 
   def holidayIncrease (time: LocalDateTime): Boolean ={
 
-    val x = time.getMonth
+    val x = time.getMonthValue
     val y = time.getDayOfMonth
     var bool = false
     if (x == 11) {

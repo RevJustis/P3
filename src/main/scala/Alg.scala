@@ -117,7 +117,7 @@ object Alg {
       if (!exists) { // Not in the record already? Then put it in there!
         val pw = new PrintWriter(new FileOutputStream(f, true))
         //name = proNameGen()
-        var maxPrice = genPrice
+        val maxPrice = genPrice
         println(maxPrice)
         val (l, w) = lastWeekDecrease(time)
         val h = holidayIncrease(time)
@@ -174,10 +174,11 @@ object Alg {
             url = e.getString(2)
           //highest is about 1000
         }
-        if (l == true) {
-          price = price * (0.9 - (w * 0.05))
+        if (l) {
+
+          price = price * (1.0 - w)
         }
-        if(h == true) {
+        if(h) {
           price = price * 1.25
         }
         pw.append(s"$n,$name,$pcat,$price,$url\n")
