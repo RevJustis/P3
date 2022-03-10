@@ -1,7 +1,7 @@
-import org.joda.time.DateTime
+import java.time.LocalDateTime
+import Trends._
 
-import java.text.SimpleDateFormat
-import java.time.{LocalDate, LocalDateTime, LocalTime}
+import scala.util.Random.nextInt
 
 object DateTimeGenerator {
 
@@ -32,29 +32,30 @@ object DateTimeGenerator {
   }
 
   // Code for the "Bad" timestamp string, generates a random day based on the month
-  def dayGen(month: String): String = {
+  def dayGen(month: Int): Int = {
 
     val r = scala.util.Random
     val lower = 1
     var x = 0
 
     month match {
-      case "Jan" => x = 31
-      case "Feb" => x = 28
-      case "Mar" => x = 31
-      case "Apr" => x = 30
-      case "May" => x = 31
-      case "Jun" => x = 30
-      case "Jul" => x = 31
-      case "Aug" => x = 31
-      case "Sep" => x = 30
-      case "Oct" => x = 31
-      case "Nov" => x = 30
-      case "Dec" => x = 31
+      case 1 => x = 31
+      case 2 => x = 28
+      case 3 => x = 31
+      case 4 => x = 30
+      case 5 => x = 31
+      case 6 => x = 30
+      case 7 => x = 31
+      case 8 => x = 31
+      case 9 => x = 30
+      case 10 => x = 31
+      case 11 => x = 30
+      case 12 => x = 31
     }
 
     val dayNum = r.nextInt(x-lower) + 1
-    dayNum.toString
+    //dayNum.toString
+    dayNum
   }
 
   // Code to generate a "Bad" timestamp for part of our bad data being sent to the other team
@@ -127,7 +128,8 @@ object DateTimeGenerator {
   // Method to combine parts of the "Bad" timestamp string together to be sent via the producer
   def createBadTimestamp: String = {
     val month = monthGen
-    val day = dayGen(month)
+    //val day = dayGen(month)
+    val day = 0
     val ranDay = createRandomDay
     val time = timeStampGen
     val timezone = timezoneGenerator
@@ -142,14 +144,14 @@ object DateTimeGenerator {
     val monthStart = 1
     val monthEnd = 13
     val r = scala.util.Random
-    val month = r.nextInt(monthEnd-monthStart) + 1
+    var month = r.nextInt(monthEnd-monthStart) + 1
     val year = 2021
-    var day = 0
+    var day = dayGen(month)
     val hour = hourGen
     val min = minGen
     val sec = secondGen
-    println(month)
 
+    /*
     month match {
       case 1 => day = 31
       case 2 => day = 28
@@ -163,6 +165,22 @@ object DateTimeGenerator {
       case 10 => day = 31
       case 11 => day = 30
       case 12 => day = 31
+    }
+     */
+    val holiday = holidayIncrease()
+    if(holiday == true) {
+        val h = IndexedSeq(
+          11,
+          12,
+          1
+        )
+       month = h(nextInt(h.length))
+
+      month match {
+        case 11 => day = 30-r.nextInt(5)
+        case 12 => day = 24-r.nextInt(23)
+        case 1 => day = 3-r.nextInt(2)
+      }
     }
 
     // Uses parameters to combine together into a Java LocalDateTime object
