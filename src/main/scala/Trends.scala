@@ -21,7 +21,6 @@ object Trends {
     record += ("order_id" -> ID.toString, "datetime" -> timestampGen)
     ID += 1
 
-
     // Using below code to work on futures, uncomment and feel free to change or experiment as you wish
 
     /*
@@ -97,11 +96,7 @@ object Trends {
 
      */
 
-
-
-
     ///////Below is working code without futures, comment out if you want to test the above stuff
-
 
     // Price, unit price and quantity gen
     val price = priceGen // Total, Unit, qty
@@ -138,12 +133,10 @@ object Trends {
     val host = hostNameGen
     // record += ("ecommerce_website_name" -> urlGen(host, customer._2))
     // Product info generation
-<<<<<<< Updated upstream
-    val product = proRecord(nextInt(1000), price._2, host, fitStatus, time, spark)
-=======
-    val product = proRecord(nextInt(1000), price._2, host, spark)
-    def productFuture: Future[(String,String,String,String,String)] = Future {proRecord(nextInt(1000), price._2, host, spark)}
->>>>>>> Stashed changes
+    val product =
+      proRecord(nextInt(1000), price._2, host, fitStatus, time, spark)
+    // def productFuture: Future[(String, String, String, String, String)] =
+    // Future { proRecord(nextInt(1000), price._2, host, spark) }
     record += (
       "product_id" -> product._1,
       "product_name" -> product._2,
@@ -151,24 +144,25 @@ object Trends {
       "original_price" -> product._4,
       "ecommerce_website_name" -> product._5
     )
-<<<<<<< Updated upstream
     //if price is decreased at the end of the month, increase qty purchased
-    if(record.keys.toString().contains("Clothing") && time.getDayOfMonth >= 24) {
+    if (
+      record.keys.toString().contains("Clothing") && time.getDayOfMonth >= 24
+    ) {
       record("qty") = (record("qty").toInt + 5).toString
-    } else if(record.keys.toString().contains("Food") && time.getDayOfMonth >= 24) {
+    } else if (
+      record.keys.toString().contains("Food") && time.getDayOfMonth >= 24
+    ) {
       record("qty") = (record("qty").toInt + 5).toString
     }
-=======
 
-    val location = cityCountryGen(spark)
-    def locationFuture: Future[(String,String)] = Future {cityCountryGen(spark)}
-    record += (
-      "city" -> location._1,
-      "country" -> location._2
-    )
->>>>>>> Stashed changes
-
-
+    // val location = cityCountryGen(spark)
+    // def locationFuture: Future[(String, String)] = Future {
+    //   cityCountryGen(spark)
+    // }
+    // record += (
+    //   "city" -> location._1,
+    //   "country" -> location._2
+    // )
 
     //end the uncomment here for testing futures
 
@@ -214,7 +208,7 @@ object Trends {
     var b = ""
     var num = 0
     val rand = nextInt(1)
-    if (rand == 0){
+    if (rand == 0) {
       val x = IndexedSeq(
         "Los Angeles",
         "Amsterdam",
@@ -227,20 +221,18 @@ object Trends {
         "Montreal",
         "Miami"
       )
-      for(i <- x){
-        if(i == city){
+      for (i <- x) {
+        if (i == city) {
           num += 1
-        }
-        else{
+        } else {
           num += 0
         }
       }
-      if(num == 1){
+      if (num == 1) {
         b = "true"
-      }
-      else{b = "false"}
+      } else { b = "false" }
       b
-    }else "false"
+    } else "false"
 
   }
 
@@ -253,10 +245,10 @@ object Trends {
     if (x >= 24) {
       bool = true
     }
-    if(x >= 26){
+    if (x >= 26) {
       num = 1
     }
-    if (x >= 28){
+    if (x >= 28) {
       num = 2
     }
     (bool, num)
