@@ -1,11 +1,6 @@
-import java.util
-import org.apache.kafka.clients.consumer.KafkaConsumer
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.execution.streaming.FileStreamSource.Timestamp
-import org.apache.spark.sql.functions.{col, from_json,split}
-import org.apache.spark.sql.types.{StringType, StructField, StructType}
+import org.apache.spark.sql.functions.{col, split}
 
-import java.security.Key
 import scala.collection.JavaConverters._
 
 object streaming {
@@ -79,6 +74,11 @@ object streaming {
     //Both need the following
     //Sample querying
     df.printSchema()
+    df.createOrReplaceTempView("test")
+    spark.table("test").cache()
+    spark.sql("select * from table")
+
+
     val df0=df
       .writeStream
       .outputMode("append")
