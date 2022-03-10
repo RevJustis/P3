@@ -406,7 +406,6 @@ object Alg {
       val r = new Random()
       val id = r.nextInt(41001)
       val rand = spenderCities()
-      println(rand)
       if (rand == "Other") {
         df = df.select("city", "country").where(s"id = $id").limit(1).toDF()
         println("Your city is " + df.first.getString(0))

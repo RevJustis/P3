@@ -215,10 +215,8 @@ object Trends {
     val result = name.split(" ")(0)
     val count = result.toCharArray.length
     var long = false
-    //val name = cusNameGen().length
     if (count > 7 && count < 20) {
       long = true
-      //println("hello")
     }else{long = false}
     long
   }

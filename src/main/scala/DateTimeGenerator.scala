@@ -150,7 +150,6 @@ object DateTimeGenerator {
     val hour = hourGen
     val min = minGen
     val sec = secondGen
-    println(month)
 
     /*
     month match {
