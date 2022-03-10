@@ -186,7 +186,7 @@ object Trends {
     if (x >= 24 && x < 26) {
       bool = true
     }
-    else if (x >= 26 && x < 26) {
+    else if (x >= 26 && x < 28) {
       num = 1
     }
     else if (x >= 28) {
