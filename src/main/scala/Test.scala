@@ -12,13 +12,13 @@ import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types._
 import org.apache.spark.storage.StorageLevel
 
-object Main {
+object Test {
   System.setProperty("hadoop.home.dir", "C:\\hadoop")
   val spark = SparkSession.builder
     .master("local[*]")
     .appName("P3")
     .getOrCreate()
-  import spark.implicits._
+  spark.sparkContext.setLogLevel("ERROR")
   // Create the DataFrames at global scope so that they are made once and used many times
   val dfA = spark.read
     .parquet("input/pq/amazon.parquet")
@@ -42,15 +42,15 @@ object Main {
     .select("Title", "Price", "Pageurl")
   var ID = 1
   def main(args: Array[String]): Unit = {
-    spark.sparkContext.setLogLevel("ERROR")
     dfA.persist(StorageLevel.MEMORY_ONLY_SER_2)
     dfW.persist(StorageLevel.MEMORY_ONLY_SER_2)
     dfE.persist(StorageLevel.MEMORY_ONLY_SER_2)
 
-    var i = 0
-    while (i < 30) {
-      getMap.toSeq.toDF.show()
-      i += 1
+    for (x <- 1 to 50) {
+      var th = new MyThread()
+      th.setName(x.toString())
+      th.start()
     }
+
   }
 }

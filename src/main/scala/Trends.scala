@@ -10,13 +10,12 @@ import scala.concurrent._
 import scala.util.Random._
 
 object Trends {
-  def getMap(): mutable.Map[String, String] = {
+  def getMap(id: String): mutable.Map[String, String] = {
     val t1 = System.nanoTime
     var record = mutable.Map[String, String]()
     // Order ID and timestamp generation
     val time = createDateTime
-    record += ("order_id" -> ID.toString, "datetime" -> time.toString)
-    ID += 1
+    record += ("order_id" -> id, "datetime" -> timestampGen)
 
     // Price, unit price and quantity gen
     val price = priceGen // Total, Unit, qty

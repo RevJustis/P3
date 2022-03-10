@@ -1,5 +1,5 @@
-import Main._
 import Trends._
+import Test._
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types._
@@ -11,6 +11,22 @@ import scala.collection.mutable
 import scala.math.BigDecimal._
 import scala.util.Random
 import scala.util.Random._
+import scala.io.Source
+import java.io.IOException
+import java.util.InputMismatchException
+import org.apache.spark.sql.functions._
+import org.apache.spark.sql.types._
+
+import java.util.Locale.Category
+import Trends._
+import org.apache.spark.storage.StorageLevel
+import java.text.SimpleDateFormat
+import java.time.{LocalDate, LocalDateTime, LocalTime}
+//Futures and Threading
+import scala.concurrent._
+import scala.util.{Failure, Success}
+import scala.concurrent.duration.Duration
+import ExecutionContext.Implicits.global
 
 object Alg {
   // Checks if an int is already a customer id, returns an array
@@ -34,14 +50,85 @@ object Alg {
       x getOrElse ((nextInt(1012) + 1001).toString, ("ERROR", "ERROR"))
     }
     try {
-      val f = new File("input/customers.txt")
-      //f.createNewFile
-      val sc = new Scanner(f)
-      var id = ""
       var name = ""
       var exists = false
       val (city, country) = cityCountryGen(spark)
-      while (sc.hasNext && !exists) { // Attempt to find the id in record, if found get name
+      val f = new File("input/customers.txt")
+      val fc = Source.fromFile(f).getLines()
+      val s = fc.size
+      val mid = s / 2
+      val left = fc.slice(0, mid)
+      val right = fc.slice(mid, s)
+
+      def leftFuture: Future[(Boolean, String)] = Future {
+        while (left.hasNext && !exists) { // Attempt to find the id in record, if found get name
+          val s = left.next.split(',')
+          if (s(0) == n.toString) {
+            (true, s(1))
+          }
+        }
+        (false, "")
+      }
+      def rightFuture: Future[(Boolean, String)] = Future {
+        while (right.hasNext && !exists) { // Attempt to find the id in record, if found get name
+          val s = right.next.split(',')
+          if (s(0) == n.toString) {
+            (true, s(1))
+          }
+        }
+        (false, "")
+      }
+
+      leftFuture onComplete {
+        case Success(tup) =>
+          if (!tup._1) {
+            val pw = new PrintWriter(new FileOutputStream(f, true))
+            name = cusNameGen
+            pw.append(s"$n,$name\n")
+            pw.close
+          } else {
+            name = tup._2
+          }
+        case Failure(t) => println("Could not process: " + t.getMessage)
+      }
+
+      rightFuture onComplete {
+        case Success(tup) =>
+          if (!tup._1) {
+            val pw = new PrintWriter(new FileOutputStream(f, true))
+            name = cusNameGen
+            pw.append(s"$n,$name\n")
+            pw.close
+          } else {
+            name = tup._2
+          }
+        case Failure(t) => println("Could not process: " + t.getMessage)
+      }
+      Await.result(leftFuture, Duration.Inf)
+      Await.result(rightFuture, Duration.Inf)
+      /*
+      val lr = Await.result(leftFuture, Duration.Inf)
+      val rr = Await.result(rightFuture, Duration.Inf)
+      println(lr)
+      println(rr)
+      if (!lr._1) {
+        val pw = new PrintWriter(new FileOutputStream(f, true))
+        name = cusNameGen
+        pw.append(s"$n,$name\n")
+        pw.close
+      } else {
+        name = lr._2
+      }
+      if (!lr._1) {
+        val pw = new PrintWriter(new FileOutputStream(f, true))
+        name = cusNameGen
+        pw.append(s"$n,$name\n")
+        pw.close
+      } else {
+        name = rr._2
+      }
+
+      while (fc.hasNext && !exists) { // Attempt to find the id in record, if found get name
         val s = sc.next.split(',')
         id = s(0)
         if (id == n.toString) {
@@ -57,8 +144,8 @@ object Alg {
         pw.append(s"$n,$name,$city,$country\n")
         pw.close
       }
-
-      (id, name, city, country)
+       */
+      (n.toString, name, city, country)
     } catch {
       case e: InputMismatchException =>
         println(s"Improper Input Exception:$e")
@@ -89,27 +176,69 @@ object Alg {
     try {
       val f = new File("input/products.txt")
       //f.createNewFile
-      val sc = new Scanner(f)
+      // val sc = new Scanner(f)
       var name = ""
       var pcat = ""
       var price = 0.0
       var url = ""
       var exists = false
-      while (sc.hasNext && !exists) { // Attempt to find the id in record, if found get name
-        val s = sc.nextLine.split(',')
-        if (s(0) == n.toString) {
-          exists = true
-          name = s(1)
-          pcat = s(2)
-          price = s(3).toDouble
-          url = s(4)
+
+      val fc = Source.fromFile(f).getLines()
+      val s = fc.size
+      val mid = s / 2
+      val left = fc.slice(0, mid)
+      val right = fc.slice(mid, s)
+
+      def leftFuture: Future[(Boolean, String, String, Double, String)] =
+        Future {
+          while (left.hasNext && !exists) { // Attempt to find the id in record, if found get name
+            val s = left.next.split(',')
+            if (s(0) == n.toString) {
+              (true, s(1), s(2), s(3).toDouble, s(4))
+            }
+          }
+          (false, "", "", 0.0, "")
         }
+      def rightFuture: Future[(Boolean, String, String, Double, String)] =
+        Future {
+          while (right.hasNext && !exists) { // Attempt to find the id in record, if found get name
+            val s = right.next.split(',')
+            if (s(0) == n.toString) {
+              (true, s(1), s(2), s(3).toDouble, s(4))
+            }
+          }
+          (false, "", "", 0.0, "")
+        }
+
+      leftFuture onComplete {
+        case Success(tup) =>
+          if (tup._1) {
+            name = tup._2
+            pcat = tup._3
+            price = tup._4
+            url = tup._5
+            exists = true
+          }
+        case Failure(t) => println("Could not process: " + t.getMessage)
       }
+
+      rightFuture onComplete {
+        case Success(tup) =>
+          if (tup._1) {
+            name = tup._2
+            pcat = tup._3
+            price = tup._4
+            url = tup._5
+            exists = true
+          }
+        case Failure(t) => println("Could not process: " + t.getMessage)
+      }
+      Await.result(leftFuture, Duration.Inf)
+      Await.result(rightFuture, Duration.Inf)
       if (!exists) { // Not in the record already? Then put it in there!
         val pw = new PrintWriter(new FileOutputStream(f, true))
         //name = proNameGen()
         val maxPrice = genPrice
-        println(maxPrice)
         val (l, discount) = lastWeekDecrease(time) //call to function for decreasing price last week of month
         val p = pillow(cusName) //call to function for pillow trend
         host match {
@@ -408,8 +537,6 @@ object Alg {
       val rand = spenderCities()
       if (rand == "Other") {
         df = df.select("city", "country").where(s"id = $id").limit(1).toDF()
-        println("Your city is " + df.first.getString(0))
-        println("Your country is " + df.first.getString(1))
         (df.first.getString(0), df.first.getString(1))
       } else {
         (rand, df.select("country").where(s"city = '$rand'").first.getString(0))

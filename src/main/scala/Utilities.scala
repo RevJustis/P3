@@ -1,4 +1,4 @@
-import Main.spark
+import Test.spark
 import java.io.{File, FileOutputStream, PrintWriter}
 import scala.io.Source
 import scala.io.StdIn.readLine
