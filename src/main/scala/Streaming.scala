@@ -8,7 +8,7 @@ import org.apache.spark.sql.types.{StringType, StructField, StructType}
 
 import scala.collection.JavaConverters._
 
-object streaming {
+object Streaming {
 
   def main(args: Array[String]): Unit = {
     //System.setProperty("hadoop.home.dir", "c:/hadoop")
@@ -87,9 +87,7 @@ object streaming {
     spark.table("test").cache()
     spark.sql("select * from table")
 
-
-    val df0=df
-      .writeStream
+    val df0 = df.writeStream
       .outputMode("append")
       .format("console")
       .start()

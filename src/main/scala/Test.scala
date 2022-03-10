@@ -12,7 +12,7 @@ import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types._
 import org.apache.spark.storage.StorageLevel
 
-object Main {
+object Test {
   //System.setProperty("hadoop.home.dir", "C:\\hadoop")
   //System.setProperty("hadoop.home.dir", "c:/winutils")
 
