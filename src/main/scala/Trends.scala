@@ -70,11 +70,11 @@ object Trends {
     if (
       record.keys.toString().contains("Clothing") && time.getDayOfMonth >= 24
     ) {
-      record("qty") = (record("qty").toInt + 5).toString
+      record("qty") = (record("qty").toInt + nextInt(6)).toString
     } else if (
       record.keys.toString().contains("Food") && time.getDayOfMonth >= 24
     ) {
-      record("qty") = (record("qty").toInt + 5).toString
+      record("qty") = (record("qty").toInt + nextInt(6)).toString
     }
 
     //if order is in certain countries, change price
@@ -170,7 +170,9 @@ object Trends {
       }
       if (num == 1) {
         b = "true"
-      } else { b = "false" }
+      } else {
+        b = "false"
+      }
       b
     } else "false"
 
@@ -184,9 +186,11 @@ object Trends {
     var num = 0
     if (x >= 24 && x < 26) {
       bool = true
-    } else if (x >= 26 && x < 28) {
+    }
+    else if (x >= 26 && x < 28) {
       num = 1
-    } else if (x >= 28) {
+    }
+    else if (x >= 28) {
       num = 2
     }
     (bool, num)
@@ -215,7 +219,7 @@ object Trends {
     if (count > 7 && count < 20) {
       long = true
       //println("hello")
-    } else { long = false }
+    }else{long = false}
     long
   }
 
@@ -229,19 +233,41 @@ object Trends {
     payStatus
   }
 
-  def holidayIncrease(time: LocalDateTime): Boolean = {
+  def holidayIncrease(): Boolean = {
+    val rand = nextInt(3)
+    var q = false
+    if (rand == 0) {
+      q = true
 
-    val x = time.getMonth
-    val y = time.getDayOfMonth
-    var bool = false
-    if (x == 11) {
-      if (y >= 26)
-        bool = true
+
+     // val x = time.getMonth
+      //val y = time.getDayOfMonth
+
+
+     /* if (x == 11) {
+        if (y >= 26) {
+          q = true
+        }
+      }
+      if (x == 12) {
+        if (y < 25 && y >= 1) {
+          q = true
+        }
+      }
+
+      if (x == 1) {
+        if (y <= 3 && y >= 1) {
+          q = true
+        }
+
+      }
+      */
+
     }
-    if (x == 12) {
-      if (y < 25 && y >= 1)
-        bool = true
-    }
-    bool
+    q
+
   }
 }
+
+
+

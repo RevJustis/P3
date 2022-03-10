@@ -11,16 +11,6 @@ import scala.collection.mutable
 import scala.math.BigDecimal._
 import scala.util.Random
 import scala.util.Random._
-import java.io.IOException
-import java.util.InputMismatchException
-import org.apache.spark.sql.functions._
-import org.apache.spark.sql.types._
-
-import java.util.Locale.Category
-import Trends._
-import org.apache.spark.storage.StorageLevel
-import java.text.SimpleDateFormat
-import java.time.{LocalDate, LocalDateTime, LocalTime}
 
 object Alg {
   // Checks if an int is already a customer id, returns an array
@@ -122,7 +112,6 @@ object Alg {
         println(maxPrice)
         val (l, discount) = lastWeekDecrease(time) //call to function for decreasing price last week of month
         val p = pillow(cusName) //call to function for pillow trend
-        val h = holidayIncrease(time)
         host match {
           case "amazon.com" =>
             if (fitStatus == "true") {
@@ -219,9 +208,6 @@ object Alg {
         if (l) {
 
           price = price * (1.0 - discount)
-        }
-        if(h) {
-          price = price * 1.25
         }
         pw.append(s"$n,$name,$pcat,$price,$url\n")
         pw.close
