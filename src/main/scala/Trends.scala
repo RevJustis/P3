@@ -183,13 +183,13 @@ object Trends {
     val x = time.getDayOfMonth
     var bool = false
     var num = 0
-    if (x >= 24) {
+    if (x >= 24 && x < 26) {
       bool = true
     }
-    if (x >= 26) {
+    else if (x >= 26 && x < 26) {
       num = 1
     }
-    if (x >= 28) {
+    else if (x >= 28) {
       num = 2
     }
     (bool, num)
