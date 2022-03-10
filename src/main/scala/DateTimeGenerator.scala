@@ -1,7 +1,7 @@
-import java.time.LocalDateTime
-import Trends._
+import org.joda.time.DateTime
 
-import scala.util.Random.nextInt
+import java.text.SimpleDateFormat
+import java.time.{LocalDate, LocalDateTime, LocalTime}
 
 object DateTimeGenerator {
 
@@ -144,9 +144,9 @@ object DateTimeGenerator {
     val monthStart = 1
     val monthEnd = 13
     val r = scala.util.Random
-    var month = r.nextInt(monthEnd-monthStart) + 1
+    val month = r.nextInt(monthEnd-monthStart) + 1
     val year = 2021
-    var day = dayGen(month)
+    val day = dayGen(month)
     val hour = hourGen
     val min = minGen
     val sec = secondGen
@@ -168,21 +168,6 @@ object DateTimeGenerator {
       case 12 => day = 31
     }
      */
-    val holiday = holidayIncrease()
-    if(holiday == true) {
-        val h = IndexedSeq(
-          11,
-          12,
-          1
-        )
-       month = h(nextInt(h.length))
-
-      month match {
-        case 11 => day = 30-r.nextInt(5)
-        case 12 => day = 24-r.nextInt(23)
-        case 1 => day = 3-r.nextInt(2)
-      }
-    }
 
     // Uses parameters to combine together into a Java LocalDateTime object
     // Very easy to work with for our queries and trend creation

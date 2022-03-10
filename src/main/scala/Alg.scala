@@ -11,6 +11,16 @@ import scala.collection.mutable
 import scala.math.BigDecimal._
 import scala.util.Random
 import scala.util.Random._
+import java.io.IOException
+import java.util.InputMismatchException
+import org.apache.spark.sql.functions._
+import org.apache.spark.sql.types._
+
+import java.util.Locale.Category
+import Trends._
+import org.apache.spark.storage.StorageLevel
+import java.text.SimpleDateFormat
+import java.time.{LocalDate, LocalDateTime, LocalTime}
 
 object Alg {
   // Checks if an int is already a customer id, returns an array
@@ -83,7 +93,8 @@ object Alg {
       host: String,
       fitStatus: String,
       time: LocalDateTime,
-      spark: SparkSession
+      cusName: String
+      //spark: SparkSession
   ): (String, String, String, String, String) = {
     try {
       val f = new File("input/products.txt")
@@ -107,24 +118,36 @@ object Alg {
       if (!exists) { // Not in the record already? Then put it in there!
         val pw = new PrintWriter(new FileOutputStream(f, true))
         //name = proNameGen()
-        var maxPrice = genPrice
+        val maxPrice = genPrice
         println(maxPrice)
-        val (l, w) = lastWeekDecrease(time)
-        //val h = holidayIncrease(time)
+        val (l, w) = lastWeekDecrease(time) //call to function for decreasing price last week of month
+        val p = pillow(cusName) //call to function for pillow trend
+        val h = holidayIncrease(time)
         host match {
           case "amazon.com" =>
-            if (fitStatus == "false") {
+            if (fitStatus == "true") {
               val a = dfA
-                .where(col("SellingPrice") <= maxPrice)
+                .where(col("Category").like("%Fitness%"))
                 .orderBy(desc("SellingPrice"))
                 .first
               name = a.getString(0)
               pcat = a.getString(1)
               price = a.getDouble(2)
               url = a.getString(3)
-            } else {
+            }
+            else if(p == true){ //if name is longer than 7 chars, customer buys a pillow
               val a = dfA
-                .where(col("Category").like("%Fitness%"))
+                .where(col("ProductName").like("%Pillow%"))
+                .orderBy(desc("SellingPrice"))
+                .first
+              name = a.getString(0)
+              pcat = a.getString(1)
+              price = a.getDouble(2)
+              url = a.getString(3)
+            }
+            else {
+              val a = dfA
+                .where(col("SellingPrice") <= maxPrice)
                 .orderBy(desc("SellingPrice"))
                 .first
               name = a.getString(0)
@@ -134,16 +157,7 @@ object Alg {
             }
           //highest is about 1000
           case "walmart.com" =>
-            if (fitStatus == "false") {
-              val w = dfW
-                .where(col("SalePrice") < maxPrice)
-                .orderBy(desc("SalePrice"))
-                .first
-              name = w.getString(0)
-              pcat = w.getString(1)
-              price = w.getDouble(2)
-              url = w.getString(3)
-            } else {
+            if (fitStatus == "true") {
               val w = dfW
                 .where(col("Category").like("%Fitness%"))
                 .orderBy(desc("SalePrice"))
@@ -153,21 +167,57 @@ object Alg {
               price = w.getDouble(2)
               url = w.getString(3)
             }
+            else if(p == true){ //if name is longer than 7 chars, customer buys a pillow
+              val w = dfW
+                .where(col("ProductName").like("%Pillow%"))
+                .orderBy(desc("SalePrice"))
+                .first
+              name = w.getString(0)
+              pcat = w.getString(1)
+              price = w.getDouble(2)
+              url = w.getString(3)
+            }
+            else {
+              val w = dfW
+                .where(col("SalePrice") < maxPrice)
+                .orderBy(desc("SalePrice"))
+                .first
+              name = w.getString(0)
+              pcat = w.getString(1)
+              price = w.getDouble(2)
+              url = w.getString(3)
+            }
           case "ebay.com" =>
-            val e = dfE
-              .where(col("Price") <= maxPrice)
-              .orderBy(desc("Price"))
-              .first
-            name = e.getString(0)
-            price = e.getDouble(1)
-            pcat = "n/a"
-            url = e.getString(2)
-          //highest is about 1000
-        }
-        if (l == true) {
-          price = price * (0.9 - (w * 0.05))
-        }
+            if (p == true){ //if name is longer than 7 chars, customer buys a pillow
+              val e = dfE
+                .where(col("Title").like("%Pillow%"))
+                .orderBy(desc("Price"))
+                .first
+              name = e.getString(0)
+              pcat = "n/a"
+              price = e.getDouble(1)
+              url = e.getString(2)
+            }else{
+              val e = dfE
+                .where(col("Price") <= maxPrice)
+                .orderBy(desc("Price"))
+                .first
+              name = e.getString(0)
+              price = e.getDouble(1)
+              pcat = "n/a"
+              url = e.getString(2)
+              //highest is about 1000
+            }
 
+        }
+        //If it is the last week of the month, decrease the price
+        if (l) {
+
+          price = price * (1.0 - w)
+        }
+        if(h) {
+          price = price * 1.25
+        }
         pw.append(s"$n,$name,$pcat,$price,$url\n")
         pw.close
       }

@@ -180,27 +180,3 @@
 658,Abner Thiel,Erwin,United States
 772,Lisandro Kihn,Ganzhou,China
 641,Florence Renner,Saint-Girons,France
-860,Dexter Bashirian,Hong Kong,Hong Kong
-164,Norbert Pollich,Osaka,Japan
-484,Elna Stroman,Tel Aviv-Yafo,Israel
-451,Cameron Rempel,Stratton Saint Margaret,United Kingdom
-789,Thad Bauch,Vargem Alegre,Brazil
-888,Gerson Schimmel,Hope Mills,United States
-113,London Tremblay,Kannus,Finland
-156,Afton Funk,Barra de Santo Antonio,Brazil
-257,Emilia Bode,Clermont,United States
-638,Rolando Metz,Ludinghausen,Germany
-876,Isadore Raynor,Baden,Switzerland
-487,Lisette Farrell,Bailey's Crossroads,United States
-489,Uriah OKeefe,Juneau,United States
-682,Briana Zemlak,Laichingen,Germany
-345,Pearline Flatley,Cogorno,Italy
-261,Clotilde Rodriguez,Saharanpur,India
-674,Cordie Funk,Bowie,United States
-391,Ruth Walsh,Dundee,United States
-31,Aaron Wilkinson,Vicente Guerrero,Mexico
-224,Tyreek Roob,Kassel,Germany
-492,Twila Halvorson,Hilton,United States
-178,Barney Turcotte,Tacoma,United States
-190,Gina Beahan,Attock Khurd,Pakistan
-900,Morton Gerhold,Mannheim,Germany
