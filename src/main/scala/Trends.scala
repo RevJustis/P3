@@ -56,7 +56,7 @@ object Trends {
     // record += ("ecommerce_website_name" -> urlGen(host, customer._2))
     // Product info generation
     val product = {
-      proRecord(nextInt(1000), price._2, host, fitStatus, time, spark)
+      proRecord(nextInt(1000), price._2, host, fitStatus, time, customer._2)
     }
     val tempPrice = product._4.toDouble
     record += (
@@ -66,6 +66,7 @@ object Trends {
       "original_price" -> f"$tempPrice%1.2f",
       "ecommerce_website_name" -> product._5
     )
+
     //if price is decreased at the end of the month, increase qty purchased
     if (
       record.keys.toString().contains("Clothing") && time.getDayOfMonth >= 24
@@ -202,11 +203,16 @@ object Trends {
     false
   }
 
-  def pillow(): Unit = {
-    val name = cusNameGen().length
-    if (name > 10 && name < 20) {
-      println("hello")
-    }
+  def pillow(name: String): Boolean = {
+    val result = name.split(" ")(0)
+    val count = result.toCharArray.length
+    var long = false
+    //val name = cusNameGen().length
+    if (count > 7 && count < 20) {
+      long = true
+      //println("hello")
+    }else{long = false}
+    long
   }
 
   def nameFailPay(name: String): String = {
