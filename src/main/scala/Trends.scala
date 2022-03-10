@@ -58,13 +58,15 @@ object Trends {
     val host = hostNameGen
     // record += ("ecommerce_website_name" -> urlGen(host, customer._2))
     // Product info generation
-    val product =
+    val product = {
       proRecord(nextInt(1000), price._2, host, fitStatus, time, spark)
+    }
+    val tempPrice = product._4.toDouble
     record += (
       "product_id" -> product._1,
       "product_name" -> product._2,
       "product_category" -> product._3,
-      "original_price" -> product._4,
+      "original_price" -> f"$tempPrice%1.2f",
       "ecommerce_website_name" -> product._5
     )
     //if price is decreased at the end of the month, increase qty purchased
