@@ -42,16 +42,18 @@ object Trends {
     val customer = cusRecord(nextInt(1000), isEnemyName(pay._1))
     record += (
       "customer_id" -> customer._1,
-      "customer_name" -> customer._2
+      "customer_name" -> customer._2,
+      "city" -> customer._3,
+      "country" -> customer._4
     )
 
-    val location = cityCountryGen(spark)
+    /*val location = cityCountryGen(spark)
     record += (
       "city" -> location._1,
       "country" -> location._2
-    )
+    )*/
 
-    val fitStatus = fitness(location._1)
+    val fitStatus = fitness(customer._3)
     // create url and store
     val host = hostNameGen
     // record += ("ecommerce_website_name" -> urlGen(host, customer._2))

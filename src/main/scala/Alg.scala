@@ -21,7 +21,7 @@ object Alg {
   // Checks if an int is already a customer id, returns an array
   // returnedArray(0) == customer id
   // returnedArray(1) == customer name
-  def cusRecord(n: Int, isEnemyName: Boolean): (String, String) = {
+  def cusRecord(n: Int, isEnemyName: Boolean): (String, String, String, String) = {
     if (isEnemyName) {
       val x: Map[String, String] = Map(
         "1001" -> "Yash Dhayal",
@@ -45,6 +45,7 @@ object Alg {
       var id = ""
       var name = ""
       var exists = false
+      val (city, country) = cityCountryGen(spark)
       while (sc.hasNext && !exists) { // Attempt to find the id in record, if found get name
         val s = sc.next.split(',')
         id = s(0)
@@ -56,16 +57,17 @@ object Alg {
       if (!exists) { // Not in the record already? Then put it in there!
         val pw = new PrintWriter(new FileOutputStream(f, true))
         name = cusNameGen
+
         id = n.toString
-        pw.append(s"$n,$name\n")
+        pw.append(s"$n,$name,$city,$country\n")
         pw.close
       }
 
-      (id, name)
+      (id, name, city, country)
     } catch {
       case e: InputMismatchException =>
         println(s"Improper Input Exception:$e")
-        ("ERROR", "ERROR")
+        ("ERROR", "ERROR", "ERROR", "ERROR")
     }
   }
 
