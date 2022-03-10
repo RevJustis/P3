@@ -96,7 +96,8 @@ object Producer {
       producer: KafkaProducer[String, String],
       topic: String
   ): Unit = {
-    val result = getMap()
+    // TODO replace the placeholder
+    val result = getMap("placeholder")
 
     val key = getKey()
 

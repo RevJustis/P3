@@ -13,13 +13,12 @@ import scala.concurrent.duration.Duration
 import ExecutionContext.Implicits.global
 
 object Trends {
-  def getMap(): mutable.Map[String, String] = {
+  def getMap(id: String): mutable.Map[String, String] = {
     val t1 = System.nanoTime
     var record = mutable.Map[String, String]()
     // Order ID and timestamp generation
     val time = createDateTime
-    record += ("order_id" -> ID.toString, "datetime" -> timestampGen)
-    ID += 1
+    record += ("order_id" -> id, "datetime" -> timestampGen)
 
     // Using below code to work on futures, uncomment and feel free to change or experiment as you wish
 
