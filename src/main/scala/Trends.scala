@@ -78,6 +78,33 @@ object Trends {
       record("qty") = (record("qty").toInt + 5).toString
     }
 
+    //if order is in certain countries, change price
+    if (record.keys.toString().contains("Canada")) {
+      val newPrice = (record("price").toDouble) * 1.2
+      val newTotal = (record("unitPrice").toDouble) * 1.2
+      record("price") = f"$newPrice%1.2f"
+      record("unitPrice") = f"$newTotal%1.2f"
+    } else if (record.keys.toString().contains("Venezuela")) {
+      val newPrice = (record("price").toDouble) * 5.0
+      val newTotal = (record("unitPrice").toDouble) * 5.0
+      record("price") = f"$newPrice%1.2f"
+      record("unitPrice") = f"$newTotal%1.2f"
+    } else if (record.keys.toString().contains("South Africa")) {
+      val newPrice = (record("price").toDouble) * 0.5
+      val newTotal = (record("unitPrice").toDouble) * 0.5
+      record("price") = f"$newPrice%1.2f"
+      record("unitPrice") = f"$newTotal%1.2f"
+    } else if (record.keys.toString().contains("Vietnam")) {
+      val newPrice = (record("price").toDouble) * 0.8
+      val newTotal = (record("unitPrice").toDouble) * 0.8
+      record("price") = f"$newPrice%1.2f"
+      record("unitPrice") = f"$newTotal%1.2f"
+    } else if (record.keys.toString().contains("Monaco")) {
+      val newPrice = (record("price").toDouble) * 3.0
+      val newTotal = (record("unitPrice").toDouble) * 3.0
+      record("price") = f"$newPrice%1.2f"
+      record("unitPrice") = f"$newTotal%1.2f"
+    }
     //end the uncomment here for testing futures
 
     println(
