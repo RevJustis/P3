@@ -21,83 +21,6 @@ object Trends {
     record += ("order_id" -> ID.toString, "datetime" -> timestampGen)
     ID += 1
 
-    // Using below code to work on futures, uncomment and feel free to change or experiment as you wish
-
-    /*
-    //create future definitions
-
-    val host = hostNameGen
-
-    def priceFuture: Future[(Double,Double,Int)] = Future {priceGen()}
-    def payFuture: Future[(String,String)] = Future {payStatusGen()}
-    def locationFuture: Future[(String,String)] = Future {cityCountryGen(spark)}
-
-    /* below isn't working right now, trying to figure out an alternative way to get futures to execute immediately
-    val (price1,price2,price3): (Double, Double, Int) = Future {
-      val priceResult: (Double, Double, Int) = priceGen()
-      priceResult
-    }
-
-    val (pay1,pay2): (String,String) = Future {
-      val payResult: (String,String) = payStatusGen()
-      payResult
-    }
-
-    val (location1, location2): (String,String) = Future {
-      val locationResult: (String,String) = cityCountryGen(spark)
-      locationResult
-    }
-
-    val (product1,product2,product3,product4,product5): (String,String,String,String,String) = Future {
-      val productResult: (String,String,String,String,String) = proRecord(nextInt(1000), price2, host, spark)
-      productResult
-    }
-
-    val (customer1,customer2): (String,String) = Future {
-      val customerResult: (String,String) = cusRecord(nextInt(1000), isEnemyName(pay1))
-      customerResult
-    }
-
-     */
-
-    val (price1,price2,price3) = Await.result(priceFuture, Duration.Inf)
-    def productFuture: Future[(String,String,String,String,String)] = Future {proRecord(nextInt(1000), price2, host, spark)}
-
-    val (pay1,pay2) = Await.result(payFuture, Duration.Inf)
-
-    def customerFuture: Future[(String,String)] = Future {cusRecord(nextInt(1000), isEnemyName(pay1))}
-
-    val (product1,product2,product3,product4,product5) = Await.result(productFuture, Duration.Inf)
-    val (customer1,customer2) = Await.result(customerFuture, Duration.Inf)
-
-    val (location1,location2) = Await.result(locationFuture, Duration.Inf)
-
-
-
-
-    record += (
-      "price" -> price1.toString(),
-      "unitPrice" -> price2.toString(),
-      "qty" -> price3.toString(),
-      "payment_type" -> payTypeGen,
-      "payment_txn_id" -> payIdGen,
-      "payment_txn_success" -> pay1,
-      "failure_reason" -> pay2,
-      "customer_id" -> customer1,
-      "customer_name" -> customer2,
-      "product_id" -> product1,
-      "product_name" -> product2,
-      "product_category" -> product3,
-      "original_price" -> product4,
-      "ecommerce_website_name" -> product5,
-      "city" -> location1,
-      "country" -> location2
-    )
-
-     */
-
-    ///////Below is working code without futures, comment out if you want to test the above stuff
-
     // Price, unit price and quantity gen
     val price = priceGen // Total, Unit, qty
     record += (
@@ -135,8 +58,6 @@ object Trends {
     // Product info generation
     val product =
       proRecord(nextInt(1000), price._2, host, fitStatus, time, spark)
-    // def productFuture: Future[(String, String, String, String, String)] =
-    // Future { proRecord(nextInt(1000), price._2, host, spark) }
     record += (
       "product_id" -> product._1,
       "product_name" -> product._2,
@@ -154,15 +75,6 @@ object Trends {
     ) {
       record("qty") = (record("qty").toInt + 5).toString
     }
-
-    // val location = cityCountryGen(spark)
-    // def locationFuture: Future[(String, String)] = Future {
-    //   cityCountryGen(spark)
-    // }
-    // record += (
-    //   "city" -> location._1,
-    //   "country" -> location._2
-    // )
 
     //end the uncomment here for testing futures
 
