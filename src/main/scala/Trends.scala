@@ -17,7 +17,7 @@ object Trends {
     var record = mutable.Map.empty[String, String]
     // Order ID and timestamp generation
     val time = createDateTime
-    record += ("order_id" -> id, "datetime" -> time)
+    record += ("order_id" -> id, "datetime" -> time.toString)
 
     // Price, unit price and quantity gen
     val price = priceGen // Total, Unit, qty
