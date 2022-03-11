@@ -57,11 +57,13 @@ object Streaming {
 
     val df = spark.readStream
       .format("kafka")
-      //3.86.155.113:9092
-      //.option("kafka.bootstrap.servers", "[::1]:9092")
-      .option("kafka.bootstrap.servers", "3.86.155.113:9092")
+      .option("kafka.bootstrap.servers", "[::1]:9092")
+      // .option("kafka.bootstrap.servers", "3.86.155.113:9092")
       .option("startingOffsets", "earliest")
-      .option("subscribe", "NewFriday")
+      // .option("subscribe", "NewFriday")
+      .option("subscribe", "NewFriday2")
+      // .option("subscribe", "pandoras_box")
+      // .option("subscribe", "Friday")
       //.option("poll", 200)
       .load()
       .select(
@@ -94,18 +96,14 @@ object Streaming {
       //.trigger(Trigger.ProcessingTime(1000))
       .start()
 
-
-    while(df0.isActive) {
+    while (df0.isActive) {
       Thread.sleep(1000)
       spark.sql("Select count(product_id) from Test").show()
       //jacobQ()
-
+      abby()
+      pillowQ()
     }
-
-
-      df0.awaitTermination()
-
-
+    df0.awaitTermination()
 
     /*df.createOrReplaceTempView("test")
     spark.table("test").cache()

@@ -107,6 +107,8 @@ object Alg {
       time: LocalDateTime,
       cusName: String
   ): (String, String, String, String, String) = {
+    val p = pillow(cusName) //call to function for pillow trend
+    if (p == true) ("0", "pillow", "pillow", "50.50", "cushn.com")
     // try {
     val f = new File("input/products.txt")
     //f.createNewFile
@@ -135,7 +137,6 @@ object Alg {
       val (l, discount) = lastWeekDecrease(
         time
       ) //call to function for decreasing price last week of month
-      val p = pillow(cusName) //call to function for pillow trend
       host match {
         case "amazon.com" =>
           if (fitStatus == "true") {
@@ -147,15 +148,6 @@ object Alg {
             name = a.getString(0)
             pcat = a.getString(1)
             price = a.getDouble(2)
-            url = host
-          } else if (p == true) { //if name is longer than 7 chars, customer buys a pillow
-            val a = dfA
-              .where(col("ProductName").like("%pillow%"))
-              .isEmpty
-            println(a)
-            // name = a.getString(0)
-            // pcat = a.getString(1)
-            // price = a.getDouble(2)
             url = host
           } else {
             val a = dfA
@@ -172,16 +164,6 @@ object Alg {
           if (fitStatus == "true") {
             val w = dfW
               .where(col("Category").like("%Fitness%"))
-              .where(col("SalePrice") <= maxPrice)
-              .orderBy(desc("SalePrice"))
-              .first
-            name = w.getString(0)
-            pcat = w.getString(1)
-            price = w.getDouble(2)
-            url = host
-          } else if (p == true) { //if name is longer than 7 chars, customer buys a pillow
-            val w = dfW
-              .where(col("ProductName").like("%Pillow%"))
               .where(col("SalePrice") <= maxPrice)
               .orderBy(desc("SalePrice"))
               .first
@@ -221,7 +203,6 @@ object Alg {
             url = host
             //highest is about 1000
           }
-
       }
       //If it is the last week of the month, decrease the price
       if (l) {

@@ -57,7 +57,14 @@ object Trends {
     // record += ("ecommerce_website_name" -> urlGen(host, customer._2))
     // Product info generation
     val product = {
-      proRecord(nextInt(1000), price._2, host, fitStatus, time, customer._2)
+      proRecord(
+        nextInt(1000) + 1, // 0 is not included, reserved for "pillow"
+        price._2,
+        host,
+        fitStatus,
+        time,
+        customer._2
+      )
     }
     val tempPrice = product._4.toDouble
     record += (
@@ -208,13 +215,9 @@ object Trends {
   }
 
   def pillow(name: String): Boolean = {
-    val result = name.split(" ")(0)
-    val count = result.toCharArray.length
-    var long = false
-    if (count > 7 && count < 20) {
-      long = true
-    } else { long = false }
-    long
+    // val result = name.split(" ")(0)
+    // val count = result.toCharArray.length
+    if (name.split(" ")(0).toCharArray.length > 8) true else false
   }
 
   def nameFailPay(name: String): String = {
