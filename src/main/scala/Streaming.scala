@@ -84,7 +84,27 @@ object Streaming {
     //Both need the following
     //Sample querying
     df.printSchema()
-    df.createOrReplaceTempView("test")
+
+    val df0 = df.writeStream
+      .queryName("TestTable")
+      .outputMode("update")
+      .format("memory")
+      .start()
+
+    while(true) {
+      Thread.sleep(200)
+
+      spark.sql("Select count(order_id) from TestTable").show()
+    }
+
+    spark.sql("Select count(order_id) from TestTable").show()
+
+
+
+
+
+
+    /*df.createOrReplaceTempView("test")
     spark.table("test").cache()
     spark.sql("select * from table")
 
@@ -110,6 +130,6 @@ object Streaming {
       .start()
     df0.awaitTermination()
     df1.awaitTermination()
-    df2.awaitTermination()
+    df2.awaitTermination()*/
   }
 }
