@@ -9,7 +9,7 @@ object Query {
 
   def abby(): Unit = {
 
-    spark.sql("Select * from Test")
+    spark.sql("Select country, max(price) as MaxPrice FROM TestTable GROUP BY COUNTRY ORDER BY MaxPrice DESC").show()
 
   }
   def jacobQ(): Unit = {
