@@ -61,7 +61,7 @@ object Streaming {
       //.option("kafka.bootstrap.servers", "[::1]:9092")
       .option("kafka.bootstrap.servers", "3.86.155.113:9092")
       .option("startingOffsets", "earliest")
-      .option("subscribe", "Friday")
+      .option("subscribe", "NewFriday")
       //.option("poll", 200)
       .load()
       .select(
@@ -97,7 +97,7 @@ object Streaming {
 
     while(df0.isActive) {
       Thread.sleep(1000)
-      //spark.sql("Select count(product_id) from Test").show()
+      spark.sql("Select count(product_id) from Test").show()
       //jacobQ()
 
     }

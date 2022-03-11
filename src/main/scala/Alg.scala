@@ -50,7 +50,7 @@ object Alg {
         "1010" -> "Yueqi Peng",
         "1011" -> "Grace Alberts"
       )
-      val r = (nextInt(1012) + 1001).toString
+      val r = (nextInt(11) + 1001).toString
       (r, x(r), "dumbville", "USA")
     }
     try {
