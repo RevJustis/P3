@@ -6,7 +6,7 @@ id,city,country
 5,Manila,Philippines
 6,Shanghai,China
 7,Sao Paulo,Brazil
-8,Seoul,"Korea, South"
+8,Seoul,South Korea
 9,Mexico City,Mexico
 10,Guangzhou,China
 11,Beijing,China
@@ -229,7 +229,7 @@ id,city,country
 228,Montreal,Canada
 229,Detroit,United States
 230,Baicheng,China
-231,Busan,"Korea, South"
+231,Busan,South Korea
 232,Algiers,Algeria
 233,Qincheng,China
 234,Taiyuan,China
@@ -269,7 +269,7 @@ id,city,country
 268,Sanaa,Yemen
 269,Quezon City,Philippines
 270,Dingxi,China
-271,Incheon,"Korea, South"
+271,Incheon,South Korea
 272,Bursa,Turkey
 273,Ningde,China
 274,Tampa,United States
@@ -283,7 +283,7 @@ id,city,country
 282,Denver,United States
 283,Rome,Italy
 284,La Paz,Bolivia
-285,Pyongyang,"Korea, North"
+285,Pyongyang,North Korea
 286,Kano,Nigeria
 287,Taichung,Taiwan
 288,Omdurman,Sudan
@@ -322,7 +322,7 @@ id,city,country
 321,Guangyuan,China
 322,Cali,Colombia
 323,Huangshi,China
-324,Daegu,"Korea, South"
+324,Daegu,South Korea
 325,Fortaleza,Brazil
 326,Guatemala City,Guatemala
 327,Yaounde,Cameroon
@@ -495,13 +495,13 @@ id,city,country
 494,Belem,Brazil
 495,Guiping,China
 496,Leizhou,China
-497,Gwangju,"Korea, South"
+497,Gwangju,South Korea
 498,Nasik,India
 499,Porto Alegre,Brazil
 500,Valencia,Venezuela
 501,Onitsha,Nigeria
 502,Virginia Beach,United States
-503,Daejeon,"Korea, South"
+503,Daejeon,South Korea
 504,Munich,Germany
 505,Auckland,New Zealand
 506,Yekaterinburg,Russia
@@ -578,7 +578,7 @@ id,city,country
 577,Jingling,China
 578,Kazan,Russia
 579,Dayan,China
-580,Suwon,"Korea, South"
+580,Suwon,South Korea
 581,Jiangyin,China
 582,Yongcheng,China
 583,Calgary,Canada
@@ -612,7 +612,7 @@ id,city,country
 611,Bandar Lampung,Indonesia
 612,Samara,Russia
 613,Guankou,China
-614,Ulsan,"Korea, South"
+614,Ulsan,South Korea
 615,Dingzhou,China
 616,Campinas,Brazil
 617,Lianyuan,China
@@ -672,7 +672,7 @@ id,city,country
 671,San Pedro Sula,Honduras
 672,Taixing,China
 673,Memphis,United States
-674,Goyang,"Korea, South"
+674,Goyang,South Korea
 675,Bezwada,India
 676,Edmonton,Canada
 677,Mizhou,China
@@ -683,7 +683,7 @@ id,city,country
 682,Sendai,Japan
 683,Voronezh,Russia
 684,Perm,Russia
-685,Changwon,"Korea, South"
+685,Changwon,South Korea
 686,Zhongwei,China
 687,Shouguang,China
 688,Bogor,Indonesia
@@ -781,7 +781,7 @@ id,city,country
 780,San Jose,Costa Rica
 781,Ljubljana,Slovenia
 782,Sarajevo,Bosnia And Herzegovina
-783,Nassau,"Bahamas, The"
+783,Nassau,The Bahamas
 784,Bloemfontein,South Africa
 785,Fort-de-France,Martinique
 786,Gaborone,Botswana
@@ -825,7 +825,7 @@ id,city,country
 824,Oranjestad,Aruba
 825,Saint Helier,Jersey
 826,Vaduz,Liechtenstein
-827,Banjul,"Gambia, The"
+827,Banjul,The Gambia
 828,Mamoudzou,Mayotte
 829,Majuro,Marshall Islands
 830,Tarawa,Kiribati
@@ -844,7 +844,7 @@ id,city,country
 843,Valletta,Malta
 844,Gaza,Gaza Strip
 845,Grand Turk,Turks And Caicos Islands
-846,Palikir,"Micronesia, Federated States Of"
+846,Palikir,Federated States Of Micronesia
 847,Funafuti,Tuvalu
 848,Lobamba,Swaziland
 849,Avarua,Cook Islands
@@ -857,10 +857,10 @@ id,city,country
 856,Vatican City,Vatican City
 857,Alofi,Niue
 858,Hagta,Guam
-859,Jamestown,"Saint Helena, Ascension, And Tristan Da Cunha"
+859,Jamestown,Saint Helena Ascension And Tristan Da Cunha
 860,Marigot,Saint Martin
 861,Philipsburg,Sint Maarten
-862,Road Town,"Virgin Islands, British"
+862,Road Town,British Virgin Islands
 863,Gustavia,Saint Barthelemy
 864,Saint-Pierre,Saint Pierre And Miquelon
 865,The Valley,Anguilla
@@ -900,7 +900,7 @@ id,city,country
 899,Dispur,India
 900,Coimbatore,India
 901,Guwahati,India
-902,Songnam,"Korea, South"
+902,Songnam,South Korea
 903,Taishan,China
 904,Solapur,India
 905,Tangier,Morocco
@@ -931,7 +931,7 @@ id,city,country
 930,Zhuanghe,China
 931,Hartford,United States
 932,Ad Dammam,Saudi Arabia
-933,Bucheon,"Korea, South"
+933,Bucheon,South Korea
 934,Lhasa,China
 935,Homs,Syria
 936,Jiaozhou,China
@@ -982,7 +982,7 @@ id,city,country
 981,Naucalpan de Juarez,Mexico
 982,Bhubaneshwar,India
 983,Tongchuan,China
-984,Cheongju,"Korea, South"
+984,Cheongju,South Korea
 985,Warri,Nigeria
 986,Pointe-Noire,Congo (Brazzaville)
 987,Rongjiawan,China
@@ -1047,7 +1047,7 @@ id,city,country
 1046,Samarinda,Indonesia
 1047,Changhua,Taiwan
 1048,Pietermaritzburg,South Africa
-1049,Hungnam,"Korea, North"
+1049,Hungnam,North Korea
 1050,Kolhapur,India
 1051,Ciudad Guayana,Venezuela
 1052,Cucuta,Colombia
@@ -1147,7 +1147,7 @@ id,city,country
 1146,Yatou,China
 1147,Songyang,China
 1148,Cape Coral,United States
-1149,Ch'ongjin,"Korea, North"
+1149,Ch'ongjin,North Korea
 1150,Puyang Chengguanzhen,China
 1151,Qionghu,China
 1152,Ribeirao Preto,Brazil
@@ -1159,11 +1159,11 @@ id,city,country
 1158,Bouake,Côte D’Ivoire
 1159,Sialkot City,Pakistan
 1160,As Sulaymaniyah,Iraq
-1161,Hwasu-dong,"Korea, South"
-1162,Jeonju,"Korea, South"
+1161,Hwasu-dong,South Korea
+1162,Jeonju,South Korea
 1163,Durango,Mexico
 1164,Shimoga,India
-1165,Ansan,"Korea, South"
+1165,Ansan,South Korea
 1166,Bulawayo,Zimbabwe
 1167,Xiping,China
 1168,Sanhe,China
@@ -1172,7 +1172,7 @@ id,city,country
 1171,Concord,United States
 1172,Contagem,Brazil
 1173,Tiruppur,India
-1174,Ch'onan,"Korea, South"
+1174,Ch'onan,South Korea
 1175,Zaragoza,Spain
 1176,Dusseldorf,Germany
 1177,Izhevsk,Russia
@@ -1202,7 +1202,7 @@ id,city,country
 1201,Rotterdam,Netherlands
 1202,Benghazi,Libya
 1203,Kryvyi Rih,Ukraine
-1204,Yanggok,"Korea, South"
+1204,Yanggok,South Korea
 1205,Changping,China
 1206,Raurkela,India
 1207,Halwan,Egypt
@@ -1229,7 +1229,7 @@ id,city,country
 1228,Khabarovsk,Russia
 1229,Zhugang,China
 1230,Xinji,China
-1231,Hamhung,"Korea, North"
+1231,Hamhung,North Korea
 1232,Serang,Indonesia
 1233,Sanya,China
 1234,Buraydah,Saudi Arabia
@@ -1275,7 +1275,7 @@ id,city,country
 1274,Shangzhi,China
 1275,Botou,China
 1276,Bucaramanga,Colombia
-1277,Anyang,"Korea, South"
+1277,Anyang,South Korea
 1278,Genoa,Italy
 1279,Kuiju,China
 1280,Tlaquepaque,Mexico
@@ -1373,7 +1373,7 @@ id,city,country
 1372,Yucheng,China
 1373,Meknes,Morocco
 1374,Nuremberg,Germany
-1375,Pohang,"Korea, South"
+1375,Pohang,South Korea
 1376,Anda,China
 1377,Jinghong,China
 1378,Utsunomiya,Japan
@@ -1517,7 +1517,7 @@ id,city,country
 1516,Tel Aviv,Israel
 1517,Xicheng,China
 1518,Marikina City,Philippines
-1519,Pyeongtaek,"Korea, South"
+1519,Pyeongtaek,South Korea
 1520,Kurnool,India
 1521,City of Calamba,Philippines
 1522,Denton,United States
@@ -1564,14 +1564,14 @@ id,city,country
 1563,San Cristobal,Venezuela
 1564,Zurich,Switzerland
 1565,Zhangjiakou Shi Xuanhua Qu,China
-1566,Sunch'on,"Korea, North"
+1566,Sunch'on,North Korea
 1567,Diadema,Brazil
 1568,Guangming,China
 1569,Sangli,India
 1570,Tuticorin,India
 1571,Herat,Afghanistan
 1572,Kupang,Indonesia
-1573,Jeju,"Korea, South"
+1573,Jeju,South Korea
 1574,Bandar `Abbas,Iran
 1575,Santos,Brazil
 1576,Manizales,Colombia
@@ -1589,7 +1589,7 @@ id,city,country
 1588,Uyo,Nigeria
 1589,Maringa,Brazil
 1590,Khamis Mushayt,Saudi Arabia
-1591,Masan,"Korea, South"
+1591,Masan,South Korea
 1592,Cusco,Peru
 1593,Sevastopol,Ukraine
 1594,Mandaluyong City,Philippines
@@ -1605,7 +1605,7 @@ id,city,country
 1604,Laval,Canada
 1605,Toyota,Japan
 1606,Winston-Salem,United States
-1607,Uijeongbu,"Korea, South"
+1607,Uijeongbu,South Korea
 1608,Tver,Russia
 1609,Elazig,Turkey
 1610,Akure,Nigeria
@@ -1630,7 +1630,7 @@ id,city,country
 1629,Palm Coast,United States
 1630,Arusha,Tanzania
 1631,Fenyang,China
-1632,Paju,"Korea, South"
+1632,Paju,South Korea
 1633,Oujda-Angad,Morocco
 1634,Mataram,Indonesia
 1635,Chattanooga,United States
@@ -1781,7 +1781,7 @@ id,city,country
 1780,Zalantun,China
 1781,Tecamac,Mexico
 1782,Ciudad General Escobedo,Mexico
-1783,Wonsan,"Korea, North"
+1783,Wonsan,North Korea
 1784,Kocaeli,Turkey
 1785,Bengkulu,Indonesia
 1786,Shuanghejiedao,China
@@ -1796,7 +1796,7 @@ id,city,country
 1795,Wudalianchi,China
 1796,Sungai Petani,Malaysia
 1797,Nam Dinh,Vietnam
-1798,Sinuiju,"Korea, North"
+1798,Sinuiju,North Korea
 1799,Vitoria,Brazil
 1800,Hrodna,Belarus
 1801,Vladimir,Russia
@@ -1812,7 +1812,7 @@ id,city,country
 1811,Hongzhai,China
 1812,Wakayama,Japan
 1813,Pavlodar,Kazakhstan
-1814,Gimpo,"Korea, South"
+1814,Gimpo,South Korea
 1815,Rahimyar Khan,Pakistan
 1816,Nara,Japan
 1817,Van,Turkey
@@ -1843,7 +1843,7 @@ id,city,country
 1842,Chitungwiza,Zimbabwe
 1843,Pensacola,United States
 1844,Victorville,United States
-1845,Tanch'on,"Korea, North"
+1845,Tanch'on,North Korea
 1846,Tokorozawa,Japan
 1847,Sumqayit,Azerbaijan
 1848,Kusti,Sudan
@@ -1861,7 +1861,7 @@ id,city,country
 1860,Franca,Brazil
 1861,Brest,Belarus
 1862,Kaluga,Russia
-1863,Yeosu,"Korea, South"
+1863,Yeosu,South Korea
 1864,Corpus Christi,United States
 1865,Muzaffarpur,India
 1866,Lublin,Poland
@@ -1880,10 +1880,10 @@ id,city,country
 1879,Randburg,South Africa
 1880,Tepic,Mexico
 1881,Jitpur,Nepal
-1882,Kaesong,"Korea, North"
+1882,Kaesong,North Korea
 1883,Beni,Congo (Kinshasa)
 1884,Petrolina,Brazil
-1885,Chinju,"Korea, South"
+1885,Chinju,South Korea
 1886,Tangdong,China
 1887,Butuan,Philippines
 1888,Reading,United Kingdom
@@ -1916,7 +1916,7 @@ id,city,country
 1915,Smolensk,Russia
 1916,Asahikawa,Japan
 1917,Islip,United States
-1918,Wonju,"Korea, South"
+1918,Wonju,South Korea
 1919,Dahuk,Iraq
 1920,Batangas,Philippines
 1921,Mathura,India
@@ -1944,7 +1944,7 @@ id,city,country
 1943,Al Fallujah,Iraq
 1944,Kochi,Japan
 1945,Boa Vista,Brazil
-1946,Gwangmyeongni,"Korea, South"
+1946,Gwangmyeongni,South Korea
 1947,Bari,Italy
 1948,Pucallpa,Peru
 1949,Kuching,Malaysia
@@ -1982,8 +1982,8 @@ id,city,country
 1981,Poltava,Ukraine
 1982,Henderson,United States
 1983,Maroua,Cameroon
-1984,Kaech'on,"Korea, North"
-1985,Asan,"Korea, South"
+1984,Kaech'on,North Korea
+1985,Asan,South Korea
 1986,Coatzacoalcos,Mexico
 1987,Huntsville,United States
 1988,Oskemen,Kazakhstan
@@ -2025,13 +2025,13 @@ id,city,country
 2024,Yokkaichi,Japan
 2025,Chalco,Mexico
 2026,Mannheim,Germany
-2027,Namp'o,"Korea, North"
+2027,Namp'o,North Korea
 2028,Shahriar,Iran
 2029,Coban,Guatemala
 2030,Kasugai,Japan
 2031,Sapele,Nigeria
 2032,Blumenau,Brazil
-2033,Sariwon,"Korea, North"
+2033,Sariwon,North Korea
 2034,St. Catharines,Canada
 2035,Matadi,Congo (Kinshasa)
 2036,Niagara Falls,Canada
@@ -2061,7 +2061,7 @@ id,city,country
 2060,Wollongong,Australia
 2061,Brest,France
 2062,Awka,Nigeria
-2063,Iksan,"Korea, South"
+2063,Iksan,South Korea
 2064,Taubate,Brazil
 2065,Antioch,United States
 2066,Lakeland,United States
@@ -2091,7 +2091,7 @@ id,city,country
 2090,Rampur,India
 2091,Najran,Saudi Arabia
 2092,Chernihiv,Ukraine
-2093,Yangsan,"Korea, South"
+2093,Yangsan,South Korea
 2094,Comilla,Bangladesh
 2095,Oyster Bay,United States
 2096,Valparaiso,Chile
@@ -2109,7 +2109,7 @@ id,city,country
 2108,Panipat,India
 2109,Delmas,Haiti
 2110,Batna,Algeria
-2111,Kunp'o,"Korea, South"
+2111,Kunp'o,South Korea
 2112,Tambov,Russia
 2113,Iasi,Romania
 2114,Thies,Senegal
@@ -2172,7 +2172,7 @@ id,city,country
 2171,Ica,Peru
 2172,Newark,United States
 2173,Jining,China
-2174,Chuncheon,"Korea, South"
+2174,Chuncheon,South Korea
 2175,Malard,Iran
 2176,Pematangsiantar,Indonesia
 2177,Long Xuyen,Vietnam
@@ -2189,7 +2189,7 @@ id,city,country
 2188,Wiesbaden,Germany
 2189,Kostroma,Russia
 2190,Round Lake Beach,United States
-2191,Gyeongsan,"Korea, South"
+2191,Gyeongsan,South Korea
 2192,Governador Valadares,Brazil
 2193,Katowice,Poland
 2194,Shaowu,China
@@ -2210,10 +2210,10 @@ id,city,country
 2209,Mbandaka,Congo (Kinshasa)
 2210,Tehuacan,Mexico
 2211,La Guaira,Venezuela
-2212,Kunsan,"Korea, South"
+2212,Kunsan,South Korea
 2213,Chula Vista,United States
 2214,Ratlam,India
-2215,Yeosu,"Korea, South"
+2215,Yeosu,South Korea
 2216,Crato,Brazil
 2217,Derby,United Kingdom
 2218,Tsu,Japan
@@ -2273,7 +2273,7 @@ id,city,country
 2272,Kutahya,Turkey
 2273,Salem,United States
 2274,Djelfa,Algeria
-2275,Suncheon,"Korea, South"
+2275,Suncheon,South Korea
 2276,Graz,Austria
 2277,St. Petersburg,United States
 2278,Engels,Russia
@@ -2282,7 +2282,7 @@ id,city,country
 2281,Dezful,Iran
 2282,Osmaniye,Turkey
 2283,Lafayette,United States
-2284,Kyongju,"Korea, South"
+2284,Kyongju,South Korea
 2285,Dumai,Indonesia
 2286,Gent,Belgium
 2287,San Lorenzo,Paraguay
@@ -2363,7 +2363,7 @@ id,city,country
 2362,Shinozaki,Japan
 2363,Goma,Congo (Kinshasa)
 2364,Rach Gia,Vietnam
-2365,Kanggye,"Korea, North"
+2365,Kanggye,North Korea
 2366,Taganrog,Russia
 2367,Kiziltepe,Turkey
 2368,El Fasher,Sudan
@@ -2439,7 +2439,7 @@ id,city,country
 2438,Itaborai,Brazil
 2439,Myitkyina,Myanmar
 2440,Barnstable,United States
-2441,Haeju,"Korea, North"
+2441,Haeju,North Korea
 2442,Petah Tiqwa,Israel
 2443,Norfolk,United States
 2444,Gonzalez Catan,Argentina
@@ -2453,7 +2453,7 @@ id,city,country
 2452,Sao Leopoldo,Brazil
 2453,Arakawa,Japan
 2454,Duzce,Turkey
-2455,Anju,"Korea, North"
+2455,Anju,North Korea
 2456,Divinopolis,Brazil
 2457,Aarhus,Denmark
 2458,Kennewick,United States
@@ -2466,7 +2466,7 @@ id,city,country
 2465,Irving,United States
 2466,Hachimancho,Japan
 2467,Longueuil,Canada
-2468,Mokpo,"Korea, South"
+2468,Mokpo,South Korea
 2469,Kosice,Slovakia
 2470,`Ajman,United Arab Emirates
 2471,Lille,France
@@ -2474,7 +2474,7 @@ id,city,country
 2473,Shenmu,China
 2474,Le Havre,France
 2475,Taiping,Malaysia
-2476,P'yong-dong,"Korea, North"
+2476,P'yong-dong,North Korea
 2477,Springs,South Africa
 2478,Ivano-Frankivsk,Ukraine
 2479,As Sib,Oman
@@ -2669,7 +2669,7 @@ id,city,country
 2668,Cartagena,Spain
 2669,Petropavl,Kazakhstan
 2670,Marg`ilon,Uzbekistan
-2671,Gangneung,"Korea, South"
+2671,Gangneung,South Korea
 2672,San Bernardino,United States
 2673,Cua,Venezuela
 2674,Meycauayan,Philippines
@@ -2686,7 +2686,7 @@ id,city,country
 2685,Mohammedia,Morocco
 2686,Babruysk,Belarus
 2687,Roanoke,United States
-2688,Osan,"Korea, South"
+2688,Osan,South Korea
 2689,Geneva,Switzerland
 2690,Fontana,United States
 2691,Sikasso,Mali
@@ -2711,7 +2711,7 @@ id,city,country
 2710,Rio Grande,Brazil
 2711,Pskov,Russia
 2712,Bila Tserkva,Ukraine
-2713,Chungju,"Korea, South"
+2713,Chungju,South Korea
 2714,Babylon,United States
 2715,Tunja,Colombia
 2716,Barrancabermeja,Colombia
@@ -2727,7 +2727,7 @@ id,city,country
 2726,Dongning,China
 2727,Moratuwa,Sri Lanka
 2728,Burutu,Nigeria
-2729,Ich'on,"Korea, South"
+2729,Ich'on,South Korea
 2730,Puerto Cabello,Venezuela
 2731,Beersheba,Israel
 2732,Nasim Shahr,Iran
@@ -2866,16 +2866,16 @@ id,city,country
 2865,Zipaquira,Colombia
 2866,Beni Mellal,Morocco
 2867,Prokopyevsk,Russia
-2868,Rajin,"Korea, North"
+2868,Rajin,North Korea
 2869,Ghandinagar,India
 2870,Eldoret,Kenya
-2871,Kusong,"Korea, North"
+2871,Kusong,North Korea
 2872,Suhaj,Egypt
 2873,Khammam,India
 2874,Kirikkale,Turkey
 2875,Parma,Italy
 2876,Suzuka,Japan
-2877,Brikama,"Gambia, The"
+2877,Brikama,The Gambia
 2878,Acarigua,Venezuela
 2879,Hugli,India
 2880,Viransehir,Turkey
@@ -2890,7 +2890,7 @@ id,city,country
 2889,Bandar-e Bushehr,Iran
 2890,Prato,Italy
 2891,Cholula de Rivadabia,Mexico
-2892,Anseong,"Korea, South"
+2892,Anseong,South Korea
 2893,Yuzhno-Sakhalinsk,Russia
 2894,Richmond Hill,Canada
 2895,Dese,Ethiopia
@@ -2909,7 +2909,7 @@ id,city,country
 2908,Muar,Malaysia
 2909,Godoy Cruz,Argentina
 2910,Mus,Turkey
-2911,Hyesan,"Korea, North"
+2911,Hyesan,North Korea
 2912,Kielce,Poland
 2913,Arapiraca,Brazil
 2914,Valencia,Philippines
@@ -2938,7 +2938,7 @@ id,city,country
 2937,Santa Barbara d'Oeste,Brazil
 2938,Saddiqabad,Pakistan
 2939,Rybinsk,Russia
-2940,Chongju,"Korea, North"
+2940,Chongju,North Korea
 2941,Hagen,Germany
 2942,Ngaoundere,Cameroon
 2943,Potosi,Bolivia
@@ -2967,7 +2967,7 @@ id,city,country
 2966,Gharyan,Libya
 2967,Tottori,Japan
 2968,Bournemouth,United Kingdom
-2969,Chaedok,"Korea, North"
+2969,Chaedok,North Korea
 2970,Joetsu,Japan
 2971,Prizren,Kosovo
 2972,Sioux Falls,United States
@@ -2982,7 +2982,7 @@ id,city,country
 2981,Dunhuang,China
 2982,Huntington,United States
 2983,Mahesana,India
-2984,Guri,"Korea, South"
+2984,Guri,South Korea
 2985,Jamaame,Somalia
 2986,Panabo,Philippines
 2987,Breda,Netherlands
@@ -3217,7 +3217,7 @@ id,city,country
 3216,Medinipur,India
 3217,Fenglu,China
 3218,Al Marj,Libya
-3219,Sosan,"Korea, South"
+3219,Sosan,South Korea
 3220,Ocala,United States
 3221,Uppsala,Sweden
 3222,Gondomar,Portugal
@@ -3233,7 +3233,7 @@ id,city,country
 3232,Sorsogon,Philippines
 3233,Higuey,Dominican Republic
 3234,Tanjungbalai,Indonesia
-3235,Huich'on,"Korea, North"
+3235,Huich'on,North Korea
 3236,Mahabad,Iran
 3237,Itapecerica da Serra,Brazil
 3238,Sao Caetano do Sul,Brazil
@@ -3295,7 +3295,7 @@ id,city,country
 3294,Tema,Ghana
 3295,Piedras Negras,Mexico
 3296,Itapetininga,Brazil
-3297,Pocheon,"Korea, South"
+3297,Pocheon,South Korea
 3298,Turgutlu,Turkey
 3299,Navsari,India
 3300,Wau,South Sudan
@@ -3319,7 +3319,7 @@ id,city,country
 3318,Budaun,India
 3319,Chittoor,India
 3320,San Martin Texmelucan de Labastida,Mexico
-3321,Andong,"Korea, South"
+3321,Andong,South Korea
 3322,Ash Shatrah,Iraq
 3323,Guadalajara,Spain
 3324,Rafsanjan,Iran
@@ -3399,7 +3399,7 @@ id,city,country
 3398,Camarajibe,Brazil
 3399,Lafayette,United States
 3400,Fethiye,Turkey
-3401,Uiwang,"Korea, South"
+3401,Uiwang,South Korea
 3402,Navojoa,Mexico
 3403,Calama,Chile
 3404,Erzincan,Turkey
@@ -3420,7 +3420,7 @@ id,city,country
 3419,Chlef,Algeria
 3420,Chetumal,Mexico
 3421,Angers,France
-3422,Hanam,"Korea, South"
+3422,Hanam,South Korea
 3423,Matagalpa,Nicaragua
 3424,Vidisha,India
 3425,Paranagua,Brazil
@@ -3471,7 +3471,7 @@ id,city,country
 3470,Lucapa,Angola
 3471,Kafr ash Shaykh,Egypt
 3472,Tama,Japan
-3473,Seogwipo,"Korea, South"
+3473,Seogwipo,South Korea
 3474,Tochigi,Japan
 3475,Moanda,Congo (Kinshasa)
 3476,Barreiras,Brazil
@@ -3481,11 +3481,11 @@ id,city,country
 3480,Fyzabad,India
 3481,Harrow,United Kingdom
 3482,Poole,United Kingdom
-3483,Hoeryong,"Korea, North"
+3483,Hoeryong,North Korea
 3484,Kirsehir,Turkey
 3485,Muskegon,United States
 3486,Sievierodonetsk,Ukraine
-3487,Sinpo,"Korea, North"
+3487,Sinpo,North Korea
 3488,Dutse,Nigeria
 3489,Baliuag,Philippines
 3490,Silchar,India
@@ -3511,7 +3511,7 @@ id,city,country
 3510,Tulancingo,Mexico
 3511,Erode,India
 3512,Midsayap,Philippines
-3513,Gwangyang,"Korea, South"
+3513,Gwangyang,South Korea
 3514,Tororo,Uganda
 3515,Kukichuo,Japan
 3516,Gonbad-e Kavus,Iran
@@ -3797,7 +3797,7 @@ id,city,country
 3796,Mandya,India
 3797,Boulogne-sur-Mer,France
 3798,Greeley,United States
-3799,Ch'ungmu,"Korea, South"
+3799,Ch'ungmu,South Korea
 3800,Al Khmissat,Morocco
 3801,Birganj,Nepal
 3802,Igdir,Turkey
@@ -3829,7 +3829,7 @@ id,city,country
 3828,Santa Tecla,El Salvador
 3829,Inazawa,Japan
 3830,Uppsala,Sweden
-3831,Chech'on,"Korea, South"
+3831,Chech'on,South Korea
 3832,Jinotega,Nicaragua
 3833,Tiraspol,Moldova
 3834,Apucarana,Brazil
@@ -3993,7 +3993,7 @@ id,city,country
 3992,Chinguar,Angola
 3993,Tariba,Venezuela
 3994,Wurzburg,Germany
-3995,Songnim,"Korea, North"
+3995,Songnim,North Korea
 3996,Mansa,Zambia
 3997,Elizabeth,United States
 3998,Opole,Poland
@@ -4128,7 +4128,7 @@ id,city,country
 4127,Pervouralsk,Russia
 4128,Algeciras,Spain
 4129,New Mirpur,Pakistan
-4130,Noksan,"Korea, South"
+4130,Noksan,South Korea
 4131,Boulder,United States
 4132,Bimbo,Central African Republic
 4133,Baia Mare,Romania
@@ -4161,7 +4161,7 @@ id,city,country
 4160,Varginha,Brazil
 4161,Lehigh Acres,United States
 4162,Dabrowa Gornicza,Poland
-4163,Munch'on,"Korea, North"
+4163,Munch'on,North Korea
 4164,Khenifra,Morocco
 4165,Hoi An,Vietnam
 4166,Alberton,South Africa
@@ -4355,7 +4355,7 @@ id,city,country
 4354,Mendoza,Argentina
 4355,Clearwater,United States
 4356,Tandil,Argentina
-4357,Manpo,"Korea, North"
+4357,Manpo,North Korea
 4358,Beppu,Japan
 4359,Buzau,Romania
 4360,Tatui,Brazil
@@ -4454,7 +4454,7 @@ id,city,country
 4453,Wythenshawe,United Kingdom
 4454,Erlangen,Germany
 4455,Jendouba,Tunisia
-4456,Sa-ch'on,"Korea, South"
+4456,Sa-ch'on,South Korea
 4457,Ponce,Puerto Rico
 4458,Kipushi,Congo (Kinshasa)
 4459,Mazhang,China
@@ -4588,7 +4588,7 @@ id,city,country
 4587,Darlington,United Kingdom
 4588,Broken Arrow,United States
 4589,Milton,Canada
-4590,Yoju,"Korea, South"
+4590,Yoju,South Korea
 4591,Xishancun,China
 4592,Bangaon,India
 4593,Miami Gardens,United States
@@ -4614,7 +4614,7 @@ id,city,country
 4613,Caen,France
 4614,Botosani,Romania
 4615,Sandy Springs,United States
-4616,Yongju,"Korea, South"
+4616,Yongju,South Korea
 4617,Gresham,United States
 4618,Uitenhage,South Africa
 4619,Bukoba,Tanzania
@@ -4848,14 +4848,14 @@ id,city,country
 4847,Yilong,China
 4848,Bergama,Turkey
 4849,Naujan,Philippines
-4850,Miryang,"Korea, South"
+4850,Miryang,South Korea
 4851,Nyeri,Kenya
 4852,Mengdingjie,China
 4853,Satu Mare,Romania
 4854,Houzhuang,China
 4855,Hildesheim,Germany
 4856,Nanterre,France
-4857,Sangju,"Korea, South"
+4857,Sangju,South Korea
 4858,Kirklareli,Turkey
 4859,Hove,United Kingdom
 4860,Arden-Arcade,United States
@@ -4886,7 +4886,7 @@ id,city,country
 4885,Coatepec,Mexico
 4886,Sabratah,Libya
 4887,Chishtian,Pakistan
-4888,Boryeong,"Korea, South"
+4888,Boryeong,South Korea
 4889,Shushtar,Iran
 4890,Jingping,China
 4891,Santo Antonio de Jesus,Brazil
@@ -7758,7 +7758,7 @@ id,city,country
 7757,Visaginas,Lithuania
 7758,Marly-le-Roi,France
 7759,Albal,Spain
-7760,Mansa Konko,"Gambia, The"
+7760,Mansa Konko,The Gambia
 7761,Bou Djeniba,Morocco
 7762,Harnosand,Sweden
 7763,Tlaltetela,Mexico
@@ -8227,7 +8227,7 @@ id,city,country
 8226,Tierra Colorada,Mexico
 8227,Stiring-Wendel,France
 8228,Malvinas Argentinas,Argentina
-8229,Basse Santa Su,"Gambia, The"
+8229,Basse Santa Su,The Gambia
 8230,Ar Rommani,Morocco
 8231,Baruun-Urt,Mongolia
 8232,Haddon,United States
@@ -9298,7 +9298,7 @@ id,city,country
 9297,Naguabo,Puerto Rico
 9298,Slovenske Konjice,Slovenia
 9299,Twin Lakes,United States
-9300,Kanifing,"Gambia, The"
+9300,Kanifing,The Gambia
 9301,Broadmoor,United States
 9302,Liquica,Timor-Leste
 9303,Smiltene,Latvia
@@ -9391,7 +9391,7 @@ id,city,country
 9390,Piran,Slovenia
 9391,Kalvarija,Lithuania
 9392,Makedonski Brod,Macedonia
-9393,Janjanbureh,"Gambia, The"
+9393,Janjanbureh,The Gambia
 9394,Cankuzo,Burundi
 9395,Pinki,Latvia
 9396,Moroto,Uganda
@@ -9445,10 +9445,10 @@ id,city,country
 9444,Arima,Trinidad And Tobago
 9445,Novo Selo,Macedonia
 9446,Rasdhoo,Maldives
-9447,Kerewan,"Gambia, The"
+9447,Kerewan,The Gambia
 9448,Broceni,Latvia
 9449,Petrovec,Macedonia
-9450,Kolonia,"Micronesia, Federated States Of"
+9450,Kolonia,Federated States Of Micronesia
 9451,Vilani,Latvia
 9452,Vevcani,Macedonia
 9453,Al Wakrah,Qatar
@@ -9461,7 +9461,7 @@ id,city,country
 9460,Qala,Malta
 9461,Kllokot,Kosovo
 9462,Cestos City,Liberia
-9463,Tofol,"Micronesia, Federated States Of"
+9463,Tofol,Federated States Of Micronesia
 9464,Bundibugyo,Uganda
 9465,Demir Hisar,Macedonia
 9466,Ruggell,Liechtenstein
@@ -9593,7 +9593,7 @@ id,city,country
 9592,Radovljica,Slovenia
 9593,Rauna,Latvia
 9594,Vilaka,Latvia
-9595,Weno,"Micronesia, Federated States Of"
+9595,Weno,Federated States Of Micronesia
 9596,Taro,Solomon Islands
 9597,Oranjestad,Netherlands
 9598,Belcista,Macedonia
@@ -9645,7 +9645,7 @@ id,city,country
 9644,Isale,Burundi
 9645,Sostanj,Slovenia
 9646,Dien Bien Phu,Vietnam
-9647,P'yongsong,"Korea, North"
+9647,P'yongsong,North Korea
 9648,Pavilosta,Latvia
 9649,Centar Zupa,Macedonia
 9650,Aglona,Latvia
@@ -9766,7 +9766,7 @@ id,city,country
 9765,Radenci,Slovenia
 9766,Hvannasund,Faroe Islands
 9767,Log,Slovenia
-9768,Colonia,"Micronesia, Federated States Of"
+9768,Colonia,Federated States Of Micronesia
 9769,Tisina,Slovenia
 9770,Spodnji Duplek,Slovenia
 9771,Bushenyi,Uganda
@@ -9919,7 +9919,7 @@ id,city,country
 9918,Straza,Slovenia
 9919,Kanoni,Uganda
 9920,Kokopo,Papua New Guinea
-9921,Sejong,"Korea, South"
+9921,Sejong,South Korea
 9922,Ramotswa,Botswana
 9923,Mulifanua,Samoa
 9924,Smarjeske Toplice,Slovenia
@@ -9970,12 +9970,12 @@ id,city,country
 9969,Mersch,Luxembourg
 9970,Ucar,Azerbaijan
 9971,Dolenjske Toplice,Slovenia
-9972,Hongseong,"Korea, South"
+9972,Hongseong,South Korea
 9973,Strendur,Faroe Islands
 9974,Tuzi,Montenegro
 9975,Verzej,Slovenia
 9976,Zgornja Kungota,Slovenia
-9977,Muan,"Korea, South"
+9977,Muan,South Korea
 9978,Crensovci,Slovenia
 9979,Mirna Pec,Slovenia
 9980,Saratamata,Vanuatu
@@ -10001,7 +10001,7 @@ id,city,country
 10000,Drabesi,Latvia
 10001,Cicevac,Serbia
 10002,Mokronog,Slovenia
-10003,Bakjagol,"Korea, South"
+10003,Bakjagol,South Korea
 10004,Plandiste,Serbia
 10005,Kozina,Slovenia
 10006,Velika Polana,Slovenia
@@ -10270,7 +10270,7 @@ id,city,country
 10269,Loango,Congo (Brazzaville)
 10270,Laascaanood,Somalia
 10271,Husavik,Faroe Islands
-10272,Georgetown,"Saint Helena, Ascension, And Tristan Da Cunha"
+10272,Georgetown,Saint Helena Ascension And Tristan Da Cunha
 10273,Amdjarass,Chad
 10274,Lhuentse,Bhutan
 10275,Jakar,Bhutan
@@ -10287,7 +10287,7 @@ id,city,country
 10286,Skuvoy,Faroe Islands
 10287,Pluzine,Montenegro
 10288,Choyr,Mongolia
-10289,Edinburgh of the Seven Seas,"Saint Helena, Ascension, And Tristan Da Cunha"
+10289,Edinburgh of the Seven Seas,Saint Helena Ascension And Tristan Da Cunha
 10290,Awbari,Libya
 10291,Gasa,Bhutan
 10292,Idri,Libya
@@ -10712,7 +10712,7 @@ id,city,country
 10711,Brossard,Canada
 10712,Chita,Japan
 10713,Villingen-Schwenningen,Germany
-10714,Sokcho,"Korea, South"
+10714,Sokcho,South Korea
 10715,Sao Bento do Sul,Brazil
 10716,Redencao,Brazil
 10717,Chiclana de la Frontera,Spain
@@ -10896,7 +10896,7 @@ id,city,country
 10895,Uvinza,Tanzania
 10896,Kottagudem,India
 10897,Mbalmayo,Cameroon
-10898,Namsan,"Korea, North"
+10898,Namsan,North Korea
 10899,Zarzis,Tunisia
 10900,Chapadinha,Brazil
 10901,Andahuaylas,Peru
@@ -11418,7 +11418,7 @@ id,city,country
 11417,Escada,Brazil
 11418,Bacacay,Philippines
 11419,Delray Beach,United States
-11420,Ongjang,"Korea, North"
+11420,Ongjang,North Korea
 11421,Sheboygan,United States
 11422,Chisec,Guatemala
 11423,Aqsu,Kazakhstan
@@ -11571,7 +11571,7 @@ id,city,country
 11570,Caledon,Canada
 11571,Gukovo,Russia
 11572,Indang,Philippines
-11573,P'yongsan,"Korea, North"
+11573,P'yongsan,North Korea
 11574,Urla,Turkey
 11575,Brookes Point,Philippines
 11576,Kalush,Ukraine
@@ -11930,7 +11930,7 @@ id,city,country
 11929,Reston,United States
 11930,Barra do Garcas,Brazil
 11931,Idiofa,Congo (Kinshasa)
-11932,Sonbong,"Korea, North"
+11932,Sonbong,North Korea
 11933,Skhirate,Morocco
 11934,Quezon,Philippines
 11935,Lakewood,United States
@@ -12934,7 +12934,7 @@ id,city,country
 12933,Cwmbran,United Kingdom
 12934,Yong'an,China
 12935,Pasacao,Philippines
-12936,Changyon,"Korea, North"
+12936,Changyon,North Korea
 12937,Dunwoody,United States
 12938,Ad Darwa,Morocco
 12939,Beberibe,Brazil
@@ -13338,7 +13338,7 @@ id,city,country
 13337,Ourem,Portugal
 13338,Santa Rosa del Sur,Colombia
 13339,Erkrath,Germany
-13340,Freeport City,"Bahamas, The"
+13340,Freeport City,The Bahamas
 13341,Iranduba,Brazil
 13342,Caiguantun,China
 13343,Guaramirim,Brazil
@@ -14852,7 +14852,7 @@ id,city,country
 14851,Natick,United States
 14852,French Valley,United States
 14853,Somma Vesuviana,Italy
-14854,Farafenni,"Gambia, The"
+14854,Farafenni,The Gambia
 14855,Miranda de Ebro,Spain
 14856,Portsmouth,United States
 14857,Canicatti,Italy
@@ -20265,7 +20265,7 @@ id,city,country
 20264,Silla,Spain
 20265,Ottawa,United States
 20266,Lerdo de Tejada,Mexico
-20267,Sil-li,"Korea, North"
+20267,Sil-li,North Korea
 20268,Itigi,Tanzania
 20269,Pescia,Italy
 20270,Barrhead,United Kingdom
@@ -23897,7 +23897,7 @@ id,city,country
 23896,Sidi Azzouz,Morocco
 23897,Wilsdruff,Germany
 23898,Corinth,United States
-23899,Ulchin,"Korea, South"
+23899,Ulchin,South Korea
 23900,Gernsbach,Germany
 23901,Dimiao,Philippines
 23902,Mahinog,Philippines
@@ -28738,7 +28738,7 @@ id,city,country
 28737,Cypress Gardens,United States
 28738,Itape,Brazil
 28739,Taufkirchen,Germany
-28740,Eumseong,"Korea, South"
+28740,Eumseong,South Korea
 28741,Lugovoy,Kazakhstan
 28742,Pebble Creek,United States
 28743,Martinopole,Brazil
@@ -36586,7 +36586,7 @@ id,city,country
 36585,Florian,Colombia
 36586,Enrique Villanueva,Philippines
 36587,Mesoy,Norway
-36588,"Islamorada, Village of Islands",United States
+36588,Islamorada,United States
 36589,Horezu,Romania
 36590,Astrakhan,Kazakhstan
 36591,Markt Sankt Florian,Austria
@@ -36631,7 +36631,7 @@ id,city,country
 36630,Forest Hills,United States
 36631,Stonewood,United Kingdom
 36632,Lubizhde,Kosovo
-36633,Marsh Harbour,"Bahamas, The"
+36633,Marsh Harbour,The Bahamas
 36634,El Rio,United States
 36635,Tarleton,United Kingdom
 36636,Nenzing,Austria
@@ -40478,13 +40478,13 @@ id,city,country
 40477,Baksanenok,Russia
 40478,Ain Bida,Morocco
 40479,Lumina,Romania
-40480,Ch'osan-up,"Korea, North"
+40480,Ch'osan-up,North Korea
 40481,Ban Pao,Thailand
 40482,Benoy-Yurt,Russia
 40483,Iqaluit,Canada
 40484,Kalabo,Zambia
 40485,Velykyi Dalnyk,Ukraine
-40486,Bansang,"Gambia, The"
+40486,Bansang,The Gambia
 40487,Baguey,Niger
 40488,Bayghanin,Kazakhstan
 40489,Gucheng,China
@@ -40810,7 +40810,7 @@ id,city,country
 40809,Mbe,Cameroon
 40810,Shongzhy,Kazakhstan
 40811,Ciudad Cortes,Costa Rica
-40812,P'ungsan,"Korea, North"
+40812,P'ungsan,North Korea
 40813,Vitim,Russia
 40814,Puke,Albania
 40815,Palana,Russia
@@ -40853,7 +40853,7 @@ id,city,country
 40852,Konza,Kenya
 40853,Altata,Mexico
 40854,Dawwah,Oman
-40855,Taedong,"Korea, North"
+40855,Taedong,North Korea
 40856,Abuna,Brazil
 40857,Corocoro,Bolivia
 40858,Beringovskiy,Russia

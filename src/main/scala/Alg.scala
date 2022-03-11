@@ -63,7 +63,6 @@ object Alg {
 
       while (fc.hasNext && !exists) { // Attempt to find the id in record, if found get name
         val line = fc.next()
-        println(line)
         val s = line.split(',')
         if (s(0) == n.toString) {
           exists = true
