@@ -181,17 +181,14 @@ object Trends {
   }
 
   //Decreases price for purchases made last week of the month
-  def lastWeekDecrease(time: LocalDateTime): (Boolean, Int) = {
+  def lastWeekDecrease(time: LocalDateTime): (Boolean, Double) = {
     //val date = time.
     val x = time.getDayOfMonth
     var bool = false
-    var num = 0
-    if (x >= 24 && x < 26) {
+    var num = 0.0
+    if (x >= 24) {
       bool = true
-    } else if (x >= 26 && x < 28) {
-      num = 1
-    } else if (x >= 28) {
-      num = 2
+      num = (nextInt(20)+1).toDouble/100.0
     }
     (bool, num)
   }

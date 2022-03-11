@@ -63,15 +63,15 @@ object Streaming {
       .option("subscribe", "pandoras_box")
       .load()
       .select(
-        split(col("value"), ",").getItem(0).as("order_id"),
-        split(col("value"), ",").getItem(1).as("customer_id"),
+        split(col("value"), ",").getItem(0).as("order_id").cast("int"),
+        split(col("value"), ",").getItem(1).as("customer_id").cast("int"),
         split(col("value"), ",").getItem(2).as("customer_name"),
-        split(col("value"), ",").getItem(3).as("product_id"),
+        split(col("value"), ",").getItem(3).as("product_id").cast("int"),
         split(col("value"), ",").getItem(4).as("product_name"),
         split(col("value"), ",").getItem(5).as("product_category"),
         split(col("value"), ",").getItem(6).as("payment_type"),
-        split(col("value"), ",").getItem(7).as("qty"),
-        split(col("value"), ",").getItem(8).as("price"),
+        split(col("value"), ",").getItem(7).as("qty").cast("int"),
+        split(col("value"), ",").getItem(8).as("price").cast("double"),
         split(col("value"), ",").getItem(9).as("datetime"),
         split(col("value"), ",").getItem(10).as("country"),
         split(col("value"), ",").getItem(11).as("city"),
@@ -94,7 +94,7 @@ object Streaming {
     while(true) {
       Thread.sleep(200)
 
-      spark.sql("Select count(order_id) from TestTable").show()
+      spark.sql("Select country, max(price) as MaxPrice").show()
     }
 
     spark.sql("Select count(order_id) from TestTable").show()
