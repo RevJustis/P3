@@ -109,7 +109,7 @@ object Trends {
     //end the uncomment here for testing futures
 
     println(
-      "Time to create record " + ID + "is: " + (System.nanoTime - t1) / 1e9 + " seconds."
+      "Time to create record " + id + "is: " + (System.nanoTime - t1) / 1e9 + " seconds."
     )
     record
   }
@@ -188,11 +188,9 @@ object Trends {
     var num = 0
     if (x >= 24 && x < 26) {
       bool = true
-    }
-    else if (x >= 26 && x < 28) {
+    } else if (x >= 26 && x < 28) {
       num = 1
-    }
-    else if (x >= 28) {
+    } else if (x >= 28) {
       num = 2
     }
     (bool, num)
@@ -219,7 +217,7 @@ object Trends {
     var long = false
     if (count > 7 && count < 20) {
       long = true
-    }else{long = false}
+    } else { long = false }
     long
   }
 
@@ -239,12 +237,10 @@ object Trends {
     if (rand == 0) {
       q = true
 
-
-     // val x = time.getMonth
+      // val x = time.getMonth
       //val y = time.getDayOfMonth
 
-
-     /* if (x == 11) {
+      /* if (x == 11) {
         if (y >= 26) {
           q = true
         }
@@ -261,13 +257,10 @@ object Trends {
         }
 
       }
-      */
+       */
 
     }
     q
 
   }
 }
-
-
-

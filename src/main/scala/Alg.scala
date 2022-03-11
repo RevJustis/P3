@@ -32,7 +32,10 @@ object Alg {
   // Checks if an int is already a customer id, returns an array
   // returnedArray(0) == customer id
   // returnedArray(1) == customer name
-  def cusRecord(n: Int, isEnemyName: Boolean): (String, String, String, String) = {
+  def cusRecord(
+      n: Int,
+      isEnemyName: Boolean
+  ): (String, String, String, String) = {
     if (isEnemyName) {
       val x: Map[String, String] = Map(
         "1001" -> "Yash Dhayal",
@@ -47,104 +50,37 @@ object Alg {
         "1010" -> "Yueqi Peng",
         "1011" -> "Grace Alberts"
       )
-      x getOrElse ((nextInt(1012) + 1001).toString, ("ERROR", "ERROR"))
+      val r = (nextInt(1012) + 1001).toString
+      (r, x(r), "dumbville", "USA")
     }
     try {
       var name = ""
       var exists = false
-      val (city, country) = cityCountryGen(spark)
+      var city = ""
+      var country = ""
       val f = new File("input/customers.txt")
       val fc = Source.fromFile(f).getLines()
-      val s = fc.size
-      val mid = s / 2
-      val left = fc.slice(0, mid)
-      val right = fc.slice(mid, s)
-
-      def leftFuture: Future[(Boolean, String)] = Future {
-        while (left.hasNext && !exists) { // Attempt to find the id in record, if found get name
-          val s = left.next.split(',')
-          if (s(0) == n.toString) {
-            (true, s(1))
-          }
-        }
-        (false, "")
-      }
-      def rightFuture: Future[(Boolean, String)] = Future {
-        while (right.hasNext && !exists) { // Attempt to find the id in record, if found get name
-          val s = right.next.split(',')
-          if (s(0) == n.toString) {
-            (true, s(1))
-          }
-        }
-        (false, "")
-      }
-
-      leftFuture onComplete {
-        case Success(tup) =>
-          if (!tup._1) {
-            val pw = new PrintWriter(new FileOutputStream(f, true))
-            name = cusNameGen
-            pw.append(s"$n,$name\n")
-            pw.close
-          } else {
-            name = tup._2
-          }
-        case Failure(t) => println("Could not process: " + t.getMessage)
-      }
-
-      rightFuture onComplete {
-        case Success(tup) =>
-          if (!tup._1) {
-            val pw = new PrintWriter(new FileOutputStream(f, true))
-            name = cusNameGen
-            pw.append(s"$n,$name\n")
-            pw.close
-          } else {
-            name = tup._2
-          }
-        case Failure(t) => println("Could not process: " + t.getMessage)
-      }
-      Await.result(leftFuture, Duration.Inf)
-      Await.result(rightFuture, Duration.Inf)
-      /*
-      val lr = Await.result(leftFuture, Duration.Inf)
-      val rr = Await.result(rightFuture, Duration.Inf)
-      println(lr)
-      println(rr)
-      if (!lr._1) {
-        val pw = new PrintWriter(new FileOutputStream(f, true))
-        name = cusNameGen
-        pw.append(s"$n,$name\n")
-        pw.close
-      } else {
-        name = lr._2
-      }
-      if (!lr._1) {
-        val pw = new PrintWriter(new FileOutputStream(f, true))
-        name = cusNameGen
-        pw.append(s"$n,$name\n")
-        pw.close
-      } else {
-        name = rr._2
-      }
 
       while (fc.hasNext && !exists) { // Attempt to find the id in record, if found get name
-        val s = sc.next.split(',')
-        id = s(0)
-        if (id == n.toString) {
+        val line = fc.next()
+        println(line)
+        val s = line.split(',')
+        if (s(0) == n.toString) {
           exists = true
           name = s(1)
+          city = s(2)
+          country = s(3)
         }
       }
       if (!exists) { // Not in the record already? Then put it in there!
+        val cc = cityCountryGen(spark)
         val pw = new PrintWriter(new FileOutputStream(f, true))
         name = cusNameGen
-
-        id = n.toString
-        pw.append(s"$n,$name,$city,$country\n")
+        city = cc._1
+        country = cc._2
+        pw.append(s"$n,$name,${cc._1},${cc._2}\n")
         pw.close
       }
-       */
       (n.toString, name, city, country)
     } catch {
       case e: InputMismatchException =>
@@ -184,62 +120,23 @@ object Alg {
       var exists = false
 
       val fc = Source.fromFile(f).getLines()
-      val s = fc.size
-      val mid = s / 2
-      val left = fc.slice(0, mid)
-      val right = fc.slice(mid, s)
-
-      def leftFuture: Future[(Boolean, String, String, Double, String)] =
-        Future {
-          while (left.hasNext && !exists) { // Attempt to find the id in record, if found get name
-            val s = left.next.split(',')
-            if (s(0) == n.toString) {
-              (true, s(1), s(2), s(3).toDouble, s(4))
-            }
-          }
-          (false, "", "", 0.0, "")
+      while (fc.hasNext && !exists) {
+        val s = fc.next().split(",")
+        if (s(0) == n.toString()) {
+          name = s(1)
+          pcat = s(2)
+          price = s(3).toDouble
+          url = s(4)
+          exists = true
         }
-      def rightFuture: Future[(Boolean, String, String, Double, String)] =
-        Future {
-          while (right.hasNext && !exists) { // Attempt to find the id in record, if found get name
-            val s = right.next.split(',')
-            if (s(0) == n.toString) {
-              (true, s(1), s(2), s(3).toDouble, s(4))
-            }
-          }
-          (false, "", "", 0.0, "")
-        }
-
-      leftFuture onComplete {
-        case Success(tup) =>
-          if (tup._1) {
-            name = tup._2
-            pcat = tup._3
-            price = tup._4
-            url = tup._5
-            exists = true
-          }
-        case Failure(t) => println("Could not process: " + t.getMessage)
       }
-
-      rightFuture onComplete {
-        case Success(tup) =>
-          if (tup._1) {
-            name = tup._2
-            pcat = tup._3
-            price = tup._4
-            url = tup._5
-            exists = true
-          }
-        case Failure(t) => println("Could not process: " + t.getMessage)
-      }
-      Await.result(leftFuture, Duration.Inf)
-      Await.result(rightFuture, Duration.Inf)
       if (!exists) { // Not in the record already? Then put it in there!
         val pw = new PrintWriter(new FileOutputStream(f, true))
         //name = proNameGen()
         val maxPrice = genPrice
-        val (l, discount) = lastWeekDecrease(time) //call to function for decreasing price last week of month
+        val (l, discount) = lastWeekDecrease(
+          time
+        ) //call to function for decreasing price last week of month
         val p = pillow(cusName) //call to function for pillow trend
         host match {
           case "amazon.com" =>
@@ -253,8 +150,7 @@ object Alg {
               pcat = a.getString(1)
               price = a.getDouble(2)
               url = a.getString(3)
-            }
-            else if(p == true){ //if name is longer than 7 chars, customer buys a pillow
+            } else if (p == true) { //if name is longer than 7 chars, customer buys a pillow
               val a = dfA
                 .where(col("ProductName").like("%Pillow%"))
                 .where(col("SellingPrice") <= maxPrice)
@@ -264,8 +160,7 @@ object Alg {
               pcat = a.getString(1)
               price = a.getDouble(2)
               url = a.getString(3)
-            }
-            else {
+            } else {
               val a = dfA
                 .where(col("SellingPrice") <= maxPrice)
                 .orderBy(desc("SellingPrice"))
@@ -287,8 +182,7 @@ object Alg {
               pcat = w.getString(1)
               price = w.getDouble(2)
               url = w.getString(3)
-            }
-            else if(p == true){ //if name is longer than 7 chars, customer buys a pillow
+            } else if (p == true) { //if name is longer than 7 chars, customer buys a pillow
               val w = dfW
                 .where(col("ProductName").like("%Pillow%"))
                 .where(col("SalePrice") <= maxPrice)
@@ -298,8 +192,7 @@ object Alg {
               pcat = w.getString(1)
               price = w.getDouble(2)
               url = w.getString(3)
-            }
-            else {
+            } else {
               val w = dfW
                 .where(col("SalePrice") < maxPrice)
                 .orderBy(desc("SalePrice"))
@@ -310,7 +203,7 @@ object Alg {
               url = w.getString(3)
             }
           case "ebay.com" =>
-            if (p == true){ //if name is longer than 7 chars, customer buys a pillow
+            if (p == true) { //if name is longer than 7 chars, customer buys a pillow
               val e = dfE
                 .where(col("Title").like("%Pillow%"))
                 .where(col("Price") <= maxPrice)
@@ -320,7 +213,7 @@ object Alg {
               pcat = "n/a"
               price = e.getDouble(1)
               url = e.getString(2)
-            }else{
+            } else {
               val e = dfE
                 .where(col("Price") <= maxPrice)
                 .orderBy(desc("Price"))
@@ -373,7 +266,6 @@ object Alg {
       "Movies & TV",
       "Toys & Games",
       "Toys & Games"
-
     )
     val randomCategory = x(random.nextInt(x.length))
     randomCategory
