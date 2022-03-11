@@ -22,80 +22,66 @@ object Trends {
 
     // Using below code to work on futures, uncomment and feel free to change or experiment as you wish
 
-    /*
+
     //create future definitions
+
 
     val host = hostNameGen
 
-    def priceFuture: Future[(Double,Double,Int)] = Future {priceGen()}
-    def payFuture: Future[(String,String)] = Future {payStatusGen()}
-    def locationFuture: Future[(String,String)] = Future {cityCountryGen(spark)}
+    val priceFuture: Future[(Double,Double,Int)] = Future {priceGen()}
+    //val priceFuture: Future[(Double)] = Future {priceGen()._2}
+    //val price1: Future[Double] = Future {priceGen()._1}
+    val payFuture: Future[(String,String)] = Future {payStatusGen()}
+    val locationFuture: Future[(String,String)] = Future {cityCountryGen(spark)}
 
-    /* below isn't working right now, trying to figure out an alternative way to get futures to execute immediately
-    val (price1,price2,price3): (Double, Double, Int) = Future {
-      val priceResult: (Double, Double, Int) = priceGen()
-      priceResult
-    }
 
-    val (pay1,pay2): (String,String) = Future {
-      val payResult: (String,String) = payStatusGen()
-      payResult
-    }
-
-    val (location1, location2): (String,String) = Future {
-      val locationResult: (String,String) = cityCountryGen(spark)
-      locationResult
-    }
-
-    val (product1,product2,product3,product4,product5): (String,String,String,String,String) = Future {
-      val productResult: (String,String,String,String,String) = proRecord(nextInt(1000), price2, host, spark)
-      productResult
-    }
-
-    val (customer1,customer2): (String,String) = Future {
-      val customerResult: (String,String) = cusRecord(nextInt(1000), isEnemyName(pay1))
-      customerResult
-    }
-
+    /*
+    price1.onComplete({
+      case Success(p1) => record += ("price" -> p1.toString)
+      case Failure(exception) => record += ("price" -> "Bad Data")
+    })
      */
 
-    val (price1,price2,price3) = Await.result(priceFuture, Duration.Inf)
-    def productFuture: Future[(String,String,String,String,String)] = Future {proRecord(nextInt(1000), price2, host, spark)}
+    payFuture.onComplete({
+      case Success(pay) => record += ("payment_type" -> payTypeGen, "payment_txn_id" -> payIdGen,"payment_txn_success" -> pay._1, "failure_reason" -> pay._2)
+        val customerFuture: Future[(String,String)] = Future {cusRecord(nextInt(1000), isEnemyName(pay._1))}
+        //Await.result(customerFuture,Duration.Inf)
+        customerFuture.onComplete({
+          case Success(customer) => record += ("customer_id" -> customer._1, "customer_name" -> customer._2)
+          case Failure(exception) => record += ("customer_id" -> "Bad Data", "customer_name" -> "Bad Data")
+        })
+      //Await.result(customerFuture,Duration.Inf)
+      case Failure(exception) => record += ("payment_type" -> "Bad Data", "payment_txn_id" -> "Bad Data","payment_txn_success" -> "Bad Data", "failure_reason" -> "Bad Data")
+    })
 
-    val (pay1,pay2) = Await.result(payFuture, Duration.Inf)
+    locationFuture.onComplete({
+      case Success(location) => record += ("city" -> location._1, "country" -> location._2)
+      case Failure(exception) => record += ("city" -> "Bad Data", "country" -> "Bad Data")
+    })
 
-    def customerFuture: Future[(String,String)] = Future {cusRecord(nextInt(1000), isEnemyName(pay1))}
 
-    val (product1,product2,product3,product4,product5) = Await.result(productFuture, Duration.Inf)
-    val (customer1,customer2) = Await.result(customerFuture, Duration.Inf)
+    priceFuture.onComplete({
+      case Success(price) => record += ("price" -> price._1.toString(),"unitPrice" -> price._2.toString, "qty" -> price._3.toString)
+      case Failure(x) => println("Could not process: " + x.getMessage)
+    })
 
     val (location1,location2) = Await.result(locationFuture, Duration.Inf)
+    val fitStatus = fitness(location1)
 
+    val pf: Future[(String,String,String,String,String)] = priceFuture.flatMap(a =>  Future {proRecord(nextInt(1000), a._2, host, fitStatus, time, spark)})
 
+    pf.onComplete({
+      case Success(product) => record += ("product_id" -> product._1, "product_name" -> product._2, "product_category" -> product._3, "original_price" -> product._4, "ecommerce_website_name" -> product._5)
+      case Failure(t) => println("Could not process: " + t.getMessage)
+    })
 
+    Await.result(pf,Duration.Inf)
+    
 
-    record += (
-      "price" -> price1.toString(),
-      "unitPrice" -> price2.toString(),
-      "qty" -> price3.toString(),
-      "payment_type" -> payTypeGen,
-      "payment_txn_id" -> payIdGen,
-      "payment_txn_success" -> pay1,
-      "failure_reason" -> pay2,
-      "customer_id" -> customer1,
-      "customer_name" -> customer2,
-      "product_id" -> product1,
-      "product_name" -> product2,
-      "product_category" -> product3,
-      "original_price" -> product4,
-      "ecommerce_website_name" -> product5,
-      "city" -> location1,
-      "country" -> location2
-    )
-
-     */
 
     ///////Below is working code without futures, comment out if you want to test the above stuff
+    /*
+
 
     // Price, unit price and quantity gen
     val price = priceGen // Total, Unit, qty
@@ -164,6 +150,10 @@ object Trends {
     // )
 
     //end the uncomment here for testing futures
+
+     */
+
+
 
     println(
       "The execution time of the function is: " + (System.nanoTime - t1) / 1e9 + " seconds."
