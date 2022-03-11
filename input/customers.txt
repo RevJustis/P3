@@ -1,578 +1,89 @@
-24,Alec Conn,Los Angeles,United States
-430,Marquise Krajcik,Tel Aviv,Israel
-319,Nathanael Marvin,Osaka,Japan
-312,Lily Will,Tel Aviv,Israel
-275,Korbin Romaguera,Copenhagen,Denmark
-826,Willa Sporer,Tel Aviv,Israel
-930,Geraldine Bayer,Tel Aviv,Israel
-1,Gwendolyn Kunze,Hejian,China
-698,Pablo Wuckert,Hpa-An,Myanmar
-549,Lourdes Adams,Loule,Portugal
-513,Jakob Crist,Paro,Bhutan
-468,Sally Renner,Huambo,Angola
-240,Winston Hickle,Wethersfield,United States
-672,Meagan Russel,Santa Maria das Barreiras,Brazil
-706,Kiel Russel,Brown Deer,United States
-595,Joey Schimmel,Plano,United States
-97,Reba Bogisich,Massapequa,United States
-830,Beth Mertz,New Mirpur,Pakistan
-933,Okey Huel,Frimley,United Kingdom
-504,Avery Wehner,North Grenville,Canada
-285,Jeramy Ruecker,Hillsboro,United States
-501,Mohamed Hills,Bad Neustadt,Germany
-78,Aracely Kirlin,Harrislee,Germany
-593,Harrison Hermann,Cavaion Veronese,Italy
-699,Lucio Rohan,Huai Mek,Thailand
-693,Hilario Barton,Brescello,Italy
-432,Domenick Stark,Krasnogorsk,Russia
-113,Lelia Koelpin,Rieti,Italy
-795,Katherine Willms,Lucapa,Angola
-188,Tom Lubowitz,Birnin Konni,Niger
-908,Henri DuBuque,Osthofen,Germany
-345,Danial Wintheiser,Birnbach,Germany
-35,Sadye Turner,La Junta,United States
-850,Damaris Gutmann,Chinguar,Angola
-16,Trisha Green,Alessano,Italy
-227,Lue Corkery,Altenstadt,Germany
-223,Philip Reichert,Guixi,China
-966,Deron Runolfsdottir,Ratlam,India
-581,Nicolette VonRueden,Torpoint,United Kingdom
-101,Kiana Hintz,Jafra,Morocco
-949,Felton Wuckert,Vanersborg,Sweden
-767,Enid Prohaska,Sai Buri,Thailand
-13,Lesley Kautzer,Riudoms,Spain
-876,Abdul Hegmann,Ospedaletto Euganeo,Italy
-732,Shayna Kling,Canteleu,France
-175,Malachi Gerlach,Volodymyr-Volynskyi,Ukraine
-382,Yazmin Haag,Jayaque,El Salvador
-576,Geoffrey Borer,Agourai,Morocco
-295,Earnest Hyatt,Pressbaum,Austria
-576,Jewel Stracke,Coutances,France
-975,Nyasia Gleichner,Tel Aviv,Israel
-726,Dayton Thiel,Tel Aviv,Israel
-881,Khalid Schowalter,Tel Aviv,Israel
-872,Omer Grimes,Los Angeles,United States
-388,Deshaun Gorczany,Newcastle,United Kingdom
-525,Tre Klein,Kunitachi,Japan
-22,Carter Fisher,Jitaicun,China
-496,Gussie Maggio,Buhi,Philippines
-258,Garrett Kohler,Heshancun,China
-325,Natalia Wisozk,Elista,Russia
-289,Julia Deckow,Capitao Poco,Brazil
-932,Alejandra Bauch,South Riding,United States
-461,Eulalia Lehner,Buttelborn,Germany
-921,Deshaun Hodkiewicz,Tubod,Philippines
-721,Oleta Grant,Muquem de Sao Francisco,Brazil
-768,Jerrell Rosenbaum,Lyudinovo,Russia
-452,Elwyn OConnell,Alacuas,Spain
-727,Elliot Witting,Maragogi,Brazil
-718,Leslie Herman,Fort Payne,United States
-580,Rhoda Fadel,Fujin,China
-840,Lauretta Schmeler,Tapiratiba,Brazil
-879,Ahmad Jast,Imi n'Oulaoun,Morocco
-76,Graham Abshire,Bischwiller,France
-220,Carmel Farrell,Pando,Uruguay
-897,Garth Baumbach,Teggiano,Italy
-796,Major Orn,Inhapim,Brazil
-747,Roslyn Conroy,Vila Boa,Brazil
-827,Andreane West,Eldoret,Kenya
-743,Emanuel Brown,Covington,United States
-770,Vivien Purdy,Violet,United States
-20,Brendon Cassin,Torrejon de Ardoz,Spain
-380,Merl Zemlak,Qufadah,Egypt
-428,Ruthie Stokes,Los Osos,United States
-487,Astrid Kemmer,High Ackworth,United Kingdom
-83,Levi Veum,Cecina,Italy
-509,Kaleb White,Plymouth,United States
-181,Marcellus Littel,Bottmingen,Switzerland
-355,Josh Rodriguez,Frenstat pod Radhostem,Czechia
-903,Augusta Bailey,Guangping,China
-612,Toni Moore,Itambaraca,Brazil
-499,Ora Brekke,Yakouren,Algeria
-450,Wilhelmine Zulauf,Cresaptown,United States
-525,Elissa Murazik,Jerico,Brazil
-20,Arden Nikolaus,Appleton,United Kingdom
-723,Bradly Greenfelder,Pirkkala,Finland
-924,Brent Hodkiewicz,Millis,United States
-580,Lola Monahan,La Wantzenau,France
-796,Nola Green,Dornhan,Germany
-254,Priscilla Lindgren,Xiba,China
-413,Earlene Padberg,Tel Aviv,Israel
-920,Oscar Torphy,Calicut,India
-236,Julian Frami,Magalang,Philippines
-757,Brandon Quitzon,Dinalupihan,Philippines
-610,Kayli Raynor,Vaureal,France
-503,Benjamin Cremin,Lucapa,Angola
-668,Dandre Walker,Promissao,Brazil
-863,Odell Mayer,Veinticinco de Mayo,Argentina
-360,Beryl Dickens,Porto San Giorgio,Italy
-800,Ryann Wisozk,Penn Hills,United States
-539,Sven Lind,Hikone,Japan
-303,Hector Emmerich,Gmunden,Austria
-481,Cassandre Gutmann,`Alavicheh,Iran
-194,Samara Grimes,Gaillon,France
-874,Thora Kub,Dillenburg,Germany
-787,Hope Farrell,Essex,United States
-337,Verdie Balistreri,Wiesmoor,Germany
-283,Destiny Kuphal,Porto dos Gauchos,Brazil
-159,Mariah Schultz,Feldkirchen,Germany
-483,Damaris Boyer,Anantapur,India
-557,Albert Bergnaum,Putnok,Hungary
-323,Gertrude Renner,Adoni,India
-343,Oda Davis,Sabzevar,Iran
-268,Danny Jacobi,Eldoret,Kenya
-54,Fabiola Weimann,Zwiesel,Germany
-680,Bria Hoeger,Lida,Belarus
-343,Mathias Maggio,Conceicao de Macabu,Brazil
-156,Brooke Tillman,Langsa,Indonesia
-605,Magali Hackett,Petrovsk-Zabaykal'skiy,Russia
-373,Nick Weissnat,General Zaragoza,Mexico
-904,Garret Daniel,Grafton,Australia
-601,Felipe Reichel,Zwonitz,Germany
-677,Eino Gleason,Kechoulah,Morocco
-951,Lavina Lehner,Taybad,Iran
-356,Myrtis OConner,Lake Alfred,United States
-616,Lauriane Cassin,Upholland,United Kingdom
-195,Arnaldo Lemke,Bujanovac,Serbia
-553,Amber Bernier,Piratininga,Brazil
-209,Cicero Hessel,Vergato,Italy
-586,Austyn Blick,Arara,Brazil
-957,Newton Leannon,Boscotrecase,Italy
-983,Magnolia Green,Silacayoapam,Mexico
-823,Kaden Stoltenberg,Corocoro,Bolivia
-759,Burnice Hahn,Kyren,Russia
-970,Justina Wiza,Ourique,Portugal
-902,Francisca Aufderhar,Cobleskill,United States
-639,Darion Reynolds,Bayghanin,Kazakhstan
-834,Anita Daniel,Tixtla de Guerrero,Mexico
-381,Eldred Kiehn,Bragadiru,Romania
-559,Darwin Pouros,Kuaidamao,China
-302,Gianni McLaughlin,Cholpon-Ata,Kyrgyzstan
-102,Blair Hermiston,Crowborough,United Kingdom
-484,Maxine Senger,Tomiya,Japan
-123,Walton Muller,Amalfi,Colombia
-87,Octavia Medhurst,Oswego,United States
-497,Beth Stokes,Sabadell,Spain
-385,Maud Schmeler,Longchuan,China
-741,Thea Champlin,Gryfino,Poland
-754,Viviane Reichel,Anse,France
-540,Yvette Hessel,Arsenyev,Russia
-792,Haley Keeling,Yinggen,China
-359,Darren Labadie,Rosso,Mauritania
-169,Ulices Denesik,Yakeshi,China
-917,Orlando Haag,Cana,Slovakia
-280,Donnie Nitzsche,Kuala Belait,Brunei
-103,Kristina OKon,Cornelius,United States
-620,Quentin Beer,Geneva,Switzerland
-106,Jedediah Rodriguez,Federal Way,United States
-10,Kenya Yost,Buyende,Uganda
-801,Lavina Baumbach,Kachkanar,Russia
-753,Griffin Breitenberg,Yatton,United Kingdom
-143,Lavada Witting,Cocalinho,Brazil
-53,Kari Schmitt,Glastonbury,United Kingdom
-839,Millie Boyle,Hajdusamson,Hungary
-397,Shanel Schamberger,Gryfino,Poland
-955,Collin Muller,Mount Holly,United States
-372,Mylene Stoltenberg,Martuni,Armenia
-526,Juliana Blick,Cleveland Heights,United States
-334,Drake Renner,Montmorillon,France
-371,Vena Heathcote,Akhalkalaki,Georgia
-79,Abbigail Bernhard,Tall Rif`at,Syria
-547,Pat Lowe,Grebenstein,Germany
-331,Marquis Rice,Durrington,United Kingdom
-702,Alberto Koch,Collecorvino,Italy
-402,Libby Lockman,Laterza,Italy
-609,Jose Douglas,Barquisimeto,Venezuela
-422,Larry Little,Tadaoka-higashi,Japan
-851,Montana Fay,Toyota,Japan
-124,Rogers Stracke,Ibb,Yemen
-735,Kevon Roberts,Matigou,China
-88,Sabina Bruen,Fair Haven,United States
-724,Titus Collins,Xindian,China
-256,Norene Lynch,Oulad Teima,Morocco
-424,Jayce Moen,Newnan,United States
-621,Jessy Lehner,Lake Fenton,United States
-884,Amelie Wisozk,Fontaine-les-Dijon,France
-368,Estefania Brekke,Harnosand,Sweden
-925,Toby Beer,Montereau-faut-Yonne,France
-164,Kali OKon,Osaka,Japan
-625,Tristin Hirthe,Commerce,United States
-467,Ocie Jenkins,Zittau,Germany
-477,Bethel Renner,Geneva,Switzerland
-396,Arielle Thiel,Chimichagua,Colombia
-416,Laisha Medhurst,Kurush,Russia
-41,Kellen Von,San Vicente,Philippines
-794,Rudolph Ankunding,Veliki Preslav,Bulgaria
-710,Bradley Mosciski,Lognes,France
-92,Gilda Schuster,Brianka,Ukraine
-956,Antoinette Kuhlman,Peje,Kosovo
-614,Sincere DuBuque,Kursenai,Lithuania
-779,Owen Gorczany,Muzambinho,Brazil
-0,Ethyl Gottlieb,Goose Creek,United States
-855,Jamie Purdy,Villanueva,Honduras
-498,Oma Corwin,Lom Kao,Thailand
-436,Russel Hessel,Osaka,Japan
-66,Nicola Cassin,Los Angeles,United States
-554,Shyanne Auer,Taliwine,Morocco
-313,Laila Zulauf,Ramona,United States
-84,Carlotta Ledner,Tamworth,Australia
-456,Eduardo Gutkowski,Marlin,United States
-674,Kaci Padberg,Azitan,China
-898,Tito Bogan,El Progreso,Guatemala
-974,Ole Abbott,Novi Ligure,Italy
-584,Terrell Mills,San Carlos,Venezuela
-889,Vincenzo Schoen,Eaunes,France
-182,Malachi Oberbrunner,Thorold,Canada
-686,Sally Grimes,Lauderdale-by-the-Sea,United States
-111,Idell Bashirian,Heyunkeng,China
-37,Ronaldo Renner,Moulins-les-Metz,France
-766,Juana Cole,Pulheim,Germany
-89,Deborah Ruecker,Micco,United States
-711,Adolphus Kessler,Patzcuaro,Mexico
-59,Marc Krajcik,Ubai,Brazil
-137,Torrance Dickens,Alatyr,Russia
-176,Francisco Olson,Dulag,Philippines
-914,Vilma Heaney,Castro Alves,Brazil
-523,Heath Schmidt,Haute-Goulaine,France
-241,Lucile Stamm,Rasskazovo,Russia
-459,Lenna Kling,Itapira,Brazil
-25,Caleigh Zemlak,Sekondi,Ghana
-636,Levi Corwin,Nailsea,United Kingdom
-641,Thelma Satterfield,Bloomfield,United States
-502,Dimitri Bogisich,Seuzach,Switzerland
-118,Fredy Friesen,New York,United States
-306,Benny Barrows,Kalaheo,United States
-944,Andy Lockman,Garden City,United States
-613,Haskell Boyle,Zurich,Switzerland
-121,Anna Paucek,Furth im Wald,Germany
-813,Benton Goldner,Susa,Italy
-7,Caterina Marvin,Orebro,Sweden
-259,Enid Heller,Veyrier,Switzerland
-435,Omer Brown,Padre Carvalho,Brazil
-365,Nelson Batz,Grumo Nevano,Italy
-519,Nelson Veum,Balimbing,Philippines
-901,Noemy Collins,Labrea,Brazil
-626,Vada Waters,New York,United States
-548,Jefferey Stanton,Sarandi Grande,Uruguay
-722,Deangelo Heller,Khatassy,Russia
-384,Ulices Boehm,Guaramiranga,Brazil
-812,Mekhi Maggio,Bhavnagar,India
-682,Katarina Stehr,Alto Garcas,Brazil
-573,Keegan Bahringer,Khrystynivka,Ukraine
-245,Ewald Spinka,Hybla Valley,United States
-857,Bethel Carroll,Orodara,Burkina Faso
-61,Berenice Flatley,Hong Kong,Hong Kong
-565,Isabella Schuppe,Tel Aviv,Israel
-728,Trace Connelly,Los Angeles,United States
-578,Anais Balistreri,Los Angeles,United States
-494,Janick Toy,Tel Aviv,Israel
-802,Joanne Crist,Ig,Slovenia
-518,Zachary Schultz,Eeklo,Belgium
-342,Thurman Nolan,Rongcheng,China
-575,Sven Powlowski,Tarnobrzeg,Poland
-26,Judd Graham,Bahia Blanca,Argentina
-579,Kathleen Watsica,Gobabis,Namibia
-809,Sigmund Kerluke,Kuvshinovo,Russia
-423,Emiliano Hand,Yanggezhuang,China
-47,Bobbie Hettinger,Santa Luzia do Norte,Brazil
-214,Adeline Stehr,Caraglio,Italy
-149,Milo Witting,Montijo,Portugal
-969,Ida Kovacek,Prabuty,Poland
-472,Emmalee Gibson,Harjavalta,Finland
-520,Alexandre Lindgren,Laufach,Germany
-18,Jeromy Ledner,Tarifa,Spain
-705,Walton Schuster,Barrington,United States
-687,Johanna McCullough,Ginebra,Colombia
-370,Paul Romaguera,Oleggio,Italy
-271,Paolo Kertzmann,Urmston,United Kingdom
-127,Kathryne Roberts,Ust'-Maya,Russia
-590,Anika Orn,Chongshan,China
-615,Lavonne Powlowski,Petal,United States
-835,Demario Rodriguez,Wetzlar,Germany
-148,Raphaelle Stehr,Ficarazzi,Italy
-406,Hillard Wuckert,Fishguard,United Kingdom
-543,Tracey Rutherford,Rockwall,United States
-814,Theo Simonis,Grossmehring,Germany
-250,Jacinthe Stanton,Obukhiv,Ukraine
-163,Elissa Watsica,San Matias,Bolivia
-225,Manley Bins,Pana,United States
-597,Keely Miller,Monett,United States
-643,Theresa Keebler,Tubaran,Philippines
-837,Lauriane Johns,Lozuvatka,Ukraine
-848,Laurence Erdman,Copenhagen,Denmark
-712,Kaycee Beier,Geneva,Switzerland
-115,Randi Williamson,Copenhagen,Denmark
-996,Moshe Sporer,New York,United States
-239,Norval Rowe,Paris,France
-449,Doyle Goldner,Copenhagen,Denmark
-255,Ellie Parisian,Copenhagen,Denmark
-350,Tina Fadel,New York,United States
-458,Jayce Kuhn,Paris,France
-782,Santino Hansen,Sunderland,United Kingdom
-945,Dallin Casper,Orumiyeh,Iran
-161,Boyd Hauck,St. Paul,United States
-186,Ismael Feest,Ogden,United States
-528,Simeon Hoeger,Kimberley,South Africa
-64,Kenneth Kuhic,Walvisbaai,Namibia
-62,Marcelle Krajcik,Brotton,United Kingdom
-362,Toney Shanahan,Calahorra,Spain
-82,Fannie Dibbert,Pombos,Brazil
-44,Issac Reichert,Mumbai,India
-185,Stephen Kertzmann,Batticaloa,Sri Lanka
-12,Dexter Waters,Xinqing,China
-299,Wilford Schmeler,Burnaby,Canada
-657,Shirley Kub,Altdorf,Germany
-712,Brandy Hirthe,Sape,Brazil
-536,Salma Schmidt,Hazard,United States
-644,Gabe Muller,Mudanjiang,China
-819,Rashawn Macejkovic,Slatyne,Ukraine
-940,Golden Predovic,Castelnuovo di Garfagnana,Italy
-729,Forest OReilly,Sighetu Marmatiei,Romania
-191,Dawson Veum,Aratiba,Brazil
-571,Russ Hudson,Roost-Warendin,France
-931,Evelyn Parker,Perkiomen,United States
-305,Bonnie Wiegand,Sheffield,United States
-946,Oda Sawayn,Avezzano,Italy
-366,Mozelle Emmerich,Non Sung,Thailand
-762,Marcia OConner,Harsova,Romania
-187,Irwin Dooley,Zusmarshausen,Germany
-444,Nathen Gleason,Rodeio,Brazil
-353,Mallie Kovacek,Fuente el Saz,Spain
-438,Jocelyn Langosh,Baragua,Cuba
-375,Larissa Gleichner,Villa Martin Colchak,Bolivia
-976,Lura Witting,Newport,United States
-818,Brianne Hauck,Kolonia,Federated States Of Micronesia
-378,Eden Schmitt,Nador,Morocco
-68,Adrien Hintz,Antrim,United States
-85,Cecelia Pollich,Silleda,Spain
-447,Brain Dooley,Abercarn,United Kingdom
-130,Reva Marvin,Nyiradony,Hungary
-594,Meredith Smith,Xangda,China
-221,Weston Denesik,Cestas,France
-448,Margret Kulas,Atmore,United States
-38,Lily Hodkiewicz,Lima,Peru
-199,Olin Kulas,Gilgit,Pakistan
-211,Cesar Bosco,Yass,Australia
-57,Horacio Murray,Nassau,The Bahamas
-17,Santiago Will,Oskemen,Kazakhstan
-822,Efrain Bernhard,Roselle,United States
-213,Darius Feeney,Osaka,Japan
-212,Carley Gorczany,View Royal,Canada
-652,Elaina Schmitt,Wilmot,Canada
-664,Kattie Emmerich,Wolfsburg,Germany
-587,Myrtle Crooks,Glendive,United States
-755,Trycia DAmore,Oer-Erkenschwick,Germany
-713,Ralph Dooley,Wonsan,North Korea
-210,Rick Abshire,Santo Tomas,Peru
-962,Agnes Lesch,Los Angeles,United States
-811,Maeve Buckridge,Macaubal,Brazil
-93,Corine Predovic,Petrolina de Goias,Brazil
-660,Mauricio Hintz,Lawrence,United States
-887,Jorge Renner,Louangphabang,Laos
-627,Emerald Bradtke,Pyrgos,Greece
-570,Jaquan Hilpert,Linda,United States
-193,Keira Schmitt,Sechenovo,Russia
-816,Garnet Kreiger,Manresa,Spain
-715,Lynn Pacocha,Josefina,Philippines
-180,Freddy McDermott,Luleburgaz,Turkey
-661,Aurelio Prohaska,Gonzalez,Mexico
-462,Pink Goldner,Lower Oxford,United States
-419,Sheldon Gaylord,Adliswil,Switzerland
-888,Leo Sanford,Monsenhor Hipolito,Brazil
-556,Carter Lebsack,Breinigsville,United States
-445,Diamond Ritchie,Degollado,Mexico
-707,Gladyce Mitchell,Yalutorovsk,Russia
-972,Marcel Gislason,Godollo,Hungary
-829,Matilda Hirthe,Medolla,Italy
-916,Sheldon Rosenbaum,Osnabruck,Germany
-603,Marianna OConnell,Warwick,United States
-69,Lillie Maggio,Zurich,Switzerland
-979,Immanuel Bechtelar,Champagne-au-Mont-d'Or,France
-116,Danial Kilback,Umarkot,Pakistan
-330,Else Wolf,La Cenia,Spain
-253,Karolann Robel,Singapore,Singapore
-67,Delbert Buckridge,Pervomaysk,Russia
-869,Dayana Boyer,Sattenapalle,India
-391,Odie Jenkins,Tomah,United States
-491,Ibrahim Walter,Montigny-les-Cormeilles,France
-737,Kailey McKenzie,El Ghiate,Morocco
-442,Cordia Cruickshank,Matuguinao,Philippines
-703,Madyson Walsh,Renfrew,United Kingdom
-264,Trey Treutel,La Paz,Mexico
-470,Fritz Langworth,Copenhagen,Denmark
-206,Dion Kautzer,West Cocalico,United States
-196,Kaela Schuppe,Bni Rzine,Morocco
-294,Brooke Bergstrom,Leones,Argentina
-344,Delphine Simonis,Progreso,Mexico
-939,Herminio Price,Lebanon,United States
-270,Tre Upton,East Renton Highlands,United States
-201,Mozell Gleason,Jatauba,Brazil
-418,Holden Stoltenberg,Hong Kong,Hong Kong
-546,Isai Simonis,Tel Aviv,Israel
-906,Ludie Schaefer,Fairburn,United States
-591,Jovan Orn,Karumai,Japan
-348,Khalid Vandervort,Nyanza,Rwanda
-274,Taryn Hermiston,Charnay-les-Macon,France
-219,Dennis McDermott,Kavaratti,India
-506,Dandre Ankunding,Copenhagen,Denmark
-667,Eleanora Gibson,Lariano,Italy
-426,Jessy Leannon,Kalsdorf bei Graz,Austria
-139,Jerald Cole,New York,United States
-205,Kara Hane,Cambira,Brazil
-817,Amber Collins,Poggio a Caiano,Italy
-71,Roderick Bergstrom,New York,United States
-208,Kira Steuber,Yaroslavl,Russia
-986,Duane Tremblay,Grosse Pointe Farms,United States
-276,Laurel Kozey,Angleton,United States
-653,Isabel Schulist,Belmar,United States
-522,Jamaal Greenfelder,New York,United States
-771,Francesca Leffler,Miahuatlan,Mexico
-583,Walton Kessler,Szentlorinc,Hungary
-598,Thurman Klocko,Freeport,United States
-915,Andrew Terry,Sidi Harazem,Morocco
-90,Linnie Hyatt,Perobal,Brazil
-960,Jarret Oberbrunner,Estarreja,Portugal
-512,Ansel Considine,Pleiku,Vietnam
-936,Juana Beer,Serranopolis,Brazil
-134,Caden Okuneva,Khammam,India
-777,Ernest Schamberger,Union,United States
-434,Tyrell Mills,Prymorsk,Ukraine
-572,Amara Cronin,Copenhagen,Denmark
-942,Lina Hartmann,Canton,United States
-485,Lauretta OReilly,Castelldefels,Spain
-473,Tomas Langosh,San Jose de Pare,Colombia
-719,Erin OKeefe,Iramaia,Brazil
-112,Katheryn Ryan,Srinagar,India
-981,Emmanuel Zulauf,East Windsor,United States
-341,Wilmer Upton,Santa Lucia,Colombia
-982,Whitney Bernier,Saint-Jean-de-Maurienne,France
-676,Hollie Will,Haywards Heath,United Kingdom
-763,Albert Pagac,Cherykaw,Belarus
-650,Sherman Koss,Sarina,Australia
-533,Johnson Zboncak,Arab,United States
-290,Danny Altenwerth,Varvarin,Serbia
-963,Carol Hoppe,Barra Longa,Brazil
-98,Candida Hirthe,Old Saybrook,United States
-202,Justyn Parker,Neuenkirchen,Germany
-374,Tracey Mills,Copenhagen,Denmark
-628,Leonardo Gulgowski,Teixeira,Brazil
-773,Aurelio Price,Xaignabouli,Laos
-482,Vaughn Thompson,Laoang,Philippines
-989,Derrick Blick,Catanzaro,Italy
-282,Leila Berge,Timber Pines,United States
-204,Aditya Weissnat,Jilin,China
-395,Fred DuBuque,Albany,United States
-746,Coralie McGlynn,Nadvirna,Ukraine
-40,Antoinette Corwin,Diffa,Niger
-870,Theo Wehner,Bikou,China
-329,Lonnie McLaughlin,Longmont,United States
-589,Jamel Bergstrom,Emstek,Germany
-775,Orval Quigley,Tel Aviv,Israel
-911,Rhiannon Hyatt,Bollate,Italy
-637,Gudrun Kerluke,Nosivka,Ukraine
-987,Meaghan Von,Walnut Creek,United States
-990,Dave Johnston,Buadiposo-Buntong,Philippines
-170,Warren Collins,Leping,China
-36,Michel Turner,Burketown,Australia
-836,Alice Herman,Los Angeles,United States
-895,Mariela Mueller,Crestline,United States
-339,Aaron Macejkovic,Shali,Russia
-369,Lisandro Smith,Hemet,United States
-326,Austen Goyette,Leisure World,United States
-892,Troy Hamill,Condom,France
-415,Jermey Zboncak,Monte Cristo,Argentina
-550,Christa Purdy,Chiatura,Georgia
-409,Maryam Schowalter,Zuyevka,Russia
-248,Shea Volkman,New York,United States
-602,Thelma Rosenbaum,Stavern,Norway
-192,Loyce Wisozk,Zuitou,China
-725,Octavia DuBuque,Limeil-Brevannes,France
-189,Katlyn Simonis,Garden Grove,United States
-742,Raymundo Gaylord,Nara,Mali
-885,Fannie Romaguera,Hafendorf,Austria
-478,Eloisa Jaskolski,Douar Oulad Amer,Morocco
-32,Dale Kerluke,Samaca,Colombia
-120,Gwen Nikolaus,Tel Aviv,Israel
-301,Taurean Friesen,Moorhead,United States
-950,Abner Kuhic,Terrasson-Lavilledieu,France
-893,Humberto Howell,Indija,Serbia
-971,Jordy Wintheiser,Calenzano,Italy
-100,Erling Schultz,Sukhothai,Thailand
-919,Derrick Rice,Gemona del Friuli,Italy
-692,Dakota Flatley,Little Canada,United States
-110,Reggie Kautzer,Paris,France
-322,Hermina Predovic,Vares,Bosnia And Herzegovina
-308,Jocelyn Stehr,Hong Kong,Hong Kong
-177,Brenna Grady,Carcarana,Argentina
-961,Maia Walsh,Aratuipe,Brazil
-739,Opal Reynolds,New York,United States
-114,Andrew Gulgowski,Westbury,United States
-927,Tabitha Anderson,Timberlane,United States
-551,Yesenia Jast,Keren,Eritrea
-776,Chelsea Stoltenberg,Medford,United States
-804,Dorthy DuBuque,Pendleton,United States
-633,Krystal Wintheiser,Baile Herculane,Romania
-131,Wilfrid Davis,Naka,Japan
-427,Justine DuBuque,Puerto Acosta,Bolivia
-403,Janelle Schumm,Parsberg,Germany
-999,Talon Leffler,Riviere-du-Loup,Canada
-934,Litzy Jones,Saratamata,Vanuatu
-899,Nash Nicolas,Artvin,Turkey
-8,Cordelia Kris,Le Barcares,France
-316,Blanca West,Narat,China
-849,Maximilian Lynch,Dom Pedrito,Brazil
-928,Katherine Murazik,Farmington,United States
-825,Salvatore Reilly,Kauhajoki,Finland
-679,River Corwin,Tezontepec,Mexico
-560,Cecile Dibbert,Burghfield,United Kingdom
-689,Devonte Swift,Jerez,Guatemala
-567,Narciso Hackett,Lardero,Spain
-685,Raheem Sawayn,San Pedro Tapanatepec,Mexico
-400,Eliezer Jaskolski,Hermsdorf,Germany
-890,Modesto Hermiston,Ceiba,Puerto Rico
-298,Karelle Raynor,Arlon,Belgium
-511,Green Von,Sernaglia della Battaglia,Italy
-354,Elta Baumbach,Mata de Sao Joao,Brazil
-203,Clarissa McGlynn,Marion,United States
-854,Lee Upton,Hucclecote,United Kingdom
-242,Allie Haag,Ozolnieki,Latvia
-832,Twila Kihn,Pritzwalk,Germany
-783,Carolanne Gaylord,New Whiteland,United States
-390,Dallin Kuhic,Islamorada,United States
-377,Gabrielle Hoppe,Jussari,Brazil
-197,Ada Jenkins,Tel Aviv,Israel
-797,Freddie Auer,Paris,France
-126,Rebeca Mann,Quesada,Costa Rica
-538,Omari Ryan,Zurich,Switzerland
-791,Paxton Daugherty,Conwy,United Kingdom
-508,Gregoria Fahey,Warka,Poland
-524,Nolan Heaney,Pakefield,United Kingdom
-993,Frank Conn,Juterbog,Germany
-320,Emerson Pagac,Rosh Ha`Ayin,Israel
-786,Cheyenne Rath,Bojnik,Serbia
-534,Howell Shields,Nabeul,Tunisia
-941,Armand Hoppe,Spring,United States
-269,Cary Sauer,Jaguey Grande,Cuba
-86,Chaz Cruickshank,Midar,Morocco
-58,Crystal Schinner,Wolf Trap,United States
-665,Vella Feeney,East Pikeland,United States
-585,Eliseo Gorczany,Pierrelaye,France
-33,Jackie Langosh,Al Bahah,Saudi Arabia
-171,Estelle Cole,Villasis,Philippines
-263,Enola Mosciski,Nanded,India
-640,Pete McKenzie,Berrien Springs,United States
-695,Bernita Stokes,Miren,Slovenia
-891,Deshawn Hartmann,Outes,Spain
-363,Jacklyn Homenick,Ceyu,China
-980,Grady Carter,Shiyan,China
-145,Deja Hahn,Highbridge,United Kingdom
-803,Rudy Bergnaum,Galanta,Slovakia
-246,Erna Anderson,At Ta'if,Saudi Arabia
-514,Sienna Weber,Mariglianella,Italy
-600,Eula Ullrich,Aschaffenburg,Germany
-463,Carmine Sawayn,Dobele,Latvia
-697,Jaren Bartoletti,Havre,United States
-281,Darrell Heaney,Luis Gomes,Brazil
-841,Ross Hermiston,Tsirang,Bhutan
-132,Earnest DuBuque,Ocean Shores,Australia
-165,Rey Carroll,Sibay,Russia
+402,Conrad Monahan,Copenhagen,Denmark
+171,Carey Blanda,Kamensk-Ural'skiy,Russia
+400,Hilario Gusikowski,Mahesana,India
+102,Rosalind Windler,Fleming Island,United States
+488,Johnathan Crooks,Passa Tempo,Brazil
+761,Winston Huels,Kerimaki,Finland
+423,Dayne Ruecker,Maracaja,Brazil
+937,Ron Hauck,Slutsk,Belarus
+979,Einar Ratke,Suzhou,China
+403,Amelie Waters,Cramahe,Canada
+850,Violet Marvin,Lutz,United States
+561,Lempi Wolf,Hong Kong,Hong Kong
+472,Charley Kautzer,Redhill,United Kingdom
+517,Davonte Bergstrom,Yulinshi,China
+953,Melissa Murazik,Makilala,Philippines
+930,Kamren Harber,Yreka,United States
+419,Donny Larson,Lubao,Congo (Kinshasa)
+22,Yesenia Stroman,Irondequoit,United States
+814,Bertrand Rolfson,Divrigi,Turkey
+317,Rosalee Gerlach,Kyshtym,Russia
+264,Lee Cremin,Brejinho,Brazil
+484,Raymundo Ondricka,Pisek,Czechia
+484,Isac Pollich,Culpeper,United States
+925,Cyrus Parisian,Los Angeles,United States
+239,Tyreek Bradtke,Muta,Slovenia
+124,Jayce Lang,Redentora,Brazil
+424,Ashlee Morar,Imgarr,Malta
+788,Sydnee Ankunding,Tizgane,Morocco
+676,Elmo Rogahn,Zurich,Switzerland
+503,Jocelyn Beer,Chone,Ecuador
+899,Dannie Yost,Osaka,Japan
+58,Joannie Stiedemann,Marignier,France
+93,Bennett Brekke,Eagar,United States
+899,Mike Huels,Turmero,Venezuela
+148,Dayana Lueilwitz,Serrinha,Brazil
+653,Hertha OReilly,Colle di Val d'Elsa,Italy
+135,Lawson Smith,Singapore,Singapore
+977,Destany Hills,Norwich,United States
+347,Spencer Strosin,Santa Maria Jalapa del Marques,Mexico
+660,Dylan Tillman,Geneva,Switzerland
+17,Dedric Walsh,Wiltz,Luxembourg
+322,Teagan Runolfsdottir,Gowerton,United Kingdom
+632,Trycia Muller,Kamigori,Japan
+509,Jarret Keebler,Warsaw,United States
+553,Lisette Cummings,Mut,Turkey
+68,Annalise Quigley,Allington,United Kingdom
+834,Keyshawn Leuschke,Kocevje,Slovenia
+224,Greyson Gutkowski,Tangerhutte,Germany
+481,Rhett Dibbert,Maria Enzersdorf,Austria
+309,Abigale Stark,`Ajlun,Jordan
+461,Judd Abshire,West Windsor,United States
+556,Daniella Terry,Utuado,Puerto Rico
+853,Declan Streich,Middletown,United States
+666,Destany Conn,Cliftonville,United Kingdom
+932,Margaretta Bode,Eatontown,United States
+903,Sydney Leuschke,Stockelsdorf,Germany
+1,Barney Davis,Tel Aviv,Israel
+241,August Glover,Villefranche-de-Rouergue,France
+934,Minnie Hessel,Copenhagen,Denmark
+2,Heaven Morar,Osaka,Japan
+964,Heidi Quigley,Old Town,United States
+792,Hunter Hirthe,Beecher,United States
+78,Genesis Medhurst,Le Haillan,France
+815,Lucy Pfeffer,Plabennec,France
+162,Rasheed Kunde,Carlton,United Kingdom
+79,Malvina Wintheiser,Dunboyne,Ireland
+559,Rahul Torphy,Paris,France
+43,Kailey Haley,Veinticinco de Mayo,Argentina
+597,Kelton Schumm,Gazojak,Turkmenistan
+840,Bennett Murray,Prospect Park,United States
+932,Beulah Padberg,Gitega,Burundi
+100,Thea Paucek,Zacualpan de Amilpas,Mexico
+646,Edmund Smitham,Pereiro,Brazil
+103,Rosalyn Macejkovic,Monywa,Myanmar
+570,Zoey Beahan,Cassano al Ionio,Italy
+585,Eric Jenkins,Caspe,Spain
+453,Richard Fahey,Osorio,Brazil
+745,Irwin Jerde,Lumberton,United States
+120,Osborne Paucek,Avon,United States
+98,Genesis Kertzmann,Singapore,Singapore
+235,Aida Lynch,Restinga Seca,Brazil
+29,Idell McDermott,Gelendzhik,Russia
+226,Elda Bartell,Geneva,Switzerland
+922,Eino Hickle,Aguadilla,Puerto Rico
+823,Whitney Breitenberg,Goffstown,United States
+703,Arnold Fisher,Roura,French Guiana
+556,Gennaro Ryan,Kurumkan,Russia
+36,Emilio Paucek,El Banco,Colombia
+300,Adonis Mueller,Cacu,Brazil
