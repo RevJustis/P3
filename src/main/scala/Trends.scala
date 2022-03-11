@@ -2,7 +2,6 @@ import Alg._
 import Producer._
 import DateTimeGenerator._
 import Producer._
-import Producer.ID
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.streaming.StreamingContext._
 import org.apache.spark.streaming._
@@ -15,7 +14,7 @@ import scala.util.Random._
 object Trends {
   def getMap(id: String): mutable.Map[String, String] = {
     val t1 = System.nanoTime
-    var record = mutable.Map[String, String]()
+    var record = mutable.Map.empty[String, String]
     // Order ID and timestamp generation
     val time = createDateTime
     record += ("order_id" -> id, "datetime" -> time)
@@ -188,7 +187,7 @@ object Trends {
     var num = 0.0
     if (x >= 24) {
       bool = true
-      num = (nextInt(20)+1).toDouble/100.0
+      num = (nextInt(20) + 1).toDouble / 100.0
     }
     (bool, num)
   }
