@@ -107,7 +107,6 @@ object Alg {
       fitStatus: String,
       time: LocalDateTime,
       cusName: String
-      //spark: SparkSession
   ): (String, String, String, String, String) = {
     try {
       val f = new File("input/products.txt")
@@ -149,7 +148,7 @@ object Alg {
               name = a.getString(0)
               pcat = a.getString(1)
               price = a.getDouble(2)
-              url = a.getString(3)
+              url = host
             } else if (p == true) { //if name is longer than 7 chars, customer buys a pillow
               val a = dfA
                 .where(col("ProductName").like("%Pillow%"))
@@ -159,7 +158,7 @@ object Alg {
               name = a.getString(0)
               pcat = a.getString(1)
               price = a.getDouble(2)
-              url = a.getString(3)
+              url = host
             } else {
               val a = dfA
                 .where(col("SellingPrice") <= maxPrice)
@@ -168,7 +167,7 @@ object Alg {
               name = a.getString(0)
               pcat = a.getString(1)
               price = a.getDouble(2)
-              url = a.getString(3)
+              url = host
             }
           //highest is about 1000
           case "walmart.com" =>
@@ -181,7 +180,7 @@ object Alg {
               name = w.getString(0)
               pcat = w.getString(1)
               price = w.getDouble(2)
-              url = w.getString(3)
+              url = host
             } else if (p == true) { //if name is longer than 7 chars, customer buys a pillow
               val w = dfW
                 .where(col("ProductName").like("%Pillow%"))
@@ -191,7 +190,7 @@ object Alg {
               name = w.getString(0)
               pcat = w.getString(1)
               price = w.getDouble(2)
-              url = w.getString(3)
+              url = host
             } else {
               val w = dfW
                 .where(col("SalePrice") < maxPrice)
@@ -200,7 +199,7 @@ object Alg {
               name = w.getString(0)
               pcat = w.getString(1)
               price = w.getDouble(2)
-              url = w.getString(3)
+              url = host
             }
           case "ebay.com" =>
             if (p == true) { //if name is longer than 7 chars, customer buys a pillow
@@ -212,7 +211,7 @@ object Alg {
               name = e.getString(0)
               pcat = "n/a"
               price = e.getDouble(1)
-              url = e.getString(2)
+              url = host
             } else {
               val e = dfE
                 .where(col("Price") <= maxPrice)
@@ -221,7 +220,7 @@ object Alg {
               name = e.getString(0)
               price = e.getDouble(1)
               pcat = "n/a"
-              url = e.getString(2)
+              url = host
               //highest is about 1000
             }
 
