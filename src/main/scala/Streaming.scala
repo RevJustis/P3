@@ -1,3 +1,5 @@
+import Query._
+
 import java.util
 import java.util.Properties
 import org.apache.kafka.clients.consumer.KafkaConsumer
@@ -9,18 +11,17 @@ import org.apache.spark.sql.types.{StringType, StructField, StructType}
 import scala.collection.JavaConverters._
 
 object Streaming {
+  val spark = SparkSession
+    .builder()
+    .appName("test")
+    .config("spark.master", "local")
+    .config("spark.sql.streaming.noDataProgressEventInterval", 999999999)
+    .getOrCreate()
+  spark.sparkContext.setLogLevel("ERROR")
 
   def main(args: Array[String]): Unit = {
     //System.setProperty("hadoop.home.dir", "c:/hadoop")
     //System.setProperty("hadoop.home.dir", "c:/winutils")
-
-    val spark = SparkSession
-      .builder()
-      .appName("test")
-      .config("spark.master", "local")
-      .config("spark.sql.streaming.noDataProgressEventInterval", 999999999)
-      .getOrCreate()
-    spark.sparkContext.setLogLevel("ERROR")
 
     //json
     //    val mySchema = StructType(Array(
