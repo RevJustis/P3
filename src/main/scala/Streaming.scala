@@ -22,7 +22,7 @@ object Streaming {
 
   def main(args: Array[String]): Unit = {
     //System.setProperty("hadoop.home.dir", "c:/hadoop")
-    //System.setProperty("hadoop.home.dir", "c:/winutils")
+    System.setProperty("hadoop.home.dir", "c:/winutils")
 
     //json
     //    val mySchema = StructType(Array(
@@ -65,7 +65,7 @@ object Streaming {
       //.option("poll", 200)
       .load()
       .select(
-        split(col("value"), ",").getItem(0).as("order_id").cast("int"),
+        split(col("value"), ",").getItem(0).as("order_id"),
         split(col("value"), ",").getItem(1).as("customer_id").cast("int"),
         split(col("value"), ",").getItem(2).as("customer_name"),
         split(col("value"), ",").getItem(3).as("product_id").cast("int"),
@@ -97,8 +97,8 @@ object Streaming {
 
     while(df0.isActive) {
       Thread.sleep(1000)
-      spark.sql("Select count(product_id) from Test").show()
-
+      //spark.sql("Select count(product_id) from Test").show()
+      //jacobQ()
 
     }
 
@@ -109,13 +109,13 @@ object Streaming {
 
     /*df.createOrReplaceTempView("test")
     spark.table("test").cache()
-    spark.sql("select * from table")*/
+    spark.sql("select * from table")
 
-    /*val df0 = df.writeStream
+    val df0 = df.writeStream
       .outputMode("append")
       .format("console")
-      .start()*/
-    /*val df1 = df
+      .start()
+    val df1 = df
       .groupBy(col("country"))
       .count()
       .writeStream
@@ -130,8 +130,9 @@ object Streaming {
       .writeStream
       .outputMode("complete")
       .format("console")
-      .start()*/
-    /*df1.awaitTermination()
+      .start()
+    df0.awaitTermination()
+    df1.awaitTermination()
     df2.awaitTermination()*/
   }
 }
