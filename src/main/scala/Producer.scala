@@ -57,6 +57,7 @@ object Producer {
     val props = new Properties()
     //3.86.155.113:9092
     props.put("bootstrap.servers", "3.86.155.113:9092")
+    //props.put("bootstrap.servers", "[::1]:9092")
     props.put(
       "key.serializer",
       "org.apache.kafka.common.serialization.StringSerializer"
@@ -71,7 +72,7 @@ object Producer {
     try {
       while (true) {
         //send csv
-        sendRecord(producer, "pandoras_box")
+        sendRecord(producer, "Friday")
         //send json
         //  sendRecord(producer,"json")
 

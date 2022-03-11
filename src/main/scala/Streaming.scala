@@ -6,6 +6,7 @@ import org.apache.kafka.clients.consumer.KafkaConsumer
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.execution.streaming.FileStreamSource.Timestamp
 import org.apache.spark.sql.functions.{col, from_json, split}
+import org.apache.spark.sql.streaming.Trigger
 import org.apache.spark.sql.types.{StringType, StructField, StructType}
 
 import scala.collection.JavaConverters._
@@ -60,7 +61,8 @@ object Streaming {
       //.option("kafka.bootstrap.servers", "[::1]:9092")
       .option("kafka.bootstrap.servers", "3.86.155.113:9092")
       .option("startingOffsets", "earliest")
-      .option("subscribe", "pandoras_box")
+      .option("subscribe", "Friday")
+      //.option("poll", 200)
       .load()
       .select(
         split(col("value"), ",").getItem(0).as("order_id").cast("int"),
@@ -86,33 +88,32 @@ object Streaming {
     df.printSchema()
 
     val df0 = df.writeStream
-      .queryName("TestTable")
       .outputMode("update")
       .format("memory")
+      .queryName("Test")
+      //.trigger(Trigger.ProcessingTime(1000))
       .start()
 
-    while(true) {
-      Thread.sleep(200)
 
-      spark.sql("Select country, max(price) as MaxPrice").show()
+    while(df0.isActive) {
+      Thread.sleep(1000)
+      spark.sql("Select count(product_id) from Test").show()
     }
 
-    spark.sql("Select count(order_id) from TestTable").show()
 
-
-
+      df0.awaitTermination()
 
 
 
     /*df.createOrReplaceTempView("test")
     spark.table("test").cache()
-    spark.sql("select * from table")
+    spark.sql("select * from table")*/
 
-    val df0 = df.writeStream
+    /*val df0 = df.writeStream
       .outputMode("append")
       .format("console")
-      .start()
-    val df1 = df
+      .start()*/
+    /*val df1 = df
       .groupBy(col("country"))
       .count()
       .writeStream
@@ -127,9 +128,8 @@ object Streaming {
       .writeStream
       .outputMode("complete")
       .format("console")
-      .start()
-    df0.awaitTermination()
-    df1.awaitTermination()
+      .start()*/
+    /*df1.awaitTermination()
     df2.awaitTermination()*/
   }
 }
