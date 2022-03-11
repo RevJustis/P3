@@ -98,6 +98,8 @@ object Streaming {
     while(df0.isActive) {
       Thread.sleep(1000)
       spark.sql("Select count(product_id) from Test").show()
+
+
     }
 
 
