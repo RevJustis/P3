@@ -215,7 +215,7 @@ object Trends {
   }
 
   def pillow(name: String): Boolean = {
-    if (name.split(" ")(0).toCharArray.length > 8) true else false
+    if (name.split(" ")(0).toCharArray.length > 9) true else false
   }
 
   def nameFailPay(name: String): String = {

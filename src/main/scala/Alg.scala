@@ -107,8 +107,10 @@ object Alg {
       time: LocalDateTime,
       cusName: String
   ): (String, String, String, String, String) = {
-    val p = pillow(cusName) //call to function for pillow trend
-    if (p == true) ("0", "pillow", "pillow", "50.50", "cushn.com")
+    // Pillow trend implementation
+    if (pillow(cusName)) {
+      return ("0", "pillow", "pillow", "50.50", "cushn.com")
+    }
     // try {
     val f = new File("input/products.txt")
     //f.createNewFile
@@ -182,27 +184,15 @@ object Alg {
             url = host
           }
         case "ebay.com" =>
-          if (p == true) { //if name is longer than 7 chars, customer buys a pillow
-            val e = dfE
-              .where(col("Title").like("%Pillow%"))
-              .where(col("Price") <= maxPrice)
-              .orderBy(desc("Price"))
-              .first
-            name = e.getString(0)
-            pcat = "n/a"
-            price = e.getDouble(1)
-            url = host
-          } else {
-            val e = dfE
-              .where(col("Price") <= maxPrice)
-              .orderBy(desc("Price"))
-              .first
-            name = e.getString(0)
-            price = e.getDouble(1)
-            pcat = "n/a"
-            url = host
-            //highest is about 1000
-          }
+          val e = dfE
+            .where(col("Price") <= maxPrice)
+            .orderBy(desc("Price"))
+            .first
+          name = e.getString(0)
+          price = e.getDouble(1)
+          pcat = "n/a"
+          url = host
+        //highest is about 1000
       }
       //If it is the last week of the month, decrease the price
       if (l) {
