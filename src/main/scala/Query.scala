@@ -14,7 +14,7 @@ object Query {
       .show
   }
   def orderCountByCategory(): Unit = {
-    println("order of category popularity")
+    println("order of category popularity (raw)")
     // (clothing > books > movies > music > games > consumer electronics > food and drinks
     //    > cosmetics/body care > accessories > toys > health products > furniture/home products
     //    > sports > household appliances)
@@ -25,9 +25,10 @@ object Query {
       )
       .show(50, false)
 
+    println("order of category popularity (simplified specific)")
     spark
       .sql(
-        "select 'Toys', count(*) as Count from Test " +
+        "select 'Toys' as Category, count(*) as Count from Test " +
           "where product_category like '%Toys%' " +
           "union " +
           "select 'Hobbies', count(*) as Count from Test " +
@@ -60,6 +61,7 @@ object Query {
           "where product_category like '%Electronic%' " +
           "or product_category like '%Computer%' " +
           "or product_category like '%Computing%' " +
+          "union " +
           "select 'Skincare', count(*) as Count from Test " +
           "where product_category like '%Skin%' " +
           "and product_category like '%care%' " +
