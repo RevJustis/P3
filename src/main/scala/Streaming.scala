@@ -57,8 +57,8 @@ object Streaming {
 
     val df = spark.readStream
       .format("kafka")
-      .option("kafka.bootstrap.servers", "[::1]:9092")
-      // .option("kafka.bootstrap.servers", "3.86.155.113:9092")
+      // .option("kafka.bootstrap.servers", "[::1]:9092")
+      .option("kafka.bootstrap.servers", "3.86.155.113:9092")
       .option("startingOffsets", "earliest")
       // .option("subscribe", "NewFriday")
       .option("subscribe", "NewFriday2")
@@ -85,8 +85,7 @@ object Streaming {
         split(col("value"), ",").getItem(15).as("failure_reason")
       )
 
-    //Both need the following
-    //Sample querying
+    // CSV or JSON need the following
     df.printSchema()
 
     val df0 = df.writeStream
@@ -98,13 +97,15 @@ object Streaming {
 
     while (df0.isActive) {
       Thread.sleep(1000)
-      spark.sql("Select count(product_id) from Test").show()
-      //jacobQ()
-      abby()
-      pillowQ()
+      // spark.sql("Select count(product_id) from Test").show()
+      //jacobQ() // A collection of queries written by Jacob
+      // priceByCountryQ() // Written by Abby
+      // pillowQ()
+      orderCountByCategory()
     }
     df0.awaitTermination()
 
+    //Sample querying
     /*df.createOrReplaceTempView("test")
     spark.table("test").cache()
     spark.sql("select * from table")

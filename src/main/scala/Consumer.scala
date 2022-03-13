@@ -3,23 +3,26 @@ import org.apache.kafka.clients.consumer.KafkaConsumer
 
 import java.util.Collections
 import scala.collection.JavaConverters._
+import java.util.Properties
 
 object Consumer extends App {
-
-  import java.util.Properties
-
-
+  println("Deprecated, please use Streaming.scala!")
+  System.exit(0)
   val topics = List[String]("Topic1")
 
   val props = new Properties()
   //for apple users / windows 11 users, change [::1] below to localhost to run
   props.put("bootstrap.servers", "[::1]:9092")
 
-
-  props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
-  props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
+  props.put(
+    "key.deserializer",
+    "org.apache.kafka.common.serialization.StringDeserializer"
+  )
+  props.put(
+    "value.deserializer",
+    "org.apache.kafka.common.serialization.StringDeserializer"
+  )
   props.put("group.id", "something")
-
 
   /*val consumer = new KafkaConsumer(props)
   try {
@@ -57,8 +60,6 @@ object Consumer extends App {
       consumer.subscribe(topics.asJava)
       println(test)
       count += 1
-
-
     }
   }
 }

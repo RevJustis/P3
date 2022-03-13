@@ -215,8 +215,6 @@ object Trends {
   }
 
   def pillow(name: String): Boolean = {
-    // val result = name.split(" ")(0)
-    // val count = result.toCharArray.length
     if (name.split(" ")(0).toCharArray.length > 8) true else false
   }
 
