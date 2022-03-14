@@ -103,17 +103,25 @@ object Streaming {
       .outputMode("update")
       .format("memory")
       .queryName("Test")
+      .option("maxRowsInMemory", 3000)
+      .option("maxBytesInMemory", 25000)
+      .option("maxTotalRows", 3000)
       //.trigger(Trigger.ProcessingTime(1000))
       .start()
 
     while (df0.isActive) {
       Thread.sleep(1000)
-      // spark.sql("Select count(product_id) from Test").show()
+
+      spark.sql("Select count(product_id) from Test").show()
+      Query.orderCountByCategory()
+      Query.pillowQ()
+      Query.categoriesByCountry()
       //jacobQ() // A collection of queries written by Jacob
       // priceByCountryQ() // Written by Abby
       // pillowQ()
       orderCountByCategory()
     }
+
     df0.awaitTermination()
 
     //Sample querying
