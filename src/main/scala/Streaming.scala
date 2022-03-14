@@ -5,7 +5,7 @@ import java.util.Properties
 import org.apache.kafka.clients.consumer.KafkaConsumer
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.execution.streaming.FileStreamSource.Timestamp
-import org.apache.spark.sql.functions.{col, from_json, split}
+import org.apache.spark.sql.functions.{col, from_json, hour, minute, split, to_timestamp, date_trunc, dayofmonth, second, when}
 import org.apache.spark.sql.streaming.Trigger
 import org.apache.spark.sql.types.{StringType, StructField, StructType}
 
@@ -61,7 +61,7 @@ object Streaming {
       .option("kafka.bootstrap.servers", "3.86.155.113:9092")
       .option("startingOffsets", "earliest")
       // .option("subscribe", "NewFriday")
-      .option("subscribe", "NewFriday2")
+      .option("subscribe", "Monday")
       // .option("subscribe", "pandoras_box")
       // .option("subscribe", "Friday")
       //.option("poll", 200)
@@ -85,10 +85,21 @@ object Streaming {
         split(col("value"), ",").getItem(15).as("failure_reason")
       )
 
+
+    val df1=df.select(col("datetime"))
+      .withColumn("convert", to_timestamp(col("datetime")))
+      .withColumn("hour",hour(col("convert")))
+      .withColumn("minutes", minute(col("convert")))
+      .withColumn("seconds",second(col("convert")))
+      .withColumn("hour",date_trunc("hour",col("convert")))
+      .withColumn("minute",date_trunc("minute",col("convert")))
+
+
     // CSV or JSON need the following
     df.printSchema()
+    df1.printSchema()
 
-    val df0 = df.writeStream
+    val df0 = df1.writeStream
       .outputMode("update")
       .format("memory")
       .queryName("Test")
