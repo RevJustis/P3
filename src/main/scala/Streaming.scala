@@ -61,7 +61,8 @@ object Streaming {
       .option("kafka.bootstrap.servers", "3.86.155.113:9092")
       .option("startingOffsets", "earliest")
       // .option("subscribe", "NewFriday")
-      .option("subscribe", "NewFriday2")
+      .option("subscribe", "Monday")
+      .option("maxTotalRows", 3000)
       // .option("subscribe", "pandoras_box")
       // .option("subscribe", "Friday")
       //.option("poll", 200)
@@ -88,21 +89,31 @@ object Streaming {
     // CSV or JSON need the following
     df.printSchema()
 
+
+
     val df0 = df.writeStream
       .outputMode("update")
       .format("memory")
       .queryName("Test")
+      .option("maxRowsInMemory", 3000)
+      .option("maxBytesInMemory", 25000)
+      .option("maxTotalRows", 3000)
       //.trigger(Trigger.ProcessingTime(1000))
       .start()
 
     while (df0.isActive) {
       Thread.sleep(1000)
-      // spark.sql("Select count(product_id) from Test").show()
+
+      spark.sql("Select count(product_id) from Test").show()
+      Query.orderCountByCategory()
+      Query.pillowQ()
+      Query.categoriesByCountry()
       //jacobQ() // A collection of queries written by Jacob
       // priceByCountryQ() // Written by Abby
       // pillowQ()
       orderCountByCategory()
     }
+
     df0.awaitTermination()
 
     //Sample querying
