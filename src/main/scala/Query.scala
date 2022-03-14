@@ -1,4 +1,6 @@
 import Streaming.spark
+import org.apache.spark.sql.functions.{col, date_trunc, dayofmonth, hour, minute, second, to_timestamp, when}
+
 object Query {
   def selectAllQ: Unit = {
     println("select *")
@@ -257,4 +259,22 @@ object Query {
              |""".stripMargin).show()
      */
   }
+  //below codes only work when df is already read
+  //Leo-when price drops (e.g.last week of month), quantity bought increases for clothing and food category
+ /* val df4=df.select(col("price"),col("product_category"),col("qty").cast("int"),col("datetime"))
+    .filter(col("product_category").contains("Clothing")||col("product_category").contains("Food"))
+    .withColumn("date",to_timestamp(col("datetime")))
+    .withColumn("isLastWeek", when(dayofmonth(col("date"))>23,"isLastWeek").otherwise("NotLastWeek") )
+    .groupBy("isLastWeek").avg("qty")
+    .writeStream.outputMode("complete").format("console").start()
+
+  //Leo-Just how to split datetime(example)
+  val df3=df.select(col("datetime"))
+    .withColumn("convert", to_timestamp(col("datetime")))
+    .withColumn("hour",hour(col("convert")))
+    .withColumn("minutes", minute(col("convert")))
+    .withColumn("seconds",second(col("convert")))
+    .withColumn("hour",date_trunc("hour",col("convert")))
+    .withColumn("minute",date_trunc("minute",col("convert")))
+    .writeStream.outputMode("append").format("console").start() */
 }
