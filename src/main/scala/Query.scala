@@ -107,98 +107,102 @@ object Query {
 
   def categoriesByCountry(): Unit = {
     println("order of category popularity (grouped by country)")
+    spark.sql(
+      "create temp view cc as " +
+        "select product_category, country from test where product_category != 'n/a' and product_category != NULL"
+    )
     spark
       .sql(
-        "select country, 'Toys' as Category, count(*) as Count from Test " +
+        "select country, 'Toys' as Category, count(*) as Count from cc " +
           "where product_category like '%Toys%' " +
           "group by country " +
           "union " +
-          "select country, 'Hobbies', count(*) as Count from Test " +
+          "select country, 'Hobbies', count(*) as Count from cc " +
           "where product_category like '%Hobbies%' " +
           "group by country " +
           "union " +
-          "select country, 'Statues', count(*) as Count from Test " +
+          "select country, 'Statues', count(*) as Count from cc " +
           "where product_category like '%Statues%' " +
           "group by country " +
           "union " +
-          "select country, 'Sports', count(*) as Count from Test " +
+          "select country, 'Sports', count(*) as Count from cc " +
           "where product_category like '%Sports & Outdoor Play%' " +
           "group by country " +
           "union " +
-          "select country, 'Furniture', count(*) as Count from Test " +
+          "select country, 'Furniture', count(*) as Count from cc " +
           "where product_category like '%Furniture%' " +
           "group by country " +
           "union " +
-          "select country, 'Food and Snacks', count(*) as Count from Test " +
+          "select country, 'Food and Snacks', count(*) as Count from cc " +
           "where product_category like '%Food%' " +
           "or product_category like '%Snack%' " +
           "group by country " +
           "union " +
-          "select country, 'Exercise and Health', count(*) as Count from Test " +
+          "select country, 'Exercise and Health', count(*) as Count from cc " +
           "where product_category like '%Exercise%' " +
           "or product_category like '%Health%' " +
           "group by country " +
           "union " +
-          "select country, 'Jewelry', count(*) as Count from Test " +
+          "select country, 'Jewelry', count(*) as Count from cc " +
           "where product_category like '%Jewelry%' " +
           "group by country " +
           "union " +
-          "select country, 'Decor', count(*) as Count from Test " +
+          "select country, 'Decor', count(*) as Count from cc " +
           "where product_category like '%Decor%' " +
           "group by country " +
           "union " +
-          "select country, 'Electronics and Computing', count(*) as Count from Test " +
+          "select country, 'Electronics and Computing', count(*) as Count from cc " +
           "where product_category like '%Electronic%' " +
           "or product_category like '%Computer%' " +
           "or product_category like '%Computing%' " +
           "group by country " +
           "union " +
-          "select country, 'Skincare', count(*) as Count from Test " +
+          "select country, 'Skincare', count(*) as Count from cc " +
           "where product_category like '%Skin%' " +
           "and product_category like '%care%' " +
           "or product_category like '%Cosmetic%' " +
           "group by country " +
           "union " +
-          "select country, 'Baby', count(*) as Count from Test " +
+          "select country, 'Baby', count(*) as Count from cc " +
           "where product_category like '%Baby%' " +
           "group by country " +
           "union " +
-          "select country, 'Shoes', count(*) as Count from Test " +
+          "select country, 'Shoes', count(*) as Count from cc " +
           "where product_category like '%Shoe%' " +
           "group by country " +
           "union " +
-          "select country, 'Clothing', count(*) as Count from Test " +
+          "select country, 'Clothing', count(*) as Count from cc " +
           "where product_category like '%Clothes%' " +
           "or product_category like '%Clothing%' " +
           "group by country " +
           "union " +
-          "select country, 'Books', count(*) as Count from Test " +
+          "select country, 'Books', count(*) as Count from cc " +
           "where product_category like '%Book%' " +
           "group by country " +
           "union " +
-          "select country, 'Movies', count(*) as Count from Test " +
+          "select country, 'Movies', count(*) as Count from cc " +
           "where product_category like '%Movie%' " +
           "group by country " +
           "union " +
-          "select country, 'Music', count(*) as Count from Test " +
+          "select country, 'Music', count(*) as Count from cc " +
           "where product_category like '%Music%' " +
           "group by country " +
           "union " +
-          "select country, 'Music', count(*) as Count from Test " +
+          "select country, 'Music', count(*) as Count from cc " +
           "where product_category like '%Music%' " +
           "group by country " +
           "union " +
-          "select country, 'Accessories', count(*) as Count from Test " +
+          "select country, 'Accessories', count(*) as Count from cc " +
           "where product_category like '%Accessories%' " +
           "group by country " +
           "union " +
-          "select country, 'Appliances', count(*) as Count from Test " +
+          "select country, 'Appliances', count(*) as Count from cc " +
           "where product_category like '%Appliance%' " +
           "group by country " +
           "order by Country asc, Count desc"
       )
       .show(100, false)
-
+    // spark.sql("ALTER TABLE test DROP INDEX cc")
   }
 
   def priceByCountryQ(): Unit = {
