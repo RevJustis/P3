@@ -61,10 +61,14 @@ object Producer {
 
   var result = mutable.Map.empty[String, String]
   val producer = new KafkaProducer[String, String](props)
+
   val topic = "Tuesday13"
 
+
+
+
   def main(args: Array[String]): Unit = {
-    // Utilities.overwriteParquet()
+    Utilities.overwriteParquet() // this overwrites the parquets!!!
     dfA.persist(StorageLevel.MEMORY_ONLY_SER_2)
     dfW.persist(StorageLevel.MEMORY_ONLY_SER_2)
     dfE.persist(StorageLevel.MEMORY_ONLY_SER_2)

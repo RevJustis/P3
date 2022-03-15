@@ -5,19 +5,7 @@ import java.util.Properties
 import org.apache.kafka.clients.consumer.KafkaConsumer
 import org.apache.spark.sql.{ForeachWriter, Row, SparkSession}
 import org.apache.spark.sql.execution.streaming.FileStreamSource.Timestamp
-import org.apache.spark.sql.functions.{
-  col,
-  desc,
-  from_json,
-  hour,
-  minute,
-  split,
-  to_timestamp,
-  date_trunc,
-  dayofmonth,
-  second,
-  when
-}
+import org.apache.spark.sql.functions.{col, date_trunc, dayofmonth, from_json, hour, minute, second, split, to_timestamp, when}
 import org.apache.spark.sql.streaming.Trigger
 import org.apache.spark.sql.types.{StringType, StructField, StructType}
 
@@ -104,7 +92,8 @@ object Streaming {
         split(col("value"), ",").getItem(15).as("failure_reason")
       )
 
-    val WriteToSQLQuery  = df.writeStream.foreach(new ForeachWriter[Row] {
+
+    val WriteToSQLQuery = df.writeStream.foreach(new ForeachWriter[Row] {
       var connection: java.sql.Connection = _
       var statement: java.sql.Statement = _
 
@@ -182,10 +171,12 @@ object Streaming {
     //.option("checkpointLocation", "checkpoint")
 
 
-    while(true) {
+    while (true) {
 
       WriteToSQLQuery.start()
     }
+  }
+}
 
 
 
@@ -204,6 +195,9 @@ object Streaming {
 
 
     /*val df1 = df
+
+    val df1 = df
+
       .withColumn("convert", to_timestamp(col("datetime")))
       .withColumn("hours", hour(col("convert")))
       .withColumn("minutes", minute(col("convert")))
@@ -243,7 +237,7 @@ object Streaming {
       )
     }
 
-    df0.awaitTermination()*/
+    df0.awaitTermination()
 
     //Sample querying
     /*df.createOrReplaceTempView("test")

@@ -114,7 +114,6 @@ object Query {
           "order by Count desc"
       )
       .show(100, false)
-
   }
 
   def categoriesByCountry(): Unit = {
@@ -224,6 +223,20 @@ object Query {
         "Select country, max(price / qty) as MaxPrice FROM Test GROUP BY COUNTRY ORDER BY MaxPrice DESC"
       )
       .show()
+  }
+
+  def spenderCitiesQ(): Unit = {
+    //Proves that the big spender cities are the most popular.
+    spark.sql("Select count(city) as popularity, city from Test group by city order by popularity DESC").show(15)
+  }
+
+  def fitnessQ(): Unit = {
+    spark.sql("Select count(*) as allFitCities from Test" +
+      " where city in ('Los Angeles', 'Copenhagen', 'Amsterdam', 'Berlin', 'Stockholm', " +
+      "'San Francisco', 'Boston', 'Dublin', 'Montreal', 'Miami')").show()
+    spark.sql("Select count(*) as allFitCount from Test" +
+      " where city in ('Los Angeles', 'Copenhagen', 'Amsterdam', 'Berlin', 'Stockholm', " +
+      "'San Francisco', 'Boston', 'Dublin', 'Montreal', 'Miami') and product_category like '%Fitness%'").show()
   }
 
   def jacobQ(): Unit = {

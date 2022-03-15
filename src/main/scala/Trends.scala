@@ -41,7 +41,7 @@ object Trends {
     }
 
     // Customer info gen
-    val customer = cusRecord(nextInt(1000), isEnemyName(pay._1))
+    val customer = cusRecord(nextInt(1000), isEnemyName(record("payment_txn_success")))
     record += (
       "customer_id" -> customer._1,
       "customer_name" -> customer._2,
@@ -156,12 +156,10 @@ object Trends {
   }
 
   //Customers from these cities buy fitness items 50% of the time
-  def fitness(city: String): String = {
-    var b = ""
+  def fitness(city: String): Boolean = {
+    var b = false
     var num = 0
-    val rand = nextInt(1)
-    if (rand == 0) {
-      val x = IndexedSeq(
+    val x = IndexedSeq(
         "Los Angeles",
         "Amsterdam",
         "Berlin",
@@ -181,13 +179,14 @@ object Trends {
         }
       }
       if (num == 1) {
-        b = "true"
-      } else {
-        b = "false"
+        val rand = nextInt(1)
+        if(rand == 0){
+          b = true
+        }
+        else{b = false}
       }
+      //println(s"b is $b")
       b
-    } else "false"
-
   }
 
   //Decreases price for purchases made last week of the month
@@ -238,29 +237,6 @@ object Trends {
     var q = false
     if (rand == 0) {
       q = true
-
-      // val x = time.getMonth
-      //val y = time.getDayOfMonth
-
-      /* if (x == 11) {
-        if (y >= 26) {
-          q = true
-        }
-      }
-      if (x == 12) {
-        if (y < 25 && y >= 1) {
-          q = true
-        }
-      }
-
-      if (x == 1) {
-        if (y <= 3 && y >= 1) {
-          q = true
-        }
-
-      }
-       */
-
     }
     q
 
