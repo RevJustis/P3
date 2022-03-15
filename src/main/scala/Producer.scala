@@ -61,7 +61,7 @@ object Producer {
 
   var result = mutable.Map.empty[String, String]
   val producer = new KafkaProducer[String, String](props)
-  val topic = "Monday"
+  val topic = "Tuesday12"
 
   def main(args: Array[String]): Unit = {
     // Utilities.overwriteParquet()

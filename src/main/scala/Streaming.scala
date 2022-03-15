@@ -3,23 +3,13 @@ import Query._
 import java.util
 import java.util.Properties
 import org.apache.kafka.clients.consumer.KafkaConsumer
-import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.{ForeachWriter, Row, SparkSession}
 import org.apache.spark.sql.execution.streaming.FileStreamSource.Timestamp
-import org.apache.spark.sql.functions.{
-  col,
-  from_json,
-  hour,
-  minute,
-  split,
-  to_timestamp,
-  date_trunc,
-  dayofmonth,
-  second,
-  when
-}
+import org.apache.spark.sql.functions.{col, date_trunc, dayofmonth, from_json, hour, minute, second, split, to_timestamp, when}
 import org.apache.spark.sql.streaming.Trigger
 import org.apache.spark.sql.types.{StringType, StructField, StructType}
 
+import java.sql.DriverManager
 import scala.collection.JavaConverters._
 
 object Streaming {
@@ -98,7 +88,111 @@ object Streaming {
         split(col("value"), ",").getItem(15).as("failure_reason")
       )
 
-    val df1 = df
+    val WriteToSQLQuery  = df.writeStream.foreach(new ForeachWriter[Row] {
+      var connection: java.sql.Connection = _
+      var statement: java.sql.Statement = _
+
+      val jdbcUsername = "admin"
+      val jdbcPassword = "Password"
+      val jdbcHostname = "p3.cwoofs136vmw.us-west-1.rds.amazonaws.com" //typically, this is in the form or servername.database.windows.net
+      val jdbcPort = 3306
+      val jdbcDatabase = "p3schema"
+      val driver = "com.mysql.cj.jdbc.Driver"
+      val jdbc_url = "jdbc:mysql://p3.cwoofs136vmw.us-west-1.rds.amazonaws.com/p3schema"
+      //val jdbc_url = s"jdbc:sqlserver://${jdbcHostname}:${jdbcPort};database=${jdbcDatabase};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;"
+
+      def open(partitionId: Long, version: Long): Boolean = {
+        Class.forName(driver)
+        connection = DriverManager.getConnection(jdbc_url, jdbcUsername, jdbcPassword)
+        statement = connection.createStatement
+        true
+      }
+
+      def process(value: Row): Unit = {
+        val order_id = value(0)
+        val customer_id = value(1)
+        val customer_name = value(2)
+        val product_id = value(3)
+        val product_name = value(4)
+        val product_category = value(5)
+        val payment_type = value(6)
+        val qty = value(7)
+        val price = value(8)
+        val datetime = value(9)
+        val countrys = value(10)
+        val city = value(11)
+        val ecommerce_website_name = value(12)
+        val payment_txn_id = value(13)
+        val payment_txn_success = value(14)
+        val failure_reason = value(15)
+
+        try {
+
+          statement.execute(s"insert into DataLakeNew3 (order_id, customer_id, customer_name, product_id, product_name," +
+            s" product_category, payment_type, qty, price, datetime, country, city, ecommerce_website_name, payment_txn_id" +
+            s", payment_txn_success, failure_reason) values ('$order_id','$customer_id','$customer_name','$product_id','$product_name','$product_category'," +
+            s"'$payment_type','$qty','$price','$datetime','$countrys','$city','$ecommerce_website_name','$payment_txn_id','$payment_txn_success'," +
+            s"'$failure_reason')")
+
+          //connection.close
+        } catch {
+          case e: Exception =>
+            e.printStackTrace()
+
+          case f: Error =>
+            f.printStackTrace()
+        }
+
+        /* statement.execute(s"insert into DataLakeNew2 (order_id, customer_id, customer_name, product_id, product_name," +
+           s" product_category, payment_type, qty, price, datetime, country, city, ecommerce_website_name, payment_txn_id" +
+           s", payment_txn_success, failure_reason) values ('$order_id','$customer_id','$customer_name','$product_id','$product_name','$product_category'," +
+           s"'$payment_type','$qty','$price','$datetime','$countrys','$city','$ecommerce_website_name','$payment_txn_id','$payment_txn_success'," +
+           s"'$failure_reason')")*/
+
+
+        /*val valueStr = "'" + order_id + "'," + "'" + customer_id + "'," + "'" + customer_name + "'," + "'" + product_id +
+          "'," + "'" + product_name + "'," + "'" + product_category + "'," + "'" + payment_type + "'" +
+          "'," + "'" + qty + "'," + "'" + price + "'," + "'" + datetime + "'" +
+          "'," + "'" + country + "'," + "'" + city + "'," + "'" + ecommerce_website_name + "'" +
+          "'," + "'" + payment_txn_id + "'," + "'" + payment_txn_success + "'," + "'" + failure_reason + "'"
+        statement.execute("INSERT INTO " + "DataLake" + " (order_id, customer_id, customer_name, product_id, product_name, product_category" +
+          ", payment_type, qty, price, datetime, country, city, ecommerce_website_name, payment_txn_id, payment_txn_success, failure_reason)" + " VALUES (" + valueStr + ")")*/
+      }
+
+      def close(errorOrNull: Throwable): Unit = {
+        connection.close
+      }
+    })
+    //.option("checkpointLocation", "checkpoint")
+
+
+    while(true) {
+
+      try {
+        WriteToSQLQuery.start()
+      } catch {
+        case e: Exception =>
+          e.printStackTrace()
+      }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*val df1 = df
       .withColumn("convert", to_timestamp(col("datetime")))
       .withColumn("hours", hour(col("convert")))
       .withColumn("minutes", minute(col("convert")))
@@ -138,7 +232,7 @@ object Streaming {
       )
     }
 
-    df0.awaitTermination()
+    df0.awaitTermination()*/
 
     //Sample querying
     /*df.createOrReplaceTempView("test")
