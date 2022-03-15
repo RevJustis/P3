@@ -62,7 +62,7 @@ object Streaming {
       .option("kafka.bootstrap.servers", "3.86.155.113:9092")
       .option("startingOffsets", "earliest")
       // .option("subscribe", "pandoras_box")
-      .option("subscribe", "Monday")
+      .option("subscribe", "Tuesday12")
       //.option("poll", 200)
       // .option(
       //   "maxOffsetsPerTrigger",
@@ -197,7 +197,7 @@ object Streaming {
       .withColumn("hours", hour(col("convert")))
       .withColumn("minutes", minute(col("convert")))
       .withColumn("seconds", second(col("convert")))
-      .withColumn("hour", date_trunc("hour", col("convert")))
+      //.withColumn("hour", date_trunc("hour", col("convert")))
       .withColumn("minute", date_trunc("minute", col("convert")))
 
     // CSV or JSON need the following
@@ -219,9 +219,9 @@ object Streaming {
     while (df0.isActive) {
       Thread.sleep(1000)
       val t = System.nanoTime
-      selectAllQ
-      rowCountQ
-      //jacobQ() // A collection of queries written by Jacob
+      //selectAllQ
+      //rowCountQ
+      jacobQ() // A collection of queries written by Jacob
       // priceByCountryQ() // Written by Abby
       // pillowQ()
       // orderCountByCategory()
