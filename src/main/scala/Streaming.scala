@@ -5,7 +5,19 @@ import java.util.Properties
 import org.apache.kafka.clients.consumer.KafkaConsumer
 import org.apache.spark.sql.{ForeachWriter, Row, SparkSession}
 import org.apache.spark.sql.execution.streaming.FileStreamSource.Timestamp
-import org.apache.spark.sql.functions.{col, date_trunc, dayofmonth, from_json, hour, minute, second, split, to_timestamp, when}
+import org.apache.spark.sql.functions.{
+  col,
+  desc,
+  from_json,
+  hour,
+  minute,
+  split,
+  to_timestamp,
+  date_trunc,
+  dayofmonth,
+  second,
+  when
+}
 import org.apache.spark.sql.streaming.Trigger
 import org.apache.spark.sql.types.{StringType, StructField, StructType}
 
@@ -60,14 +72,17 @@ object Streaming {
       .format("kafka")
       // .option("kafka.bootstrap.servers", "[::1]:9092")
       .option("kafka.bootstrap.servers", "3.86.155.113:9092")
+      // .option("kafka.bootstrap.servers", "44.200.236.7:6666")
       .option("startingOffsets", "earliest")
       // .option("subscribe", "pandoras_box")
+      // .option("subscribe", "retention_test")
       .option("subscribe", "Tuesday12")
+      // .option("subscribe", "trojanhorse")
       //.option("poll", 200)
-      // .option(
-      //   "maxOffsetsPerTrigger",
-      //   150
-      // ) // Defines the rate that rows are appended
+      .option(
+        "maxOffsetsPerTrigger",
+        150
+      ) // Defines the rate that rows are appended
       .load()
       .select(
         split(col("value"), ",").getItem(0).as("order_id"),
@@ -205,7 +220,7 @@ object Streaming {
     df1.printSchema()
 
     val df0 = df1
-      .limit(70000) // hard limit on number of rows
+      .limit(50000) // hard limit on number of rows
       .writeStream
       .outputMode("append")
       .format("memory")
@@ -217,15 +232,15 @@ object Streaming {
       .start()
 
     while (df0.isActive) {
-      Thread.sleep(1000)
+      Thread.sleep(5000)
       val t = System.nanoTime
-      //selectAllQ
-      //rowCountQ
-      jacobQ() // A collection of queries written by Jacob
-      // priceByCountryQ() // Written by Abby
-      // pillowQ()
+      selectAllQ
+      rowCountQ
+      //jacobQ() // A collection of queries written by Jacob
+      priceByCountryQ() // Written by Abby
+      pillowQ()
       // orderCountByCategory()
-      // categoriesByCountry()
+      categoriesByCountry()
 
       println(
         "Time to query is: " + (System.nanoTime - t) / 1e9 + " seconds."
