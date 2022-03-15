@@ -64,7 +64,7 @@ object Producer {
   val topic = "Monday"
 
   def main(args: Array[String]): Unit = {
-    // Utilities.overwriteParquet()
+    Utilities.overwriteParquet() // this overwrites the parquets!!!
     dfA.persist(StorageLevel.MEMORY_ONLY_SER_2)
     dfW.persist(StorageLevel.MEMORY_ONLY_SER_2)
     dfE.persist(StorageLevel.MEMORY_ONLY_SER_2)
