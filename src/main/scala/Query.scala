@@ -227,47 +227,66 @@ object Query {
   }
 
   def jacobQ(): Unit = {
-    /*
    //test to be sure it's working
    spark.sql(
      """
        |SELECT * FROM Test
        |""".stripMargin)
    //test for volume of purchases higher in certain cities
-         spark.sql(
-           """
-             |SELECT city, count(order_id) AS Num_Orders
-             |FROM Test
-             |GROUP BY city
-             |ORDER BY Num_Orders desc
-             |""".stripMargin).show()
+//         spark.sql(
+//           """
+//             |SELECT city, count(order_id) AS Num_Orders
+//             |FROM Test
+//             |GROUP BY city
+//             |ORDER BY Num_Orders desc
+//             |""".stripMargin).show()
    //test for failed payments for enemies
-         spark.sql(
-           """
-             |SELECT customer_name, city, payment_txn_success
-             |FROM Test
-             |WHERE city = 'dumbville'
-             |""".stripMargin).show()
+//         spark.sql(
+//           """
+//             |SELECT customer_name, city, payment_txn_success
+//             |FROM Test
+//             |WHERE city = 'dumbville'
+//             |""".stripMargin).show()
    //test for host name purchase volume
-         spark.sql(
-           """
-             |SELECT ecommerce_website_name, count(order_id) AS Num_Orders
-             |FROM Test
-             |GROUP BY ecommerce_website_name
-             |ORDER BY Num_Orders
-             |""".stripMargin).show()
+//         spark.sql(
+//           """
+//             |SELECT ecommerce_website_name, count(order_id) AS Num_Orders
+//             |FROM Test
+//             |GROUP BY ecommerce_website_name
+//             |ORDER BY Num_Orders
+//             |""".stripMargin).show()
    //test for food purchase volume
+//         spark.sql(
+//           """
+//             |SELECT ecommerce_website_name, count(order_id) AS Num_Orders
+//             |FROM Test
+//             |WHERE product_category LIKE '%food%'
+//             |OR product_category LIKE '%Food%'
+//             |OR product_category LIKE '%FOOD%'
+//             |GROUP BY ecommerce_website_name
+//             |ORDER BY Num_Orders
+//             |""".stripMargin).show()
+   //test for higher payment fail rate between 1 and 4
          spark.sql(
            """
-             |SELECT ecommerce_website_name, count(order_id) AS Num_Orders
+             |SELECT count(*) as Fails
              |FROM Test
-             |WHERE product_category LIKE '%food%'
-             |OR product_category LIKE '%Food%'
-             |OR product_category LIKE '%FOOD%'
-             |GROUP BY ecommerce_website_name
-             |ORDER BY Num_Orders
+             |WHERE hours BETWEEN 1 and 4
+             |AND payment_txn_success = 'N'
              |""".stripMargin).show()
-     */
+         spark.sql(
+           """
+             |SELECT count(*) as Fails
+             |FROM Test
+             |WHERE hours BETWEEN 1 and 4
+             |AND payment_txn_success = 'Y'
+             |""".stripMargin).show()
+         spark.sql(
+           """
+             |SELECT count(*) as Fails
+             |FROM Test
+             |WHERE payment_txn_success = 'N'
+             |""".stripMargin).show()
   }
   //below codes only work when df is already read
   //Leo-when price drops (e.g.last week of month), quantity bought increases for clothing and food category

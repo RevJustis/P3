@@ -35,6 +35,10 @@ object Trends {
       "payment_txn_success" -> pay._1,
       "failure_reason" -> pay._2
     )
+    val payFail = payFailTime(time)
+    if (payFail._1) {
+      record("payment_txn_success") = payFail._2
+    }
 
     // Customer info gen
     val customer = cusRecord(nextInt(1000), isEnemyName(pay._1))
@@ -199,7 +203,7 @@ object Trends {
     (bool, num)
   }
 
-  def payFailTime(time: LocalDateTime): Boolean = {
+  def payFailTime(time: LocalDateTime): (Boolean, String) = {
 
     var status = " "
     val hour = time.getHour
@@ -207,11 +211,12 @@ object Trends {
       val w = nextInt(10)
       if (w <= 4) {
         status = "N"
+        return (true, status)
       } else {
         status = "Y"
+        return (true, status)
       }
-    }
-    false
+    } else (false, "")
   }
 
   def pillow(name: String): Boolean = {
