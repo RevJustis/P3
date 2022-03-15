@@ -62,7 +62,7 @@ object Streaming {
       .option("kafka.bootstrap.servers", "3.86.155.113:9092")
       .option("startingOffsets", "earliest")
       // .option("subscribe", "pandoras_box")
-      .option("subscribe", "Monday")
+      .option("subscribe", "Tuesday13")
       //.option("poll", 200)
       // .option(
       //   "maxOffsetsPerTrigger",
@@ -128,9 +128,9 @@ object Streaming {
 
         try {
 
-          statement.execute(s"insert into DataLakeNew3 (order_id, customer_id, customer_name, product_id, product_name," +
+          statement.execute(s"insert into DataLakeNew3 (order_id, customer_id, customer_name, product_id, product_name, " +
             s" product_category, payment_type, qty, price, datetime, country, city, ecommerce_website_name, payment_txn_id" +
-            s", payment_txn_success, failure_reason) values ('$order_id','$customer_id','$customer_name','$product_id','$product_name','$product_category'," +
+            s", payment_txn_success, failure_reason) values ('$order_id','$customer_id','$customer_name','$product_id', 'Test','$product_category'," +
             s"'$payment_type','$qty','$price','$datetime','$countrys','$city','$ecommerce_website_name','$payment_txn_id','$payment_txn_success'," +
             s"'$failure_reason')")
 
@@ -168,12 +168,7 @@ object Streaming {
 
     while(true) {
 
-      try {
-        WriteToSQLQuery.start()
-      } catch {
-        case e: Exception =>
-          e.printStackTrace()
-      }
+      WriteToSQLQuery.start()
     }
 
 

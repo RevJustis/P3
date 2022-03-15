@@ -49,6 +49,15 @@ dependencyOverrides ++= {
   )
 }
 
+
+// https://mvnrepository.com/artifact/mysql/mysql-connector-java
+libraryDependencies += "mysql" % "mysql-connector-java" % "8.0.27"
+
+/*libraryDependencies ++= Seq (
+  "mysql" % "mysql-connector-java" % "8.0.28"
+)*/
+
+
 // For Name Generation/Fabrication
 resolvers += "Fabricator" at "https://dl.bintray.com/biercoff/Fabricator"
 libraryDependencies += "com.github.azakordonets" % "fabricator_2.12" % "2.1.5"
