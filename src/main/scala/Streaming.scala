@@ -60,11 +60,10 @@ object Streaming {
       // .option("kafka.bootstrap.servers", "[::1]:9092")
       .option("kafka.bootstrap.servers", "3.86.155.113:9092")
       .option("startingOffsets", "earliest")
-      // .option("subscribe", "NewFriday")
-      .option("subscribe", "Monday")
       // .option("subscribe", "pandoras_box")
-      // .option("subscribe", "Friday")
+      .option("subscribe", "Monday")
       //.option("poll", 200)
+      .option("maxOffsetsPerTrigger", 100)
       .load()
       .select(
         split(col("value"), ",").getItem(0).as("order_id"),
@@ -99,8 +98,10 @@ object Streaming {
     df.printSchema()
     df1.printSchema()
 
-    val df0 = df1.writeStream
-      .outputMode("update")
+    val df0 = df1
+      .limit(70000)
+      .writeStream
+      .outputMode("append")
       .format("memory")
       .queryName("Test")
       .option("maxRowsInMemory", 3000)
@@ -111,15 +112,18 @@ object Streaming {
 
     while (df0.isActive) {
       Thread.sleep(1000)
-
-      spark.sql("Select count(product_id) from Test").show()
-      Query.orderCountByCategory()
-      Query.pillowQ()
-      Query.categoriesByCountry()
+      val t = System.nanoTime
+      // selectAllQ
+      rowCountQ
       //jacobQ() // A collection of queries written by Jacob
       // priceByCountryQ() // Written by Abby
       // pillowQ()
-      orderCountByCategory()
+      // orderCountByCategory()
+      categoriesByCountry()
+
+      println(
+        "Time to query is: " + (System.nanoTime - t) / 1e9 + " seconds."
+      )
     }
 
     df0.awaitTermination()

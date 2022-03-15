@@ -76,11 +76,11 @@ object Trends {
     )
     //if price is decreased at the end of the month, increase qty purchased
     if (
-      record.keys.toString().contains("Clothing") && time.getDayOfMonth >= 24
+      record.values.toString().contains("Clothing") && time.getDayOfMonth >= 24
     ) {
       record("qty") = (record("qty").toInt + nextInt(6)).toString
     } else if (
-      record.keys.toString().contains("Food") && time.getDayOfMonth >= 24
+      record.values.toString().contains("Food") && time.getDayOfMonth >= 24
     ) {
       record("qty") = (record("qty").toInt + nextInt(6)).toString
     }
