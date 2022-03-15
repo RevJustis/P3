@@ -41,7 +41,7 @@ object Trends {
     }
 
     // Customer info gen
-    val customer = cusRecord(nextInt(1000), isEnemyName(pay._1))
+    val customer = cusRecord(nextInt(1000), isEnemyName(record("payment_txn_success")))
     record += (
       "customer_id" -> customer._1,
       "customer_name" -> customer._2,
