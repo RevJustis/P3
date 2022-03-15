@@ -5,7 +5,18 @@ import java.util.Properties
 import org.apache.kafka.clients.consumer.KafkaConsumer
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.execution.streaming.FileStreamSource.Timestamp
-import org.apache.spark.sql.functions.{col, from_json, hour, minute, split, to_timestamp, date_trunc, dayofmonth, second, when}
+import org.apache.spark.sql.functions.{
+  col,
+  from_json,
+  hour,
+  minute,
+  split,
+  to_timestamp,
+  date_trunc,
+  dayofmonth,
+  second,
+  when
+}
 import org.apache.spark.sql.streaming.Trigger
 import org.apache.spark.sql.types.{StringType, StructField, StructType}
 
@@ -63,7 +74,10 @@ object Streaming {
       // .option("subscribe", "pandoras_box")
       .option("subscribe", "Monday")
       //.option("poll", 200)
-      .option("maxOffsetsPerTrigger", 100)
+      // .option(
+      //   "maxOffsetsPerTrigger",
+      //   150
+      // ) // Defines the rate that rows are appended
       .load()
       .select(
         split(col("value"), ",").getItem(0).as("order_id"),
@@ -84,42 +98,40 @@ object Streaming {
         split(col("value"), ",").getItem(15).as("failure_reason")
       )
 
-
-    val df1=df.select(col("datetime"))
+    val df1 = df
       .withColumn("convert", to_timestamp(col("datetime")))
-      .withColumn("hour",hour(col("convert")))
+      .withColumn("hours", hour(col("convert")))
       .withColumn("minutes", minute(col("convert")))
-      .withColumn("seconds",second(col("convert")))
-      .withColumn("hour",date_trunc("hour",col("convert")))
-      .withColumn("minute",date_trunc("minute",col("convert")))
-
+      .withColumn("seconds", second(col("convert")))
+      .withColumn("hour", date_trunc("hour", col("convert")))
+      .withColumn("minute", date_trunc("minute", col("convert")))
 
     // CSV or JSON need the following
     df.printSchema()
     df1.printSchema()
 
     val df0 = df1
-      .limit(70000)
+      .limit(70000) // hard limit on number of rows
       .writeStream
       .outputMode("append")
       .format("memory")
       .queryName("Test")
-      .option("maxRowsInMemory", 3000)
-      .option("maxBytesInMemory", 25000)
-      .option("maxTotalRows", 3000)
+      // .option("maxRowsInMemory", 3000)
+      // .option("maxBytesInMemory", 25000)
+      // .option("maxTotalRows", 3000)
       //.trigger(Trigger.ProcessingTime(1000))
       .start()
 
     while (df0.isActive) {
       Thread.sleep(1000)
       val t = System.nanoTime
-      // selectAllQ
+      selectAllQ
       rowCountQ
       //jacobQ() // A collection of queries written by Jacob
       // priceByCountryQ() // Written by Abby
       // pillowQ()
       // orderCountByCategory()
-      categoriesByCountry()
+      // categoriesByCountry()
 
       println(
         "Time to query is: " + (System.nanoTime - t) / 1e9 + " seconds."

@@ -13,7 +13,7 @@ import org.apache.spark.sql.functions.{
 object Query {
   def selectAllQ: Unit = {
     println("select *")
-    spark.sql("select * from test").show
+    spark.sql("select * from test").show(10, false)
   }
 
   def rowCountQ: Unit = {
@@ -66,6 +66,7 @@ object Query {
           "select 'Exercise and Health', count(*) as Count from Test " +
           "where product_category like '%Exercise%' " +
           "or product_category like '%Health%' " +
+          "or product_category like '%Fitness%' " +
           "union " +
           "select 'Jewelry', count(*) as Count from Test " +
           "where product_category like '%Jewelry%' " +
