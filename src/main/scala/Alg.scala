@@ -58,6 +58,7 @@ object Alg {
       var exists = false
       var city = ""
       var country = ""
+      //var check = ""
       val f = new File("input/customers.txt")
       val fc = Source.fromFile(f).getLines()
 
@@ -77,6 +78,7 @@ object Alg {
         name = cusNameGen
         city = cc._1
         country = cc._2
+        //check = cc._3
         pw.append(s"$n,$name,${cc._1},${cc._2}\n")
         pw.close
       }
@@ -103,7 +105,7 @@ object Alg {
       n: Int,
       genPrice: Double,
       host: String,
-      fitStatus: String,
+      fitStatus: Boolean,
       time: LocalDateTime,
       cusName: String
   ): (String, String, String, String, String) = {
@@ -124,13 +126,27 @@ object Alg {
     val fc = Source.fromFile(f).getLines()
     while (fc.hasNext && !exists) {
       val s = fc.next().split(",")
-      if (s(0) == n.toString()) {
-        name = s(1)
-        pcat = s(2)
-        price = s(3).toDouble
-        url = s(4)
-        exists = true
+      if(!fitStatus){
+        if (s(0) == n.toString()) {
+          name = s(1)
+          pcat = s(2)
+          price = s(3).toDouble
+          url = s(4)
+          exists = true
+        }
       }
+      else{
+        val fitPrice = genPrice + 10
+        if (s(2).contains("Fitness") && s(3).toDouble <= fitPrice) {
+          name = s(1)
+          pcat = s(2)
+          price = s(3).toDouble
+          url = s(4)
+          exists = true
+          return (s(0), name, pcat, price.toString, url)
+        }
+      }
+
     }
     if (!exists) { // Not in the record already? Then put it in there!
       val pw = new PrintWriter(new FileOutputStream(f, true))
@@ -139,12 +155,15 @@ object Alg {
       val (l, discount) = lastWeekDecrease(
         time
       ) //call to function for decreasing price last week of month
+      val p = pillow(cusName) //call to function for pillow trend
+      //val t = "true"
       host match {
         case "amazon.com" =>
-          if (fitStatus == "true") {
+          if (fitStatus) {
             val a = dfA
               .where(col("Category").like("%Fitness%"))
               .where(col("SellingPrice") <= maxPrice)
+              //.where(s"Category like '%Fitness%' or Category like '%fitness%' and SellingPrice <= $maxPrice")
               .orderBy(desc("SellingPrice"))
               .first
             name = a.getString(0)
@@ -163,10 +182,11 @@ object Alg {
           }
         //highest is about 1000
         case "walmart.com" =>
-          if (fitStatus == "true") {
+          if (fitStatus) {
             val w = dfW
               .where(col("Category").like("%Fitness%"))
               .where(col("SalePrice") <= maxPrice)
+              //.where(s"Category like '%Fitness%' or Category like '%fitness%' and SellingPrice <= $maxPrice")
               .orderBy(desc("SalePrice"))
               .first
             name = w.getString(0)
@@ -396,11 +416,14 @@ object Alg {
       val id = r.nextInt(41001)
       val rand = spenderCities()
       if (rand == "Other") {
+        //println(s"rand is $rand.")
         df = df.select("city", "country").where(s"id = $id").limit(1).toDF()
         (df.first.getString(0), df.first.getString(1))
       } else {
+        //println(s"rand is $rand.")
         (rand, df.select("country").where(s"city = '$rand'").first.getString(0))
       }
+      //rand
 
     } catch {
       case e: InputMismatchException =>
